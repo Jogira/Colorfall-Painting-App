@@ -21,33 +21,39 @@
         android:id="@+id/drawBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginBottom="1dp"
         android:text="Draw"
-        tools:layout_editor_absoluteX="163dp"
-        tools:layout_editor_absoluteY="221dp" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintStart_toStartOf="@+id/galleryBtn" />
 
     <Button
         android:id="@+id/galleryBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="2dp"
         android:text="Gallery "
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="307dp" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline3"
+        app:layout_constraintEnd_toEndOf="@+id/importBtn" />
 
     <Button
         android:id="@+id/importBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Import"
-        tools:layout_editor_absoluteX="163dp"
-        tools:layout_editor_absoluteY="392dp" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="1dp"
         android:text="Button"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="476dp" />
+        app:layout_constraintBottom_toTopOf="@+id/guideline5"
+        app:layout_constraintEnd_toEndOf="@+id/importBtn" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
