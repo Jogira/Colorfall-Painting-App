@@ -11,18 +11,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Colorfall"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.518"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.116" />
+        app:layout_constraintVertical_bias="0.128" />
 
     <Button
         android:id="@+id/drawBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginBottom="1dp"
         android:text="Draw"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/galleryBtn" />
@@ -34,26 +34,25 @@
         android:layout_marginEnd="2dp"
         android:text="Gallery "
         app:layout_constraintBottom_toTopOf="@+id/guideline3"
-        app:layout_constraintEnd_toEndOf="@+id/importBtn" />
+        app:layout_constraintEnd_toEndOf="@+id/templatesBtn" />
 
     <Button
-        android:id="@+id/importBtn"
+        android:id="@+id/templatesBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Import"
+        android:text="Templates"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/importBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="2dp"
-        android:layout_marginBottom="1dp"
-        android:text="Button"
+        android:layout_marginEnd="8dp"
+        android:text="Import"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
-        app:layout_constraintEnd_toEndOf="@+id/importBtn" />
+        app:layout_constraintEnd_toEndOf="@+id/templatesBtn" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
