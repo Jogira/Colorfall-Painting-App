@@ -44,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this,importActivity.class);
         startActivityForResult(intent, CONFIG_REQUEST);
     }
-
+    public int adr (int x, int y)
+    {
+        return x+2*y;
+    }
 
 }
