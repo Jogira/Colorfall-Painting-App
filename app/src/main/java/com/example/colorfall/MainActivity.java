@@ -45,5 +45,9 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(intent, CONFIG_REQUEST);
     }
 
-
+    //git merge testing, NOT a real method we need
+    public void gitMergeTesting() {
+        //code :~)
+        //gabe
+    }
 }
