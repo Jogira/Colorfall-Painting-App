@@ -3,6 +3,7 @@ package com.example.colorfall;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.graphics.Bitmap;
 
 public class drawActivity extends AppCompatActivity {
 
@@ -11,4 +12,6 @@ public class drawActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_draw);
     }
+
+
 }
