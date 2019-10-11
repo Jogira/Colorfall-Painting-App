@@ -17,12 +17,24 @@ public class MainActivity extends AppCompatActivity {
     private Button templatesBtn;
     private Button importBtn;
 
+    /**********************************************************************************************
+     * Method       : onCreate()
+     * Description  : runs when "main activity" view is created
+     *                creates button objects
+     *                impliments onClick() methods for each button
+     *
+     * Input        : savedInstanceState - Bundle - not sure what this is exactly but we need it
+     * Output       : void
+     *
+     * Author       : not sure who wrote this method
+     *********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        drawBtn = (Button) findViewById(R.id.drawBtn);
+        //draw button
+        drawBtn = findViewById(R.id.drawBtn);
         drawBtn.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -32,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        galleryBtn = (Button) findViewById(R.id.galleryBtn);
+        //gallery button
+        galleryBtn = findViewById(R.id.galleryBtn);
         galleryBtn.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -42,7 +55,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        templatesBtn = (Button) findViewById(R.id.templatesBtn);
+        //templates button
+        templatesBtn = findViewById(R.id.templatesBtn);
         templatesBtn.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -52,7 +66,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        importBtn = (Button) findViewById(R.id.importBtn);
+        //import button
+        importBtn = findViewById(R.id.importBtn);
         importBtn.setOnClickListener(new View.OnClickListener()
         {
             @Override
