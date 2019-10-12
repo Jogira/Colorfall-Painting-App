@@ -14,7 +14,7 @@ package com.example.colorfall;
 public class sprite extends android.graphics.Canvas {
 
     //constructor
-    public sprite() {
+    sprite() {
 
     }
 
