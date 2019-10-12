@@ -26,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
      * Input        : savedInstanceState - Bundle - not sure what this is exactly but we need it
      * Output       : void
      *
-     * Author       : not sure who wrote this method
+     * Author       : not sure who wrote this method, Gabe wrote comment
+     * Date         : 10/11/2019
      *********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
