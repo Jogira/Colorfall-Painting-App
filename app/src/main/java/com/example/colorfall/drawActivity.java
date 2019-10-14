@@ -3,15 +3,16 @@ package com.example.colorfall;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.graphics.Bitmap;
 
-public class drawActivity extends AppCompatActivity {
 
+public class drawActivity extends AppCompatActivity
+{
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_draw);
+        drawView drawView = new drawView(this);
+        setContentView(drawView);
     }
-
 
 }

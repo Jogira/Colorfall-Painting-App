@@ -21,17 +21,18 @@ public class MainActivity extends AppCompatActivity {
      * Method       : onCreate()
      * Description  : runs when "main activity" view is created
      *                creates button objects
-     *                impliments onClick() methods for each button
+     *                implements onClick() methods for each button
      *
      * Input        : savedInstanceState - Bundle - not sure what this is exactly but we need it
      * Output       : void
      *
-     * Author       : not sure who wrote this method, Gabe wrote comment
+     * Author       : Jonathan
      * Date         : 10/11/2019
      *********************************************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         //draw button
@@ -80,12 +81,7 @@ public class MainActivity extends AppCompatActivity {
     }
     private final int CONFIG_REQUEST = 123;
 
-    //Starts a new activity when user clicks
-//    public void clickUnlock(View v)
-//    {
-//        Intent intent = new Intent(this,drawActivity.class);
-//        startActivityForResult(intent, CONFIG_REQUEST);
-//    }
+
 
     public void openDrawScreen()
      {
