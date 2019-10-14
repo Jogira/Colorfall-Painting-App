@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
-        android:id="@+id/bottomAppBar2"
+        android:id="@+id/saveBtn"
         style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

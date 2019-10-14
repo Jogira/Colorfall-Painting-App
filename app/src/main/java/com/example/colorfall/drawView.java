@@ -15,7 +15,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 
+import java.io.FileOutputStream;
 
+//this is the Controller in view-controller-module architecture
 /**********************************************************************************************
  * Description  : Setting the default details for the brush type, the size of the brush
  *                and how it looks. Also specifies how the app functions if you hold you
@@ -83,4 +85,12 @@ public class drawView extends View
         canvas.drawPath(path, brush);
     }
 
+
+    //NOTE: BELOW METHOD NOT COMPLETE. NEED TO FINISH SAVING PROCESS ON https://codetheory.in/android-saving-files-on-internal-and-external-storage/
+    //this is where the code will go that saves the canvas object to internal storage
+    void saveDrawing() {//only saves one drawing at a time for now i think, maybe multiples with same name
+        String fileName = "my drawing";
+
+        FileOutputStream outputStream = null;
+    }
 }
