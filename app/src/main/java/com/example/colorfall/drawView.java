@@ -71,9 +71,16 @@ public class drawView extends View
         return false;
     }
 
+    //Color Setter method
+    public void setColor(String color)
+    {
+          brush.setColor(Color.parseColor(color));
+    }
+
     @Override
     protected void onDraw(Canvas canvas)
     {
         canvas.drawPath(path, brush);
     }
+
 }
