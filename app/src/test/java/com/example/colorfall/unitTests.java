@@ -49,11 +49,11 @@ public class unitTests {
      *                  or any other properties for that matter.
      *                  I cannot find in the api and instances of significant setters or getters.
      *********************************************************************************************/
-    @Test
-    public void testSpriteCreation() {
-        sprite result = new sprite();
-        Canvas expected = new Canvas();
-        assertEquals(result, expected);
-    }
+    //@Test
+    //public void testSpriteCreation() {
+        //sprite result = new sprite();
+        //Canvas expected = new Canvas();
+        //assertEquals(result, expected);
+    //}
 
 }
