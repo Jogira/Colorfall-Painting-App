@@ -19,17 +19,6 @@ public class drawActivity extends AppCompatActivity
         drawView drawView = new drawView(this);
         setContentView(drawView);
 
-        //save button instantiate
-        Button saveBtn = findViewById(R.id.saveBtn);
-        saveBtn.setOnClickListener(new View.OnClickListener()//this whole thing runs onClickSave() when save button is clicked
-        {
-            @Override
-            public void onClick(View v)
-            {
-                onClickSave();
-            }
-        });
-
     }
         //brush.setColor(Color.BLUE);
         //brush.setColor(Color.BLUE);
@@ -43,7 +32,8 @@ public class drawActivity extends AppCompatActivity
 
     }
 
-    public void onClickSave() { //tells controller to save start save proccess of the drawing on the draw screen
+
+    public void onClickSave (View view) {
         drawView drawView = new drawView(this);
         drawView.saveDrawing();
     }
