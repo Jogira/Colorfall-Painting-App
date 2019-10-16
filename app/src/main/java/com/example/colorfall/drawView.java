@@ -75,11 +75,19 @@ public class drawView extends View implements Serializable
         return false;
     }
 
+    /***********************************************************************************************
+     *  Method : setColor()
+     *  Description: sets brush color parameter
+     *
+     *  Notes:
+     *
+     **********************************************************************************************/
     //Color Setter method
     public void setColor(String color)
     {
           brush.setColor(Color.parseColor(color));
     }
+
 
     @Override
     protected void onDraw(Canvas canvas)

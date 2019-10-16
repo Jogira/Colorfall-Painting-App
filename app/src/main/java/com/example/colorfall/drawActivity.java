@@ -25,7 +25,6 @@ public class drawActivity extends AppCompatActivity
         //brush.setStyle(Paint.Style.STROKE);
         //brush.setStrokeJoin(Paint.Join.ROUND);
         //brush.setStrokeWidth(100f);
-
     //Detect button press of color selector
     public void colorSel(View view)
     {
