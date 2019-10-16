@@ -15,7 +15,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 
-import java.io.FileOutputStream;
+import java.io.*;
 
 //this is the Controller in view-controller-module architecture
 /**********************************************************************************************
@@ -32,7 +32,7 @@ import java.io.FileOutputStream;
  * Date         : 10/13/2019
  *********************************************************************************************/
 
-public class drawView extends View
+public class drawView extends View implements Serializable
 {
     LayoutParams params;
     private Path path = new Path();
@@ -41,6 +41,7 @@ public class drawView extends View
 
     public drawView(Context context)
     {
+
         super(context);
 
         brush.setAntiAlias(true);
@@ -50,6 +51,7 @@ public class drawView extends View
         brush.setStrokeWidth(100f);
 
         params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+
     }
 
     @Override
@@ -86,13 +88,39 @@ public class drawView extends View
     }
 
 
-    //NOTE: BELOW METHOD NOT COMPLETE. NEED TO FINISH SAVING PROCESS ON https://codetheory.in/android-saving-files-on-internal-and-external-storage/
-    //this is where the code will go that saves the canvas object to internal storage
-    void saveDrawing() {//only saves one drawing at a time for now i think, maybe multiples with same name
-        String fileName = "my drawing";
+    /***********************************************************************************************
+     *  Method : saveDrawing()
+     *  Description: saves current state of this class into internal file system.
+     *
+     *  Notes: uses serializable to convert current state of obj to a file "drawing.ser"
+     *         saves this created file into internal memory
+     *         not sure if it works yet, will be easier to check when save button is accessible
+     *
+     *
+     **********************************************************************************************/
+    void saveDrawing() {
+        String fileName = "drawing.ser";
 
-        FileOutputStream outputStream = null;
-        
+        try {
+            //saving obj to .ser file
+            FileOutputStream file = new FileOutputStream(fileName);
+            ObjectOutputStream out = new ObjectOutputStream(file);
+
+            out.writeObject(this);
+
+            out.close();
+            file.close();
+
+            //testing
+            //System.out.println("Obj has been serialized");
+
+        } catch (IOException ex) {
+            System.out.println("IOException is caught");
+        }
+
+        //saving .ser file to internal storage
+        Context context = getContext();
+        File file = new File(context.getFilesDir(), fileName);
 
     }
 }
