@@ -18,9 +18,9 @@ public class drawActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        drawView drawView = new drawView(this);
-        setContentView(drawView);
 
+        drawView drawView = new drawView(this);
+        setContentView(R.layout.activity_draw);
     }
         //brush.setColor(Color.BLUE);
         //brush.setColor(Color.BLUE);

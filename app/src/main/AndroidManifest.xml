@@ -17,10 +17,14 @@
             android:name=".importActivity"
             android:label="@string/title_activity_import"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".galleryActivity"
             android:label="@string/title_activity_gallery"
             android:theme="@style/AppTheme.NoActionBar" />
+
+
+
         <activity android:name=".drawActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
