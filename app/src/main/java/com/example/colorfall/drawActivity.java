@@ -59,10 +59,10 @@ public class drawActivity extends AppCompatActivity
     //Instantiates a recyclerview
     private void createRV()
     {
-        RecyclerView recyclerView = findViewById(R.id.cList);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, colors);
+        RecyclerView recyclerView = findViewById(R.id.cList);  //Link to XML description
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, colors); //sends item data
         recyclerView.setAdapter(adapter); //Sets adapter to recyclerview
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this)); //start linear recycleView
     }
 
     public void onClickSave (View view) {
