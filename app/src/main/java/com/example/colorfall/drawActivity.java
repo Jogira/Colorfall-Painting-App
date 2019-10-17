@@ -2,6 +2,7 @@ package com.example.colorfall;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -19,6 +20,13 @@ public class drawActivity extends AppCompatActivity
         drawView drawView = new drawView(this);
         setContentView(drawView);
 
+        //temp testing while save button DNE
+        //drawView drawVie = new drawView(this);
+        //drawVie.saveDrawing();
+        //drawView drawV = new drawView(this);
+        //drawV.printSavedFiles();
+        //above is testing while save btn DNE
+
     }
         //brush.setColor(Color.BLUE);
         //brush.setColor(Color.BLUE);
@@ -33,7 +41,12 @@ public class drawActivity extends AppCompatActivity
 
 
     public void onClickSave (View view) {
-        drawView drawView = new drawView(this);
-        drawView.saveDrawing();
+        //drawView drawView = new drawView(this);
+        //drawView.saveDrawing();
+
+        Context context = getApplicationContext();
+        saveScreenshot saveSc = new saveScreenshot();
+        saveSc.saveScreenshot(view, context);
     }
+
 }

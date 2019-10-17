@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 
 import java.io.*;
+import java.util.Arrays;
 
 //this is the Controller in view-controller-module architecture
 /**********************************************************************************************
@@ -38,10 +39,9 @@ public class drawView extends View implements Serializable
     private Path path = new Path();
     private Paint brush = new Paint();
 
-
+    //constructor
     public drawView(Context context)
     {
-
         super(context);
 
         brush.setAntiAlias(true);
@@ -51,12 +51,16 @@ public class drawView extends View implements Serializable
         brush.setStrokeWidth(100f);
 
         params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
+        //temp testing while save button DNE
+        //saveDrawing();
+        //printSavedFiles();
+        //above is testing while save btn DNE
+
         float pointX = event.getX();
         float pointY = event.getY();
 
@@ -107,28 +111,46 @@ public class drawView extends View implements Serializable
      *
      **********************************************************************************************/
     void saveDrawing() {
-        String fileName = "drawing.ser";
+        Context context = getContext(); //is this the right context? getActivityContext()? getApplicationContext()?
+        //String fileName = "/data/user/0/com.example.colorfall/files/drawing.ser";
+        String fileName = context.getFilesDir().getPath() + "/drawing.ser";
 
         try {
+            //testing
+            System.out.println("file name accessable? :" + fileName);
             //saving obj to .ser file
             FileOutputStream file = new FileOutputStream(fileName);
+            //testing
+            System.out.println("after file line reached");
             ObjectOutputStream out = new ObjectOutputStream(file);
-
-            out.writeObject(this);
-
+            System.out.println("after out decl line reached");
+            out.writeObject(this);//this is where the error occurs
+            System.out.println("after writeObj line reached");
             out.close();
             file.close();
 
             //testing
-            //System.out.println("Obj has been serialized");
+            System.out.println("end of try block reached");
 
         } catch (IOException ex) {
             System.out.println("IOException is caught");
         }
 
         //saving .ser file to internal storage
-        Context context = getContext();
         File file = new File(context.getFilesDir(), fileName);
+    }
 
+    void printSavedFiles() {
+        Context context = getContext();
+        System.out.println(context.getFilesDir().getAbsolutePath());
+        String[] fList = context.fileList();
+        System.out.println(Arrays.toString(fList) + "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+    }
+
+    public Bitmap screenShot(View view) {
+        Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        view.draw(canvas);
+        return bitmap;
     }
 }
