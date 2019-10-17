@@ -1,13 +1,18 @@
 package com.example.colorfall;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
+<<<<<<< HEAD
 import android.content.Context;
+=======
+import android.app.Activity;
+>>>>>>> 53a76c63316daba8930f736d5a85d47b6ec0142d
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+
 
 
 //this is the VIew in Model-View-Controller architecture
@@ -17,9 +22,8 @@ public class drawActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        drawView drawView = new drawView(this);
-        setContentView(drawView);
 
+<<<<<<< HEAD
         //temp testing while save button DNE
         //drawView drawVie = new drawView(this);
         //drawVie.saveDrawing();
@@ -27,6 +31,10 @@ public class drawActivity extends AppCompatActivity
         //drawV.printSavedFiles();
         //above is testing while save btn DNE
 
+=======
+        drawView drawView = new drawView(this);
+        setContentView(R.layout.activity_draw);
+>>>>>>> 53a76c63316daba8930f736d5a85d47b6ec0142d
     }
         //brush.setColor(Color.BLUE);
         //brush.setColor(Color.BLUE);

@@ -1,31 +1,30 @@
 package com.example.colorfall;
 
+import android.app.Activity;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import androidx.fragment.app.Fragment;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import com.mindorks.placeholderview.PlaceHolderView;
 
-import android.view.View;
 
-public class galleryActivity extends AppCompatActivity {
+public class galleryActivity extends Activity {
+    private PlaceHolderView mGalleryView;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gallery);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+    private class galleryActivity1 extends Fragment {
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_gallery);
+            mGalleryView = findViewById(R.id.galleryView);
+            mGalleryView.addView(new GalleryItem(getResources().getDrawable(R.drawable.tempicon, null)));
+
+        }
+
+
+
+
     }
 }
