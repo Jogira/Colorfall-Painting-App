@@ -43,6 +43,7 @@
         app:layout_constraintBottom_toTopOf="@+id/drawModeSelect"
         app:layout_constraintEnd_toEndOf="@+id/drawModeSelect"
         app:layout_constraintStart_toStartOf="@+id/drawModeSelect"
+        />
 
     <fragment
         android:id="@+id/fragment"
