@@ -22,11 +22,11 @@
         android:layout_width="@dimen/pixel_brush"
         android:layout_height="@dimen/pixel_brush"
         android:layout_marginLeft="5dp"
-        android:layout_marginBottom="2dp"
         android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
         android:background="#072F5F"
         android:contentDescription="@string/pixel"
-        android:onClick="paintClicked"
+        android:onClick="onClickBlue"
         android:tag="#072F5F" />
 
     <ImageButton
@@ -83,7 +83,7 @@
             android:id="@+id/save_file"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:contentDescription="@string/save_file"
+            android:onClick="onClickSave"
             android:src="@drawable/save_file" />
 
         <LinearLayout

@@ -14,11 +14,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 //this is the View in Model-View-Controller architecture
-public class drawActivity extends AppCompatActivity
+public class drawActivity extends AppCompatActivity implements java.io.Serializable
 {
     private ArrayList<Integer> colors = new ArrayList<>();
     private drawView drawingView;
@@ -88,13 +93,53 @@ public class drawActivity extends AppCompatActivity
 //        recyclerView.setLayoutManager(new LinearLayoutManager(this)); //start linear recycleView
 //    }
 
+    //onCLick method for save button
     public void onClickSave (View view) {
-        //drawView drawView = new drawView(this);
-        //drawView.saveDrawing();
+        save();
+        printSavedFiles();
+    }
 
+    public void onClickBlue(View view) {
+        String blue = "blue";
+        drawingView.setColor(blue);
+    }
+
+    public void save() {
+        Context context = getApplicationContext(); //is this the right context? getActivityContext()? getApplicationContext()?
+        //String fileName = "/data/user/0/com.example.colorfall/files/drawing.ser";
+        String fileName = context.getFilesDir().getPath() + "/brawing.ser";
+
+        try {
+            //testing
+            System.out.println("file name accessable? :" + fileName);
+            //saving obj to .ser file
+            FileOutputStream file = new FileOutputStream(fileName);
+            //testing
+            System.out.println("after file line reached");
+            ObjectOutputStream out = new ObjectOutputStream(file);
+            System.out.println("after out decl line reached");
+            //out.writeObject(drawingView);//this is where the error occurs
+            //out.writeObject(fileName); this for ex does not throw error
+            out.writeObject(drawingView.getPath());
+            System.out.println("after writeObj line reached");
+            out.close();
+            file.close();
+            //testing
+            System.out.println("end of try block reached");
+
+        } catch (Exception ex) {
+            System.out.println("Exception is caught");
+        }
+
+        //saving .ser file to internal storage
+        File file = new File(context.getFilesDir(), fileName);
+    }
+
+    void printSavedFiles() {
         Context context = getApplicationContext();
-        saveScreenshot saveSc = new saveScreenshot();
-        saveSc.saveScreenshot(view, context);
+        System.out.println(context.getFilesDir().getAbsolutePath());
+        String[] fList = context.fileList();
+        System.out.println(Arrays.toString(fList) + "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
     }
 
 }
