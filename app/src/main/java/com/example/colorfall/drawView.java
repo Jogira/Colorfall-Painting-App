@@ -13,7 +13,11 @@ import android.text.Layout;
 import android.view.ContextMenu;
 import android.view.MotionEvent;
 import android.view.View;
+import android.util.AttributeSet;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.view.ViewGroup.LayoutParams;
+
 
 import java.io.*;
 import java.util.Arrays;
@@ -33,52 +37,67 @@ import java.util.Arrays;
  * Date         : 10/13/2019
  *********************************************************************************************/
 
-public class drawView extends View implements Serializable
-{
-    LayoutParams params;
-    private Path path = new Path();
-    private Paint brush = new Paint();
 
-    //constructor
-    public drawView(Context context)
+    public class drawView extends View implements Serializable
     {
-        super(context);
+        private Path path;
+        private Paint drawPixel;
+        private Paint pixelCanvasPaint;
+        private int currentColor = 0xFF000000;
+        private Canvas drawPixelCanvas;
+        private Bitmap canvasPixelBitmap;
 
-        brush.setAntiAlias(true);
-        brush.setColor(Color.BLUE);
-        brush.setStyle(Paint.Style.STROKE);
-        brush.setStrokeJoin(Paint.Join.ROUND);
-        brush.setStrokeWidth(100f);
 
-        params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event)
-    {
-        //temp testing while save button DNE
-        //saveDrawing();
-        //printSavedFiles();
-        //above is testing while save btn DNE
-
-        float pointX = event.getX();
-        float pointY = event.getY();
-
-        switch(event.getAction())
-        {
-            case MotionEvent.ACTION_DOWN:
-                path.moveTo(pointX, pointY);
-                return true;
-            case MotionEvent.ACTION_MOVE:
-                path.lineTo(pointX, pointY);
-                break;
-            default:
-                return false;
+        //constructor
+        public drawView(Context context, AttributeSet attributes){
+            super(context, attributes);
+            initializePixelArt();
         }
-        postInvalidate();
-        return false;
-    }
 
+        @Override
+        public boolean onTouchEvent(MotionEvent event)
+        {
+            //temp testing while save button DNE
+            //saveDrawing();
+            //printSavedFiles();
+            //above is testing while save btn DNE
+
+            float pointX = event.getX();
+            float pointY = event.getY();
+
+            switch(event.getAction())
+            {
+                case MotionEvent.ACTION_DOWN:
+                    path.moveTo(pointX, pointY);
+                    return true;
+                case MotionEvent.ACTION_MOVE:
+                    path.lineTo(pointX, pointY);
+                    break;
+                case MotionEvent.ACTION_UP:
+                    drawPixelCanvas.drawPath(path, drawPixel);
+                    path.reset();
+                    break;
+                default:
+                    return false;
+            }
+            postInvalidate();
+            return true;
+        }
+
+    private void initializePixelArt()
+    {
+        path = new Path();
+        drawPixel = new Paint();
+
+        drawPixel.setColor(currentColor);
+        drawPixel.setAntiAlias(true);
+        drawPixel.setStrokeWidth(30F);
+        drawPixel.setStyle(Paint.Style.STROKE);
+        drawPixel.setStrokeJoin(Paint.Join.ROUND);
+        drawPixel.setStrokeCap(Paint.Cap.ROUND);
+
+        pixelCanvasPaint = new Paint(Paint.DITHER_FLAG);
+    }
     /***********************************************************************************************
      *  Method : setColor()
      *  Description: sets brush color parameter
@@ -89,15 +108,25 @@ public class drawView extends View implements Serializable
     //Color Setter method
     public void setColor(String color)
     {
-          brush.setColor(Color.parseColor(color));
+          invalidate();
+          currentColor = Color.parseColor(color);
+          drawPixel.setColor(currentColor);
     }
 
+        @Override
+        protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+            super.onSizeChanged(w, h, oldw, oldh);
+            canvasPixelBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+            drawPixelCanvas = new Canvas(canvasPixelBitmap);
+        }
 
-    @Override
-    protected void onDraw(Canvas canvas)
-    {
-        canvas.drawPath(path, brush);
-    }
+        @Override
+        protected void onDraw(Canvas canvas)
+        {
+            canvas.drawBitmap(canvasPixelBitmap, 0, 0, pixelCanvasPaint);
+            canvas.drawPath(path, drawPixel);
+        }
+
 
 
     /***********************************************************************************************

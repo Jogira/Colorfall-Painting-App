@@ -4,27 +4,40 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
+import android.view.View;
+import android.widget.ImageButton;
 import android.content.Context;
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
 
-//this is the VIew in Model-View-Controller architecture
+//this is the View in Model-View-Controller architecture
 public class drawActivity extends AppCompatActivity
 {
     private ArrayList<Integer> colors = new ArrayList<>();
+    private drawView drawingView;
+    private ImageButton selectedColor;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.activity_draw);
+        LinearLayout paintLayout = (LinearLayout)findViewById(R.id.paint_colors);
+        selectedColor = (ImageButton)paintLayout.getChildAt(0);
+        drawingView = (drawView) findViewById(R.id.drawing);
+
+       // selectedColor.setImageDrawable(getDrawable(R.drawable.paint_selected));
+
+
 
         //temp testing while save button DNE
         //drawView drawVie = new drawView(this);
@@ -33,10 +46,20 @@ public class drawActivity extends AppCompatActivity
         //drawV.printSavedFiles();
         //above is testing while save btn DNE
 
-        drawView drawView = new drawView(this);
-        setContentView(R.layout.activity_draw);
+        //drawView drawView = new drawView(this);
+        //setContentView(drawView);
 
-        colorData(); //Calls and creates color items for brush
+        //colorData(); //Calls and creates color items for brush
+    }
+
+    public void colorChanged(View view)
+    {
+        if(view != selectedColor)
+        {
+            ImageButton imgView = (ImageButton) view;
+            String color = view.getTag().toString();
+            drawingView.setColor(color);
+        }
     }
         //brush.setColor(Color.BLUE);
         //brush.setColor(Color.BLUE);
@@ -44,26 +67,26 @@ public class drawActivity extends AppCompatActivity
         //brush.setStrokeJoin(Paint.Join.ROUND);
         //brush.setStrokeWidth(100f);
 
-    //Colors for brush
-    private void colorData()
-    {
-        colors.add(R.color.colorPrimary, 1);
-        colors.add(R.color.colorPrimary, 2);
-        //colors.add("Green");
-        //colors.add("Amber");
-       // colors.add("Deep Orange");
+//    //Colors for brush
+//    private void colorData()
+//    {
+//        colors.add(R.color.colorPrimary, 1);
+//        colors.add(R.color.colorPrimary, 2);
+//        //colors.add("Green");
+//        //colors.add("Amber");
+//       // colors.add("Deep Orange");
+//
+//       // createRV();
+//    }
 
-        createRV();
-    }
-
-    //Instantiates a recyclerview
-    private void createRV()
-    {
-        RecyclerView recyclerView = findViewById(R.id.cList);  //Link to XML description
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, colors); //sends item data
-        recyclerView.setAdapter(adapter); //Sets adapter to recyclerview
-        recyclerView.setLayoutManager(new LinearLayoutManager(this)); //start linear recycleView
-    }
+//    //Instantiates a recyclerview
+//    private void createRV()
+//    {
+//        RecyclerView recyclerView = findViewById(R.id.cList);  //Link to XML description
+//        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, colors); //sends item data
+//        recyclerView.setAdapter(adapter); //Sets adapter to recyclerview
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this)); //start linear recycleView
+//    }
 
     public void onClickSave (View view) {
         //drawView drawView = new drawView(this);

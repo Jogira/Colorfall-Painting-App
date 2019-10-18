@@ -38,13 +38,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         Log.d(TAG, "onBindViewHolder: called"); //Log for debugging
 
-        holder.colorValue.setColorFilter(ColorValues.get(position));
+       // holder.colorValue.setColorFilter(ColorValues.get(position));
 
-        holder.parentLayout.setOnCLickListner(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {}
-            //call brush setter here !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        });
+       // holder.parentLayout.setOnCLickListner(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//        }
+//            //call brush setter here !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//        });
 
     }
 
