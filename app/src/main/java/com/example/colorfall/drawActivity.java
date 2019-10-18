@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.media.Image;
 import android.view.View;
 import android.widget.ImageButton;
 import android.content.Context;
@@ -13,6 +14,7 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -30,6 +32,12 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     private ArrayList<Integer> colors = new ArrayList<>();
     private drawView drawingView;
     private ImageButton selectedColor;
+    private ImageButton blueColor;
+    private ImageButton yellowColor;
+    private ImageButton redColor;
+    private ImageButton greenColor;
+    private ImageButton blackColor;
+    private ImageButton eraseButton;
 
 
     @Override
@@ -42,9 +50,60 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         selectedColor = (ImageButton)paintLayout.getChildAt(0);
         drawingView = (drawView) findViewById(R.id.drawing);
 
-       // selectedColor.setImageDrawable(getDrawable(R.drawable.paint_selected));
 
+        blueColor = (ImageButton) findViewById(R.id.blueColor);
+        blueColor.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view) {
+                onSelectColor(view);
+            }
+        });
 
+        redColor = (ImageButton) findViewById(R.id.redColor);
+        redColor.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view) {
+                onSelectColor(view);
+            }
+        });
+
+        greenColor = (ImageButton) findViewById(R.id.greenColor);
+        greenColor.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view) {
+                onSelectColor(view);
+            }
+        });
+
+        yellowColor = (ImageButton) findViewById(R.id.yellowColor);
+        yellowColor.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view) {
+                onSelectColor(view);
+            }
+        });
+
+        blackColor = (ImageButton) findViewById(R.id.blackColor);
+        blackColor.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view) {
+                onSelectColor(view);
+            }
+        });
+
+        eraseButton = (ImageButton) findViewById(R.id.eraser);
+        eraseButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view) {
+                onSelectColor(view);
+            }
+        });
 
         //temp testing while save button DNE
         //drawView drawVie = new drawView(this);
@@ -58,6 +117,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 
         //colorData(); //Calls and creates color items for brush
     }
+<<<<<<< HEAD
 
     public void colorChanged(View view)
     {
@@ -73,6 +133,8 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         Context context = getApplicationContext();
         return context;
     }
+=======
+>>>>>>> 544b89f3b7033b6656c0e86616f4fbd6c586bd64
         //brush.setColor(Color.BLUE);
         //brush.setColor(Color.BLUE);
         //brush.setStyle(Paint.Style.STROKE);
@@ -103,6 +165,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     //onCLick method for save button
     public void onClickSave (View view) {
         save();
+        Toast.makeText(getApplicationContext(), "Drawing saved...", Toast.LENGTH_SHORT).show();
         printSavedFiles();
         //testing
         ourPath path = drawingView.getPath();
@@ -114,9 +177,37 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         load();
     }
 
-    public void onClickBlue(View view) {
-        String blue = "blue";
-        drawingView.setColor(blue);
+    public void onSelectColor(View view)
+    {
+        if (view.getId() == blueColor.getId())
+        {
+            drawingView.setColor("#072F5F");
+        }
+
+        if (view.getId() == redColor.getId())
+        {
+            drawingView.setColor("#FFFF0000");
+        }
+
+        if (view.getId() == yellowColor.getId())
+        {
+            drawingView.setColor("#FFFF00");
+        }
+
+        if (view.getId() == greenColor.getId())
+        {
+            drawingView.setColor("#00FF3E");
+        }
+
+        if (view.getId() == blackColor.getId())
+        {
+            drawingView.setColor("#FF000000");
+        }
+
+        if (view.getId() == eraseButton.getId())
+        {
+            drawingView.setColor("#ffffff");
+        }
     }
 
     public void save() {

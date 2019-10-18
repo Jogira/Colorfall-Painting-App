@@ -106,7 +106,6 @@ import java.util.Arrays;
     //Color Setter method
     public void setColor(String color)
     {
-          System.out.println("blue got clicked****************");
           invalidate();
           currentColor = Color.parseColor(color);
           drawPixel.setColor(currentColor);
