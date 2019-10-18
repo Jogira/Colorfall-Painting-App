@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.media.Image;
 import android.view.View;
 import android.widget.ImageButton;
 import android.content.Context;
@@ -28,6 +29,12 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     private ArrayList<Integer> colors = new ArrayList<>();
     private drawView drawingView;
     private ImageButton selectedColor;
+    private ImageButton blueColor;
+    private ImageButton yellowColor;
+    private ImageButton redColor;
+    private ImageButton greenColor;
+    private ImageButton blackColor;
+    private ImageButton eraseButton;
 
 
     @Override
@@ -40,9 +47,60 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         selectedColor = (ImageButton)paintLayout.getChildAt(0);
         drawingView = (drawView) findViewById(R.id.drawing);
 
-       // selectedColor.setImageDrawable(getDrawable(R.drawable.paint_selected));
 
+        blueColor = (ImageButton) findViewById(R.id.blueColor);
+        blueColor.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view) {
+                onSelectColor(view);
+            }
+        });
 
+        redColor = (ImageButton) findViewById(R.id.redColor);
+        redColor.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view) {
+                onSelectColor(view);
+            }
+        });
+
+        greenColor = (ImageButton) findViewById(R.id.greenColor);
+        greenColor.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view) {
+                onSelectColor(view);
+            }
+        });
+
+        yellowColor = (ImageButton) findViewById(R.id.yellowColor);
+        yellowColor.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view) {
+                onSelectColor(view);
+            }
+        });
+
+        blackColor = (ImageButton) findViewById(R.id.blackColor);
+        blackColor.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view) {
+                onSelectColor(view);
+            }
+        });
+
+        eraseButton = (ImageButton) findViewById(R.id.eraser);
+        eraseButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view) {
+                onSelectColor(view);
+            }
+        });
 
         //temp testing while save button DNE
         //drawView drawVie = new drawView(this);
@@ -55,16 +113,6 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         //setContentView(drawView);
 
         //colorData(); //Calls and creates color items for brush
-    }
-
-    public void colorChanged(View view)
-    {
-        if(view != selectedColor)
-        {
-            ImageButton imgView = (ImageButton) view;
-            String color = view.getTag().toString();
-            drawingView.setColor(color);
-        }
     }
         //brush.setColor(Color.BLUE);
         //brush.setColor(Color.BLUE);
@@ -99,9 +147,37 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         printSavedFiles();
     }
 
-    public void onClickBlue(View view) {
-        String blue = "blue";
-        drawingView.setColor(blue);
+    public void onSelectColor(View view)
+    {
+        if (view.getId() == blueColor.getId())
+        {
+            drawingView.setColor("#072F5F");
+        }
+
+        if (view.getId() == redColor.getId())
+        {
+            drawingView.setColor("#FFFF0000");
+        }
+
+        if (view.getId() == yellowColor.getId())
+        {
+            drawingView.setColor("#FFFF00");
+        }
+
+        if (view.getId() == greenColor.getId())
+        {
+            drawingView.setColor("#00FF3E");
+        }
+
+        if (view.getId() == blackColor.getId())
+        {
+            drawingView.setColor("#FF000000");
+        }
+
+        if (view.getId() == eraseButton.getId())
+        {
+            drawingView.setColor("#ffffff");
+        }
     }
 
     public void save() {
