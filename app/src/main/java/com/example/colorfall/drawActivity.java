@@ -15,8 +15,10 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -66,6 +68,11 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             drawingView.setColor(color);
         }
     }
+
+    public Context getOurContext() {
+        Context context = getApplicationContext();
+        return context;
+    }
         //brush.setColor(Color.BLUE);
         //brush.setColor(Color.BLUE);
         //brush.setStyle(Paint.Style.STROKE);
@@ -97,6 +104,14 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     public void onClickSave (View view) {
         save();
         printSavedFiles();
+        //testing
+        ourPath path = drawingView.getPath();
+        path.printList();
+        //end testing
+    }
+
+    public void onClickLoad(View view) {
+        load();
     }
 
     public void onClickBlue(View view) {
@@ -105,27 +120,16 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     }
 
     public void save() {
-        Context context = getApplicationContext(); //is this the right context? getActivityContext()? getApplicationContext()?
-        //String fileName = "/data/user/0/com.example.colorfall/files/drawing.ser";
-        String fileName = context.getFilesDir().getPath() + "/brawing.ser";
+        Context context = getApplicationContext();
+        String fileName = context.getFilesDir().getPath() + "/drawing.ser";
 
         try {
-            //testing
-            System.out.println("file name accessable? :" + fileName);
-            //saving obj to .ser file
             FileOutputStream file = new FileOutputStream(fileName);
-            //testing
-            System.out.println("after file line reached");
             ObjectOutputStream out = new ObjectOutputStream(file);
-            System.out.println("after out decl line reached");
-            //out.writeObject(drawingView);//this is where the error occurs
-            //out.writeObject(fileName); this for ex does not throw error
             out.writeObject(drawingView.getPath());
-            System.out.println("after writeObj line reached");
             out.close();
             file.close();
-            //testing
-            System.out.println("end of try block reached");
+            System.out.println("end of try block reached");//testing
 
         } catch (Exception ex) {
             System.out.println("Exception is caught");
@@ -140,6 +144,23 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         System.out.println(context.getFilesDir().getAbsolutePath());
         String[] fList = context.fileList();
         System.out.println(Arrays.toString(fList) + "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+    }
+
+    public void load() {
+        //setup
+        Context context = getApplicationContext();//if errors occur down the road, its likely from this
+        String fileName = context.getFilesDir().getPath() + "/drawing.ser";
+        ourPath path = drawingView.getPath();
+
+        //loading
+        try {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName));
+            path.readObject(ois);//error occuring here
+            ois.close();
+        } catch (Exception e) {
+            System.out.println("error boiiiii");//testing
+            e.printStackTrace();
+        }
     }
 
 }

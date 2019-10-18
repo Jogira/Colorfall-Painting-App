@@ -40,7 +40,7 @@ import java.util.Arrays;
     public class drawView extends View implements Serializable
     {
         //private Path path;//commented for new path
-        private ourPath puth;
+        private ourPath path;
         private Paint drawPixel;
         private Paint pixelCanvasPaint;
         private int currentColor = 0xFF000000;
@@ -64,14 +64,14 @@ import java.util.Arrays;
             switch(event.getAction())
             {
                 case MotionEvent.ACTION_DOWN:
-                    puth.moveTo(pointX, pointY);
+                    path.moveTo(pointX, pointY);
                     return true;
                 case MotionEvent.ACTION_MOVE:
-                    puth.lineTo(pointX, pointY);
+                    path.lineTo(pointX, pointY);
                     break;
                 case MotionEvent.ACTION_UP:
-                    drawPixelCanvas.drawPath(puth, drawPixel);
-                    puth.reset();
+                    drawPixelCanvas.drawPath(path, drawPixel);
+                    path.reset();
                     break;
                 default:
                     return false;
@@ -83,7 +83,7 @@ import java.util.Arrays;
     private void initializePixelArt()
     {
         //path = new Path();//commented out for testing ourPath
-        puth = new ourPath();
+        path = new ourPath();
 
         drawPixel = new Paint();
 
@@ -123,11 +123,11 @@ import java.util.Arrays;
         protected void onDraw(Canvas canvas)
         {
             canvas.drawBitmap(canvasPixelBitmap, 0, 0, pixelCanvasPaint);
-            canvas.drawPath(puth, drawPixel);
+            canvas.drawPath(path, drawPixel);
         }
 
-    public Path getPath() {
-        return puth;
+    public ourPath getPath() {
+        return path;
     }
 
 }

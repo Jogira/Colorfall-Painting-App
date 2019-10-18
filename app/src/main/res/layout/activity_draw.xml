@@ -86,6 +86,14 @@
             android:onClick="onClickSave"
             android:src="@drawable/save_file" />
 
+        <Button
+            android:id="@+id/load_file"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:onClick="onClickLoad"
+            android:text="Load" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

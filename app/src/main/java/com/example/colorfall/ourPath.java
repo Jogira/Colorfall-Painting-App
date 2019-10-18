@@ -1,7 +1,12 @@
 package com.example.colorfall;
 
+import android.content.Context;
 import android.graphics.Path;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
@@ -9,8 +14,49 @@ import java.util.List;
 
 public class ourPath extends Path implements Serializable {
 
-    private List<Action> actions = new LinkedList<>();
+    private static final long serialVersionUID = -5974912367682897467L;//used for serializing
 
+    private List<Action> actions = new LinkedList<>();//list where all user actions are stored
+
+
+    /***********************************Testing methods***************************/
+    public void printList() {
+        int i = 1;
+        for (Action action : actions) {
+            System.out.println(action);
+            System.out.println(i);
+            i++;
+        }
+    }
+    /******************own write object testing********************************************/
+    public void writeObject(ObjectOutputStream out) throws IOException {
+        out.defaultWriteObject();
+        out.writeObject(this.actions);
+    }//end readObject
+    /*************End write object testing**********************************************/
+    /*******************************end Testing methods***************************/
+
+
+
+    /******************reading obj/ re-drawing stored paths on load********************************/
+    public void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        //in.defaultReadObject();//errror here
+        in.readObject();
+        System.out.println("defaultReadObject passed");//testing
+        for (Action action : actions) {
+            //System.out.println("for loop went through this many times");
+            action.perform(this);
+        }
+    }//end readObject
+
+    private interface Action extends Serializable {
+        void perform(Path path);
+    }//end Action
+    /*************End redrawing stored paths on load**********************************************/
+
+
+
+    /****************Overrides****************************/
     @Override
     public void moveTo(float x, float y) {
         actions.add(new Move(x, y));
@@ -22,10 +68,9 @@ public class ourPath extends Path implements Serializable {
         actions.add(new Line(x, y));
         super.lineTo(x, y);
     }
+    /*****************end overrides**********************/
 
-    private interface Action extends Serializable {
-        void perform(Path path);
-    }
+
 
 
     /**************inner MOVE class*******************/
@@ -42,7 +87,12 @@ public class ourPath extends Path implements Serializable {
         public void perform(Path path) {
             path.moveTo(x, y);
         }
-    }//end inner move class
+    }
+    /***********End inner MOVE class*******************/
+
+
+
+
 
     /**************inner LINE class*******************/
     private static final class Line implements Action {
@@ -58,8 +108,7 @@ public class ourPath extends Path implements Serializable {
         public void perform(Path path) {
             path.lineTo(x, y);
         }
-    }//end LINE class
-
-
+    }
+    /***********End inner LINE class*******************/
 
 }
