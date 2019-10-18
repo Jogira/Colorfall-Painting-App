@@ -14,6 +14,7 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -144,6 +145,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     //onCLick method for save button
     public void onClickSave (View view) {
         save();
+        Toast.makeText(getApplicationContext(), "Drawing saved...", Toast.LENGTH_SHORT).show();
         printSavedFiles();
     }
 
