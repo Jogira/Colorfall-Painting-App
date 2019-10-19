@@ -8,12 +8,12 @@
 
     <com.example.colorfall.drawView
         android:id="@+id/drawing"
-        android:layout_width="fill_parent"
-        android:layout_height="515dp"
-        android:layout_marginLeft="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="3dp"
         android:layout_marginTop="30dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginBottom="115dp"
         android:layout_weight="1"
         android:background="#FFFFFFFF" />
 
@@ -131,7 +131,7 @@
             android:background="#00FFFFFF"
             android:src="@drawable/save_file" />
 
-<<<<<<< HEAD
+
         <Button
             android:id="@+id/load_file"
             android:layout_width="100dp"
@@ -157,8 +157,6 @@
 
         </LinearLayout>
 
-=======
->>>>>>> 544b89f3b7033b6656c0e86616f4fbd6c586bd64
 
     </LinearLayout>
 

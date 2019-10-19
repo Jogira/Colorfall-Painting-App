@@ -1,26 +1,14 @@
 package com.example.colorfall;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Path;
-import android.os.Bundle;
-import android.graphics.Bitmap;
-import android.text.Layout;
-import android.view.ContextMenu;
+import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.util.AttributeSet;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.view.ViewGroup.LayoutParams;
-
-
-import java.io.*;
-import java.util.Arrays;
+import java.io.Serializable;
 
 //this is the Controller in view-controller-module architecture
 /**********************************************************************************************
@@ -42,14 +30,19 @@ import java.util.Arrays;
         //private Path path;//commented for new path
         private ourPath path;
         private Paint drawPixel;
+        private Paint gridLines;
         private Paint pixelCanvasPaint;
         private int currentColor = 0xFF000000;
         private Canvas drawPixelCanvas;
         private Bitmap canvasPixelBitmap;
 
+        private Bitmap mBitmapBrush;
+
+
 
         //constructor
-        public drawView(Context context, AttributeSet attributes){
+        public drawView(Context context, AttributeSet attributes)
+        {
             super(context, attributes);
             initializePixelArt();
         }
@@ -84,15 +77,17 @@ import java.util.Arrays;
     {
         //path = new Path();//commented out for testing ourPath
         path = new ourPath();
-
+        gridLines = new Paint();
         drawPixel = new Paint();
 
+        gridLines.setColor(Color.BLACK);
+        gridLines.setStrokeWidth(1F);
         drawPixel.setColor(currentColor);
-        drawPixel.setAntiAlias(true);
-        drawPixel.setStrokeWidth(30F);
+        drawPixel.setAntiAlias(false);
+        drawPixel.setStrokeWidth(70F);
         drawPixel.setStyle(Paint.Style.STROKE);
-        drawPixel.setStrokeJoin(Paint.Join.ROUND);
-        drawPixel.setStrokeCap(Paint.Cap.ROUND);
+        drawPixel.setStrokeJoin(Paint.Join.MITER);
+        drawPixel.setStrokeCap(Paint.Cap.SQUARE);
 
         pixelCanvasPaint = new Paint(Paint.DITHER_FLAG);
     }
@@ -113,7 +108,7 @@ import java.util.Arrays;
 
         @Override
         protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-            super.onSizeChanged(w, h, oldw, oldh);
+            super.onSizeChanged(0, 0, oldw, oldh);
             canvasPixelBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
             drawPixelCanvas = new Canvas(canvasPixelBitmap);
         }
@@ -123,9 +118,25 @@ import java.util.Arrays;
         {
             canvas.drawBitmap(canvasPixelBitmap, 0, 0, pixelCanvasPaint);
             canvas.drawPath(path, drawPixel);
-        }
 
-    public ourPath getPath() {
+
+                int width = getMeasuredWidth();
+                int height = getMeasuredHeight();
+                // Vertical lines
+                for (int i = 1; i < 16; i++) {
+                    canvas.drawLine(width * i / 16, 0, width * i / 16, height, gridLines);
+                }
+
+                // Horizontal lines
+                for (int i = 1; i < 16; i++) {
+                    canvas.drawLine(0, height * i / 16, width, height * i / 16, gridLines);
+                }
+            }
+
+
+
+    public ourPath getPath()
+    {
         return path;
     }
 

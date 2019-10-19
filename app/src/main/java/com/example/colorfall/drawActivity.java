@@ -1,25 +1,17 @@
 package com.example.colorfall;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.media.Image;
-import android.view.View;
-import android.widget.ImageButton;
 import android.content.Context;
-import android.app.Activity;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
@@ -117,7 +109,6 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 
         //colorData(); //Calls and creates color items for brush
     }
-<<<<<<< HEAD
 
     public void colorChanged(View view)
     {
@@ -133,8 +124,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         Context context = getApplicationContext();
         return context;
     }
-=======
->>>>>>> 544b89f3b7033b6656c0e86616f4fbd6c586bd64
+
         //brush.setColor(Color.BLUE);
         //brush.setColor(Color.BLUE);
         //brush.setStyle(Paint.Style.STROKE);
