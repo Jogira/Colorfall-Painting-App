@@ -131,7 +131,6 @@
             android:background="#00FFFFFF"
             android:src="@drawable/save_file" />
 
-<<<<<<< HEAD
         <Button
             android:id="@+id/load_file"
             android:layout_width="100dp"
@@ -156,9 +155,6 @@
             </LinearLayout>
 
         </LinearLayout>
-
-=======
->>>>>>> 544b89f3b7033b6656c0e86616f4fbd6c586bd64
 
     </LinearLayout>
 

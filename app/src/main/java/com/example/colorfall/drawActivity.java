@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.media.Image;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.content.Context;
@@ -29,7 +30,7 @@ import java.util.Arrays;
 //this is the View in Model-View-Controller architecture
 public class drawActivity extends AppCompatActivity implements java.io.Serializable
 {
-    private ArrayList<Integer> colors = new ArrayList<>();
+   // private ArrayList<Integer> colors = new ArrayList<>();
     private drawView drawingView;
     private ImageButton selectedColor;
     private ImageButton blueColor;
@@ -38,6 +39,8 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     private ImageButton greenColor;
     private ImageButton blackColor;
     private ImageButton eraseButton;
+
+    private static final String TAG = "drawActivity";
 
 
     @Override
@@ -117,7 +120,6 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 
         //colorData(); //Calls and creates color items for brush
     }
-<<<<<<< HEAD
 
     public void colorChanged(View view)
     {
@@ -133,8 +135,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         Context context = getApplicationContext();
         return context;
     }
-=======
->>>>>>> 544b89f3b7033b6656c0e86616f4fbd6c586bd64
+
         //brush.setColor(Color.BLUE);
         //brush.setColor(Color.BLUE);
         //brush.setStyle(Paint.Style.STROKE);
@@ -162,26 +163,17 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 //        recyclerView.setLayoutManager(new LinearLayoutManager(this)); //start linear recycleView
 //    }
 
-    //onCLick method for save button
-    public void onClickSave (View view) {
-        save();
-        Toast.makeText(getApplicationContext(), "Drawing saved...", Toast.LENGTH_SHORT).show();
-        printSavedFiles();
-        //testing
-        ourPath path = drawingView.getPath();
-        path.printList();
-        //end testing
-    }
-
-    public void onClickLoad(View view) {
-        load();
-    }
-
     public void onSelectColor(View view)
     {
+
         if (view.getId() == blueColor.getId())
         {
             drawingView.setColor("#072F5F");
+            //Log.v(TAG,"color now blue" + blueColor);  //May not need for test
+
+            //Used for Espresso test
+            Toast T = Toast.makeText(this, "color now blue", Toast.LENGTH_LONG);
+            T.show();
         }
 
         if (view.getId() == redColor.getId())
@@ -254,4 +246,18 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         }
     }
 
+    //onCLick method for save button
+    public void onClickSave (View view) {
+        save();
+        Toast.makeText(getApplicationContext(), "Drawing saved...", Toast.LENGTH_SHORT).show();
+        printSavedFiles();
+        //testing
+        ourPath path = drawingView.getPath();
+        path.printList();
+        //end testing
+    }
+
+    public void onClickLoad(View view) {
+        load();
+    }
 }
