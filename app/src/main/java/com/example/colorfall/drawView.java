@@ -5,9 +5,11 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+
 import java.io.Serializable;
 
 //this is the Controller in view-controller-module architecture
@@ -106,8 +108,16 @@ import java.io.Serializable;
           drawPixel.setColor(currentColor);
     }
 
+    public void wipeCanvas()
+    {
+        drawPixelCanvas.drawColor(0,PorterDuff.Mode.CLEAR);
+        invalidate();
+    }
+
+
         @Override
-        protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        protected void onSizeChanged(int w, int h, int oldw, int oldh)
+        {
             super.onSizeChanged(0, 0, oldw, oldh);
             canvasPixelBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
             drawPixelCanvas = new Canvas(canvasPixelBitmap);

@@ -1,16 +1,9 @@
 package com.example.colorfall;
 
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.media.Image;
-import android.util.Log;
-import android.view.View;
-import android.widget.ImageButton;
-
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -24,7 +17,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 
@@ -40,6 +32,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     private ImageButton greenColor;
     private ImageButton blackColor;
     private ImageButton eraseButton;
+    private ImageButton wipeCanvas;
 
     private static final String TAG = "drawActivity";
 
@@ -93,6 +86,15 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 
         blackColor = (ImageButton) findViewById(R.id.blackColor);
         blackColor.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view) {
+                onSelectColor(view);
+            }
+        });
+
+        wipeCanvas = (ImageButton) findViewById(R.id.delete_canvas);
+        wipeCanvas.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view) {
@@ -200,6 +202,25 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         if (view.getId() == eraseButton.getId())
         {
             drawingView.setColor("#ffffff");
+        }
+
+        if (view.getId() == wipeCanvas.getId())
+        {
+            AlertDialog.Builder newDialog = new AlertDialog.Builder(this);
+            newDialog.setTitle("           Would you like to restart?");
+            newDialog.setPositiveButton("[Delete Canvas]", new DialogInterface.OnClickListener(){
+                public void onClick(DialogInterface dialog, int which){
+                    drawingView.wipeCanvas();
+                    dialog.dismiss();
+                }
+            });
+            newDialog.setNegativeButton("[Continue]", new DialogInterface.OnClickListener(){
+                public void onClick(DialogInterface dialog, int which){
+                    dialog.cancel();
+                }
+            });
+            newDialog.show();
+
         }
     }
 

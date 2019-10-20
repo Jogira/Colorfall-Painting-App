@@ -131,6 +131,13 @@
             android:background="#00FFFFFF"
             android:src="@drawable/save_file" />
 
+        <ImageButton
+            android:id="@+id/delete_canvas"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="#00FFFFFF"
+            android:src="@drawable/delete_canvas" />
+
 
         <Button
             android:id="@+id/load_file"
