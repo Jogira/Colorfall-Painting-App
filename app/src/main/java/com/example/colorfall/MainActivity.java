@@ -1,15 +1,12 @@
 package com.example.colorfall;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 
 public class MainActivity extends AppCompatActivity {
     private Button drawBtn;
@@ -25,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
      *                creates button objects
      *                implements onClick() methods for each button
      *
-     * Input        : savedInstanceState - Bundle - not sure what this is exactly but we need it
+     * Input        : savedInstanceState - Bundle.
      * Output       : void
      *
      * Author       : Jonathan

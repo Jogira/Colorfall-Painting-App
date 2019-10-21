@@ -6,7 +6,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
 import com.mindorks.placeholderview.PlaceHolderView;
-
+//A work in progress for creating a gallery where we can view saved pictures.
 
 public class galleryActivity extends Activity {
     private PlaceHolderView mGalleryView;
@@ -18,13 +18,8 @@ public class galleryActivity extends Activity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_gallery);
-            mGalleryView = findViewById(R.id.galleryView);
-            mGalleryView.addView(new GalleryItem(getResources().getDrawable(R.drawable.tempicon, null)));
+
 
         }
-
-
-
-
     }
 }

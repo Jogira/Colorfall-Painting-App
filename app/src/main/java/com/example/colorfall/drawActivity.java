@@ -23,7 +23,7 @@ import java.util.Arrays;
 //this is the View in Model-View-Controller architecture
 public class drawActivity extends AppCompatActivity implements java.io.Serializable
 {
-   // private ArrayList<Integer> colors = new ArrayList<>();
+
     private drawView drawingView;
     private ImageButton selectedColor;
     private ImageButton blueColor;
@@ -110,18 +110,6 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
                 onSelectColor(view);
             }
         });
-
-        //temp testing while save button DNE
-        //drawView drawVie = new drawView(this);
-        //drawVie.saveDrawing();
-        //drawView drawV = new drawView(this);
-        //drawV.printSavedFiles();
-        //above is testing while save btn DNE
-
-        //drawView drawView = new drawView(this);
-        //setContentView(drawView);
-
-        //colorData(); //Calls and creates color items for brush
     }
 
     public void colorChanged(View view)
@@ -139,32 +127,6 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         return context;
     }
 
-        //brush.setColor(Color.BLUE);
-        //brush.setColor(Color.BLUE);
-        //brush.setStyle(Paint.Style.STROKE);
-        //brush.setStrokeJoin(Paint.Join.ROUND);
-        //brush.setStrokeWidth(100f);
-
-//    //Colors for brush
-//    private void colorData()
-//    {
-//        colors.add(R.color.colorPrimary, 1);
-//        colors.add(R.color.colorPrimary, 2);
-//        //colors.add("Green");
-//        //colors.add("Amber");
-//       // colors.add("Deep Orange");
-//
-//       // createRV();
-//    }
-
-//    //Instantiates a recyclerview
-//    private void createRV()
-//    {
-//        RecyclerView recyclerView = findViewById(R.id.cList);  //Link to XML description
-//        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, colors); //sends item data
-//        recyclerView.setAdapter(adapter); //Sets adapter to recyclerview
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this)); //start linear recycleView
-//    }
 
     public void onSelectColor(View view)
     {
@@ -175,33 +137,53 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             //Log.v(TAG,"color now blue" + blueColor);  //May not need for test
 
             //Used for Espresso test
-            Toast T = Toast.makeText(this, "color now blue", Toast.LENGTH_LONG);
+            Toast T = Toast.makeText(this, "Blue selected.", Toast.LENGTH_SHORT);
             T.show();
         }
 
         if (view.getId() == redColor.getId())
         {
             drawingView.setColor("#FFFF0000");
+
+            //Used for Espresso test
+            Toast T = Toast.makeText(this, "Red selected.", Toast.LENGTH_SHORT);
+            T.show();
         }
 
         if (view.getId() == yellowColor.getId())
         {
             drawingView.setColor("#FFFF00");
+
+            //Used for Espresso test
+            Toast T = Toast.makeText(this, "Yellow selected.", Toast.LENGTH_SHORT);
+            T.show();
         }
 
         if (view.getId() == greenColor.getId())
         {
             drawingView.setColor("#00FF3E");
+
+            //Used for Espresso test
+            Toast T = Toast.makeText(this, "Green selected.", Toast.LENGTH_SHORT);
+            T.show();
         }
 
         if (view.getId() == blackColor.getId())
         {
             drawingView.setColor("#FF000000");
+
+            //Used for Espresso test
+            Toast T = Toast.makeText(this, "Black selected.", Toast.LENGTH_SHORT);
+            T.show();
         }
 
         if (view.getId() == eraseButton.getId())
         {
             drawingView.setColor("#ffffff");
+
+            //Used for Espresso test
+            Toast T = Toast.makeText(this, "Eraser selected.", Toast.LENGTH_SHORT);
+            T.show();
         }
 
         if (view.getId() == wipeCanvas.getId())
