@@ -17,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
     private Button templatesBtn;
     private Button importBtn;
 
+
+
     /**********************************************************************************************
      * Method       : onCreate()
      * Description  : runs when "main activity" view is created

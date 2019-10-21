@@ -1,36 +1,234 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:clickable="true"
-    tools:context=".drawActivity">
+    android:background="#f1d592"
+    android:orientation="vertical"
+    tools:context=".drawView">
 
-    <Button
-        android:id="@+id/saveBtn"
+    <com.example.colorfall.drawView
+        android:id="@+id/drawing"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginBottom="115dp"
+        android:layout_weight="1"
+        android:background="#FFFFFFFF" />
+
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="680dp"
-        android:onClick="onClickSave"
-        android:text="SAVE"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_gravity="center"
+        android:orientation="horizontal">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/drawModeSelect"
+
+        <LinearLayout
+            android:id="@+id/paint_colors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/blueColor"
+                android:layout_width="@dimen/pixel_brush"
+                android:layout_height="@dimen/pixel_brush"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:background="#072F5F"
+                android:contentDescription="@string/pixel"
+                android:onClick="onSelectColor"
+                android:tag="#072F5F" />
+
+            <ImageButton
+                android:id="@+id/redColor"
+                android:layout_width="@dimen/pixel_brush"
+                android:layout_height="@dimen/pixel_brush"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:background="#FFFF0000"
+                android:contentDescription="@string/pixel"
+                android:onClick="paintClicked"
+                android:tag="#FFFF0000" />
+
+            <ImageButton
+                android:id="@+id/yellowColor"
+                android:layout_width="@dimen/pixel_brush"
+                android:layout_height="@dimen/pixel_brush"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:background="#FFFF00"
+                android:contentDescription="@string/pixel"
+                android:onClick="paintClicked"
+                android:tag="#FFFF00" />
+
+            <ImageButton
+                android:id="@+id/blackColor"
+                android:layout_width="@dimen/pixel_brush"
+                android:layout_height="@dimen/pixel_brush"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:background="#FF000000"
+                android:contentDescription="@string/pixel"
+                android:onClick="paintClicked"
+                android:tag="#FFFF0000" />
+
+            <ImageButton
+                android:id="@+id/greenColor"
+                android:layout_width="@dimen/pixel_brush"
+                android:layout_height="@dimen/pixel_brush"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:background="#00FF3E"
+                android:contentDescription="@string/pixel"
+                android:onClick="paintClicked"
+                android:tag="#00FF3E" />
+
+            <ImageButton
+                android:id="@+id/new_colors"
+                android:layout_width="@dimen/pixel_brush"
+                android:layout_height="@dimen/pixel_brush"
+                android:background="#00FFFFFF"
+                android:src="@drawable/add_colors" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:background="#00000000"
-        android:clickable="true"
-        app:backgroundTint="#222222"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.954"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_edit" />
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageButton
+            android:id="@+id/eraser"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/erase"
+            android:background="#00FFFFFF"
+            android:src="@drawable/eraser" />
+
+        <ImageButton
+            android:id="@+id/pixel_pen"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/pixel_pen"
+            android:background="#00FFFFFF"
+            android:src="@drawable/pixel_pen" />
+
+        <ImageButton
+            android:id="@+id/save_file"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:onClick="onClickSave"
+            android:background="#00FFFFFF"
+            android:src="@drawable/save_file" />
+
+        <ImageButton
+            android:id="@+id/delete_canvas"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="#00FFFFFF"
+            android:src="@drawable/delete_canvas" />
+
+
+        <Button
+            android:id="@+id/load_file"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:onClick="onClickLoad"
+            android:text="Load" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical" >
+
+            <!-- Top Row -->
+            <LinearLayout
+                android:id="@+id/paint_colors"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
+
+<!--    <?xml version="1.0" encoding="utf-8"?>-->
+<!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--xmlns:tools="http://schemas.android.com/tools"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="match_parent"-->
+<!--android:background="#FFFFFF"-->
+<!--android:clickable="true"-->
+<!--tools:context=".drawActivity">-->
+
+<!--<Button-->
+<!--    android:id="@+id/saveBtn"-->
+<!--    android:layout_width="wrap_content"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:layout_marginStart="16dp"-->
+<!--    android:layout_marginTop="680dp"-->
+<!--    android:onClick="onClickSave"-->
+<!--    android:text="SAVE"-->
+<!--    app:layout_constraintStart_toStartOf="parent"-->
+<!--    app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--<com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--    android:id="@+id/drawModeSelect"-->
+<!--    android:layout_width="wrap_content"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:layout_marginBottom="16dp"-->
+<!--    android:background="#00000000"-->
+<!--    android:clickable="true"-->
+<!--    app:backgroundTint="#222222"-->
+<!--    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--    app:layout_constraintEnd_toEndOf="parent"-->
+<!--    app:layout_constraintHorizontal_bias="0.954"-->
+<!--    app:layout_constraintStart_toStartOf="parent"-->
+<!--    app:layout_constraintTop_toBottomOf="@+id/cList"-->
+<!--    app:srcCompat="@android:drawable/ic_menu_edit" />-->
+
+
+<!--<androidx.recyclerview.widget.RecyclerView-->
+<!--    android:id="@+id/cList"-->
+<!--    android:layout_width="0dp"-->
+<!--    android:layout_height="0dp"-->
+<!--    android:layout_marginTop="2dp"-->
+<!--    app:layout_constraintBottom_toTopOf="@+id/drawModeSelect"-->
+<!--    app:layout_constraintEnd_toEndOf="@+id/drawModeSelect"-->
+<!--    app:layout_constraintStart_toStartOf="@+id/drawModeSelect"-->
+<!--    />-->
+
+<!--<fragment-->
+<!--    android:id="@+id/fragment"-->
+<!--    android:name="com.example.colorfall.drawingFragment"-->
+<!--    android:layout_width="350dp"-->
+<!--    android:layout_height="350dp"-->
+<!--    android:layout_marginStart="169dp"-->
+<!--    android:layout_marginTop="325dp"-->
+<!--    android:layout_marginEnd="169dp"-->
+<!--    android:layout_marginBottom="387dp"-->
+<!--    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--    app:layout_constraintEnd_toEndOf="parent"-->
+<!--    app:layout_constraintStart_toStartOf="parent"-->
+<!--    app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--</androidx.constraintlayout.widget.ConstraintLayout>-->

@@ -2,6 +2,7 @@
     <string name="app_name">Colorfall</string>
     <string name="title_activity_gallery">galleryActivity</string>
     <string name="large_text">
+
         "Material is the metaphor.\n\n"
 
         "A material metaphor is the unifying theory of a rationalized space and a system of motion."
@@ -93,4 +94,14 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_import">importActivity</string>
     <string name="title_activity_templates">TemplatesActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="erase">erase</string>
+    <string name="save">save</string>
+    <string name="pixel_pen">pixel_pen</string>
+    <string name="add_grid">add_grid</string>
+    <string name="save_file">save_file</string>
+    <string name="pixel">pixel</string>
+
 </resources>
