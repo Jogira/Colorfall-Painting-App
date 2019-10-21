@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+import android.content.Intent;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -33,6 +35,10 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     private ImageButton blackColor;
     private ImageButton eraseButton;
     private ImageButton wipeCanvas;
+    //testing save file -> gallery
+    private String files;
+    private String file_name = "";
+
 
     private static final String TAG = "drawActivity";
 
@@ -110,6 +116,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
                 onSelectColor(view);
             }
         });
+
     }
 
     public void colorChanged(View view)
@@ -231,7 +238,21 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         System.out.println(context.getFilesDir().getAbsolutePath());
         String[] fList = context.fileList();
         System.out.println(Arrays.toString(fList) + "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+        files+=Arrays.toString(fList) + "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n";
+        //code for gallery
+        Intent intent = new Intent(this, galleryActivity.class);
+        intent.putExtra("filenames", files);
+        startActivityForResult(intent, 0);
+
+
     }
+
+    public String getFiles(){
+        return files;
+    }
+
+
+
 
     public void load() {
         //setup
@@ -254,14 +275,21 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     public void onClickSave (View view) {
         save();
         Toast.makeText(getApplicationContext(), "Drawing saved...", Toast.LENGTH_SHORT).show();
+
+
         printSavedFiles();
         //testing
         ourPath path = drawingView.getPath();
         path.printList();
         //end testing
+
+        //sending file names to gallery
+
     }
 
     public void onClickLoad(View view) {
         load();
+        Intent intent = new Intent(this,  galleryActivity.class);
+        startActivity(intent);
     }
 }

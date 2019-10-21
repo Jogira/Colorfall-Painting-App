@@ -124,6 +124,8 @@
             android:background="#00FFFFFF"
             android:src="@drawable/save_file" />
 
+
+
         <ImageButton
             android:id="@+id/delete_canvas"
             android:layout_width="50dp"
@@ -138,6 +140,7 @@
             android:layout_height="50dp"
             android:layout_weight="1"
             android:text="Load" />
+
 
         <LinearLayout
             android:layout_width="wrap_content"
