@@ -34,6 +34,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     private ImageButton greenColor;
     private ImageButton blackColor;
     private ImageButton eraseButton;
+    private ImageButton saveButton;
     private ImageButton wipeCanvas;
     //testing save file -> gallery
     private String files;
@@ -53,6 +54,14 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         selectedColor = (ImageButton)paintLayout.getChildAt(0);
         drawingView = (drawView) findViewById(R.id.drawing);
 
+        saveButton = (ImageButton) findViewById(R.id.save_file);
+        saveButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view) {
+                onSelectColor(view);
+            }
+        });
 
         blueColor = (ImageButton) findViewById(R.id.blueColor);
         blueColor.setOnClickListener(new View.OnClickListener()
@@ -62,6 +71,8 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
                 onSelectColor(view);
             }
         });
+
+
 
         redColor = (ImageButton) findViewById(R.id.redColor);
         redColor.setOnClickListener(new View.OnClickListener()
@@ -190,6 +201,15 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 
             //Used for Espresso test
             Toast T = Toast.makeText(this, "Eraser selected.", Toast.LENGTH_SHORT);
+            T.show();
+        }
+
+
+        if (view.getId() == saveButton.getId())
+        {
+            save();
+            //Used for Espresso test
+            Toast T = Toast.makeText(this, "Saving...", Toast.LENGTH_SHORT);
             T.show();
         }
 
