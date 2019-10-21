@@ -1,6 +1,7 @@
 package com.example.colorfall;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -27,6 +28,8 @@ public class galleryActivity extends Activity {
             TextView m = (TextView) findViewById(R.id.textView);
             TextView textView1 = (TextView)findViewById(R.id.textView);
             TextView m1 = (TextView) findViewById(R.id.textView1);
+            m.setBackgroundColor(Color.BLACK);
+            m.setTextColor(Color.WHITE);
 
 
 
