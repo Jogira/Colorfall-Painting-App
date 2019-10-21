@@ -23,7 +23,7 @@ public class galleryActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
-//
+
         TextView textView = (TextView)findViewById(R.id.textView);
         TextView m = (TextView) findViewById(R.id.textView);
         TextView textView1 = (TextView)findViewById(R.id.textView);

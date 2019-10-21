@@ -240,9 +240,10 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         System.out.println(Arrays.toString(fList) + "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
         files+=Arrays.toString(fList) + "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n";
         //code for gallery
+
         Intent intent = new Intent(this, galleryActivity.class);
         intent.putExtra("filenames", files);
-        startActivityForResult(intent, 0);
+        startActivity(intent);
 
 
     }
@@ -275,8 +276,6 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     public void onClickSave (View view) {
         save();
         Toast.makeText(getApplicationContext(), "Drawing saved...", Toast.LENGTH_SHORT).show();
-
-
         printSavedFiles();
         //testing
         ourPath path = drawingView.getPath();
