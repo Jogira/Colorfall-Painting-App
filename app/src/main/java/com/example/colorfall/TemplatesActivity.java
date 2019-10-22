@@ -10,6 +10,8 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
 
+
+//WORK IN PROGRESS//
 public class TemplatesActivity extends AppCompatActivity {
 
     @Override

@@ -22,7 +22,7 @@ import java.io.ObjectOutputStream;
 import java.util.Arrays;
 
 
-//this is the View in Model-View-Controller architecture
+//this is a View in Model-View-Controller architecture
 public class drawActivity extends AppCompatActivity implements java.io.Serializable
 {
 
@@ -34,14 +34,14 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     private ImageButton greenColor;
     private ImageButton blackColor;
     private ImageButton eraseButton;
-    private ImageButton saveButton;
+    private ImageButton drawButton;
     private ImageButton wipeCanvas;
     //testing save file -> gallery
     private String files;
     private String file_name = "";
 
-
-    private static final String TAG = "drawActivity";
+    //WORK IN PROGRESS//
+    //private static final String TAG = "drawActivity";
 
 
     @Override
@@ -54,14 +54,6 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         selectedColor = (ImageButton)paintLayout.getChildAt(0);
         drawingView = (drawView) findViewById(R.id.drawing);
 
-        saveButton = (ImageButton) findViewById(R.id.save_file);
-        saveButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view) {
-                onSelectColor(view);
-            }
-        });
 
         blueColor = (ImageButton) findViewById(R.id.blueColor);
         blueColor.setOnClickListener(new View.OnClickListener()
@@ -71,8 +63,6 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
                 onSelectColor(view);
             }
         });
-
-
 
         redColor = (ImageButton) findViewById(R.id.redColor);
         redColor.setOnClickListener(new View.OnClickListener()
@@ -128,27 +118,36 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
         });
 
-    }
+        drawButton = (ImageButton) findViewById(R.id.pixel_pen);
+        drawButton.setOnClickListener(new View.OnClickListener()
 
-    public void colorChanged(View view)
-    {
-        if(view != selectedColor)
         {
-            ImageButton imgView = (ImageButton) view;
-            String color = view.getTag().toString();
-            drawingView.setColor(color);
-        }
+            @Override
+            public void onClick(View view) {
+                onSelectColor(view);
+            }
+        });
     }
 
-    public Context getOurContext() {
-        Context context = getApplicationContext();
-        return context;
-    }
+//WORK IN PROGRESS//
+//    public void colorChanged(View view)
+//    {
+//        if(view != selectedColor)
+//        {
+//            ImageButton imgView = (ImageButton) view;
+//            String color = view.getTag().toString();
+//            drawingView.setColor(color);
+//        }
+//    }
+//
+//    public Context getOurContext() {
+//        Context context = getApplicationContext();
+//        return context;
+//    }
 
-
+    //Sets vales based on btn press
     public void onSelectColor(View view)
     {
-
         if (view.getId() == blueColor.getId())
         {
             drawingView.setColor("#072F5F");
@@ -204,17 +203,18 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             T.show();
         }
 
-
-        if (view.getId() == saveButton.getId())
+        if (view.getId() == drawButton.getId())
         {
-            save();
+            drawingView.setColor("#FF000000");
+
             //Used for Espresso test
-            Toast T = Toast.makeText(this, "Saving...", Toast.LENGTH_SHORT);
+            Toast T = Toast.makeText(this, "Draw selected.", Toast.LENGTH_SHORT);
             T.show();
         }
 
         if (view.getId() == wipeCanvas.getId())
         {
+            //Delete canvas
             AlertDialog.Builder newDialog = new AlertDialog.Builder(this);
             newDialog.setTitle("           Would you like to restart?");
             newDialog.setPositiveButton("[Delete Canvas]", new DialogInterface.OnClickListener(){
@@ -233,39 +233,38 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         }
     }
 
-    public void save() {
-        Context context = getApplicationContext();
-        String fileName = context.getFilesDir().getPath() + "/drawing.ser";
-
-        try {
-            FileOutputStream file = new FileOutputStream(fileName);
-            ObjectOutputStream out = new ObjectOutputStream(file);
-            out.writeObject(drawingView.getPath());
-            out.close();
-            file.close();
-            System.out.println("end of try block reached");//testing
-
-        } catch (Exception ex) {
-            System.out.println("Exception is caught");
-        }
-
-        //saving .ser file to internal storage
-        File file = new File(context.getFilesDir(), fileName);
-    }
-
-    void printSavedFiles() {
-        Context context = getApplicationContext();
-        System.out.println(context.getFilesDir().getAbsolutePath());
-        String[] fList = context.fileList();
-        System.out.println(Arrays.toString(fList) + "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-        files+=Arrays.toString(fList) + "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n";
-        //code for gallery
-        Intent intent = new Intent(this, galleryActivity.class);
-        intent.putExtra("filenames", files);
-        startActivityForResult(intent, 0);
-
-
-    }
+//WORK IN PROGRESS//
+//    public void save() {
+//        Context context = getApplicationContext();
+//        String fileName = context.getFilesDir().getPath() + "/drawing.ser";
+//
+//        try {
+//            FileOutputStream file = new FileOutputStream(fileName);
+//            ObjectOutputStream out = new ObjectOutputStream(file);
+//            out.writeObject(drawingView.getPath());
+//            out.close();
+//            file.close();
+//            System.out.println("end of try block reached");//testing
+//
+//        } catch (Exception ex) {
+//            System.out.println("Exception is caught");
+//        }
+//
+//        //saving .ser file to internal storage
+//        File file = new File(context.getFilesDir(), fileName);
+//    }
+//
+//    void printSavedFiles() {
+//        Context context = getApplicationContext();
+//        System.out.println(context.getFilesDir().getAbsolutePath());
+//        String[] fList = context.fileList();
+//        System.out.println(Arrays.toString(fList) + "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+//        files+=Arrays.toString(fList) + "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n";
+//        //code for gallery
+//        Intent intent = new Intent(this, galleryActivity.class);
+//        intent.putExtra("filenames", files);
+//        startActivityForResult(intent, 0);
+//    }
 
     public String getFiles(){
         return files;
@@ -273,43 +272,43 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 
 
 
+//WORK IN PROGRESS//
+//    public void load() {
+//        //setup
+//        Context context = getApplicationContext();//if errors occur down the road, its likely from this
+//        String fileName = context.getFilesDir().getPath() + "/drawing.ser";
+//        ourPath path = drawingView.getPath();
+//
+//        //loading
+//        try {
+//            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName));
+//            path.readObject(ois);//error occuring here
+//            ois.close();
+//        } catch (Exception e) {
+//            System.out.println("error boiiiii");//testing
+//            e.printStackTrace();
+//        }
+//    }
 
-    public void load() {
-        //setup
-        Context context = getApplicationContext();//if errors occur down the road, its likely from this
-        String fileName = context.getFilesDir().getPath() + "/drawing.ser";
-        ourPath path = drawingView.getPath();
-
-        //loading
-        try {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName));
-            path.readObject(ois);//error occuring here
-            ois.close();
-        } catch (Exception e) {
-            System.out.println("error boiiiii");//testing
-            e.printStackTrace();
-        }
-    }
-
-    //onCLick method for save button
-    public void onClickSave (View view) {
-        save();
-        Toast.makeText(getApplicationContext(), "Drawing saved...", Toast.LENGTH_SHORT).show();
-
-
-        printSavedFiles();
-        //testing
-        ourPath path = drawingView.getPath();
-        path.printList();
-        //end testing
-
-        //sending file names to gallery
-
-    }
-
-    public void onClickLoad(View view) {
-        load();
-        Intent intent = new Intent(this,  galleryActivity.class);
-        startActivity(intent);
-    }
+//    //onCLick method for save button
+//    public void onClickSave (View view) {
+//        save();
+//        Toast.makeText(getApplicationContext(), "Drawing saved...", Toast.LENGTH_SHORT).show();
+//
+//
+//        printSavedFiles();
+//        //testing
+//        ourPath path = drawingView.getPath();
+//        path.printList();
+//        //end testing
+//
+//        //sending file names to gallery
+//
+//    }
+//
+//    public void onClickLoad(View view) {
+//        load();
+//        Intent intent = new Intent(this,  galleryActivity.class);
+//        startActivity(intent);
+//    }
 }

@@ -4,8 +4,7 @@ import com.mindorks.placeholderview.annotations.*;
 import android.widget.ImageView;
 import android.graphics.drawable.Drawable;
 
-
-
+//WORK IN PROGRESS//
 @Animate(Animation.CARD_LEFT_IN_DESC)
 @NonReusable
 @Layout(R.layout.activity_gallery)
