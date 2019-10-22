@@ -233,6 +233,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         }
     }
 
+
 //WORK IN PROGRESS//
 //    public void save() {
 //        Context context = getApplicationContext();
@@ -266,11 +267,44 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 //        startActivityForResult(intent, 0);
 //    }
 
+    public void save() {
+        Context context = getApplicationContext();
+        String fileName = context.getFilesDir().getPath() + "/drawing.ser";
+
+        try {
+            FileOutputStream file = new FileOutputStream(fileName);
+            ObjectOutputStream out = new ObjectOutputStream(file);
+            out.writeObject(drawingView.getPath());
+            out.close();
+            file.close();
+            System.out.println("end of try block reached");//testing
+
+        } catch (Exception ex) {
+            System.out.println("Exception is caught");
+        }
+
+        //saving .ser file to internal storage
+        File file = new File(context.getFilesDir(), fileName);
+    }
+
+    void printSavedFiles() {
+        Context context = getApplicationContext();
+        System.out.println(context.getFilesDir().getAbsolutePath());
+        String[] fList = context.fileList();
+        System.out.println(Arrays.toString(fList) + "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+        files+=Arrays.toString(fList) + "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n";
+        //code for gallery
+
+        Intent intent = new Intent(this, galleryActivity.class);
+        intent.putExtra("filenames", files);
+        startActivity(intent);
+
+
+    }
+
     public String getFiles(){
         return files;
     }
-
-
 
 //WORK IN PROGRESS//
 //    public void load() {
