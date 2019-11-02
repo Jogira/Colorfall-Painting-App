@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -36,6 +37,8 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     private ImageButton eraseButton;
     private ImageButton drawButton;
     private ImageButton wipeCanvas;
+    private ImageButton saveButton;
+    private Button loadButton;
     //testing save file -> gallery
     private String files;
     private String file_name = "";
@@ -61,6 +64,24 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             @Override
             public void onClick(View view) {
                 onSelectColor(view);
+            }
+        });
+
+        saveButton = (ImageButton) findViewById(R.id.save_file);
+        saveButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view) {
+                onClickSave(view);
+            }
+        });
+
+        loadButton = findViewById(R.id.load_file);
+        loadButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view) {
+                onClickLoad(view);
             }
         });
 
@@ -295,9 +316,9 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         files+=Arrays.toString(fList) + "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n";
         //code for gallery
 
-        Intent intent = new Intent(this, galleryActivity.class);
-        intent.putExtra("filenames", files);
-        startActivity(intent);
+        //Intent intent = new Intent(this, galleryActivity.class);
+        //intent.putExtra("filenames", files);
+        //startActivity(intent);
 
 
     }
@@ -307,42 +328,42 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     }
 
 //WORK IN PROGRESS//
-//    public void load() {
-//        //setup
-//        Context context = getApplicationContext();//if errors occur down the road, its likely from this
-//        String fileName = context.getFilesDir().getPath() + "/drawing.ser";
-//        ourPath path = drawingView.getPath();
-//
-//        //loading
-//        try {
-//            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName));
-//            path.readObject(ois);//error occuring here
-//            ois.close();
-//        } catch (Exception e) {
-//            System.out.println("error boiiiii");//testing
-//            e.printStackTrace();
-//        }
-//    }
+    public void load() {
+        //setup
+        Context context = getApplicationContext();//if errors occur down the road, its likely from this
+        String fileName = context.getFilesDir().getPath() + "/drawing.ser";
+        ourPath path = drawingView.getPath();
 
-//    //onCLick method for save button
-//    public void onClickSave (View view) {
-//        save();
-//        Toast.makeText(getApplicationContext(), "Drawing saved...", Toast.LENGTH_SHORT).show();
-//
-//
-//        printSavedFiles();
-//        //testing
-//        ourPath path = drawingView.getPath();
-//        path.printList();
-//        //end testing
-//
-//        //sending file names to gallery
-//
-//    }
-//
-//    public void onClickLoad(View view) {
-//        load();
-//        Intent intent = new Intent(this,  galleryActivity.class);
-//        startActivity(intent);
-//    }
+        //loading
+        try {
+            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName));
+            path.readObject(ois);//error occuring here
+            ois.close();
+        } catch (Exception e) {
+            System.out.println("error boiiiii");//testing
+            e.printStackTrace();
+        }
+    }
+
+    //onCLick method for save button
+    public void onClickSave (View view) {
+        save();
+        Toast.makeText(getApplicationContext(), "Drawing saved...", Toast.LENGTH_SHORT).show();
+
+
+        printSavedFiles();
+        //testing
+        ourPath path = drawingView.getPath();
+        path.printList();
+        //end testing
+
+        //sending file names to gallery
+
+    }
+
+    public void onClickLoad(View view) {
+        load();
+        //Intent intent = new Intent(this,  galleryActivity.class);
+        //startActivity(intent);
+    }
 }

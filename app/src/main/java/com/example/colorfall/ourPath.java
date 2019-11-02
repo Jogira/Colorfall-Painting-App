@@ -10,6 +10,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 
 //WORK IN PROGRESS//
 public class ourPath extends Path implements Serializable {
@@ -43,10 +44,20 @@ public class ourPath extends Path implements Serializable {
         //in.defaultReadObject();//errror here
         in.readObject();
         System.out.println("defaultReadObject passed");//testing
-        for (Action action : actions) {
+
+        ListIterator<Action> iter = actions.listIterator(0);
+
+        while(iter.hasNext()==true){
+            Action action = iter.next();
+            System.out.println("for loop went through this many times");
+            action.perform(this);
+            System.out.println("after perform");
+        }
+
+        /*for (Action action : actions) {
             //System.out.println("for loop went through this many times");
             action.perform(this);
-        }
+        }*/
     }//end readObject
 
     private interface Action extends Serializable {
@@ -81,6 +92,7 @@ public class ourPath extends Path implements Serializable {
         public Move(float x, float y) {
             this.x = x;
             this.y = y;
+            System.out.println("it moved. x=" + x + " y=" +y);
         }
 
         @Override
