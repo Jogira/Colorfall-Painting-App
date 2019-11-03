@@ -5,6 +5,7 @@ import android.graphics.Path;
 import android.util.Log;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -39,13 +40,49 @@ public class ourPath extends Path implements Serializable {
     /*******************************end Testing methods***************************/
 
 
+    public void save(String fileName) {
+        Log.d("TAG", "starting ourPath save");//testing
+        Log.d("TAG", "LL size = " + actions.size());//testing
+        try {
+            ObjectOutputStream saving = new ObjectOutputStream(new FileOutputStream(fileName));
+            Log.d("TAG", "file made");//testing
+            saving.writeObject(actions);
+            Log.d("TAG", "write complete");//testing
+            saving.close();
+        } catch (IOException ioe) {
+            Log.d("TAG", "Exception is caught");
+        }
+    }
 
+    public void load(String fileName) {
+        Log.d("TAG", "starting ourPath save");//testing
+        try {
+            ObjectInputStream loading = new ObjectInputStream(new FileInputStream(fileName));
+            Log.d("TAG", "file opened ");//testing
+            Object loadedList = loading.readObject();
+            Log.d("TAG", "read complete");//testing
+            actions = (LinkedList<Action>)loadedList;
+            loading.close();
+            Log.d("TAG", "LL saved locally; file closed");//testing
+            Log.d("TAG", "LL size = " + actions.size());//testing
+
+        } catch (Exception ld) {
+            Log.d("TAG", "Exception is caught");
+        }
+    }
+
+    public void testinhjt() {
+        Log.d("TAG", "erhjklsldjgwehnwknwhjkg;wthjlakg");//testing
+    }
     /******************reading obj/ re-drawing stored paths on load********************************/
     public void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         //in.defaultReadObject();//errror here
-        in.readObject();
+        //Object loadedLL = in.readObject();
         Log.d("TAG","defaultReadObject passed");//testing
 
+        //actions = (LinkedList<Action>)loadedLL; //Stores loaded LL into the local LL
+
+        //Iterates throught local LL to redraw image
         ListIterator<Action> iter = actions.listIterator(0);
 
         while(iter.hasNext()==true){
@@ -70,19 +107,21 @@ public class ourPath extends Path implements Serializable {
     public void moveTo(float x, float y) {
         actions.add(new Move(x, y));
         super.moveTo(x, y);
-        Log.d("TAG","move 1. x=" + x + " y=" +y);
+        Log.d("TAG","move 1. x=" + x + " y=" +y + " SIZE = " +  + actions.size());
     }
 
     @Override
     public void lineTo(float x, float y) {
         actions.add(new Line(x, y));
         super.lineTo(x, y);
-        Log.d("TAG","line 1. x=" + x + " y=" +y);
+        Log.d("TAG","line 1. x=" + x + " y=" +y + " SIZE = " +  + actions.size());
     }
     /*****************end overrides**********************/
 
-
-
+    //Getter for linked list
+    public List<Action> getLL()  {
+        return actions;
+    }
 
     /**************inner MOVE class*******************/
     private static final class Move implements Action, Serializable {

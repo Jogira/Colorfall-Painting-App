@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Arrays;
@@ -255,66 +256,47 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         }
     }
 
-
-//WORK IN PROGRESS//
-//    public void save() {
-//        Context context = getApplicationContext();
-//        String fileName = context.getFilesDir().getPath() + "/drawing.ser";
-//
-//        try {
-//            FileOutputStream file = new FileOutputStream(fileName);
-//            ObjectOutputStream out = new ObjectOutputStream(file);
-//            out.writeObject(drawingView.getPath());
-//            out.close();
-//            file.close();
-//            System.out.println("end of try block reached");//testing
-//
-//        } catch (Exception ex) {
-//            System.out.println("Exception is caught");
-//        }
-//
-//        //saving .ser file to internal storage
-//        File file = new File(context.getFilesDir(), fileName);
-//    }
-//
-//    void printSavedFiles() {
-//        Context context = getApplicationContext();
-//        System.out.println(context.getFilesDir().getAbsolutePath());
-//        String[] fList = context.fileList();
-//        System.out.println(Arrays.toString(fList) + "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-//        files+=Arrays.toString(fList) + "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n";
-//        //code for gallery
-//        Intent intent = new Intent(this, galleryActivity.class);
-//        intent.putExtra("filenames", files);
-//        startActivityForResult(intent, 0);
-//    }
-
     public void save() {
         Context context = getApplicationContext();
         String fileName = context.getFilesDir().getPath() + "/drawing.ser";
+        //OURRPATHTEST.testinhjt();
+        drawingView.getPath().save(fileName);
 
-        try {
-            FileOutputStream file = new FileOutputStream(fileName);
-            ObjectOutputStream out = new ObjectOutputStream(file);
-            out.writeObject(drawingView.getPath());
-            file.close();
-            out.close();
-            Log.d("TAG","end of try block reached");//testing
-
-
-        } catch (Exception ex) {
-            Log.d("TAG","Exception is caught");
-        }
-
-        //saving .ser file to internal storage
         File file = new File(fileName);
-
         if(file.exists()) {
             double bytes = file.length();
             Log.d("TAG", "bytes: " + bytes);
         } else {
             Log.d("TAG", "file does not exist");
         }
+        //Save Mk1 implimention ; may need to revert to DO NOT DELETE
+//        Context context = getApplicationContext();
+//        String fileName = context.getFilesDir().getPath() + "/drawing.ser";
+//
+//        try {
+//            FileOutputStream file = new FileOutputStream(fileName);
+//            ObjectOutputStream out = new ObjectOutputStream(file);
+//            Log.d("TAG","file made");//testing
+//            out.writeObject(ourPath.getLL());
+//            Log.d("TAG","write complete");//testing
+//            file.close();
+//            out.close();
+//            Log.d("TAG","end of try block reached");//testing
+//
+//
+//        } catch (Exception ex) {
+//            Log.d("TAG","Exception is caught");
+//        }
+//
+//        //saving .ser file to internal storage
+//        File file = new File(fileName);
+//
+//        if(file.exists()) {
+//            double bytes = file.length();
+//            Log.d("TAG", "bytes: " + bytes);
+//        } else {
+//            Log.d("TAG", "file does not exist");
+//        }
     }
 
     void printSavedFiles() {
@@ -352,18 +334,20 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         } else {
             Log.d("TAG", "file does not exist");
         }
-        //end testing blcok
-        ourPath path = drawingView.getPath();
 
-        //loading
-        try {
-            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName));
-            path.readObject(ois);//error occuring here
-            ois.close();
-        } catch (Exception e) {
-            Log.d("TAG","error boiiiii");//testing
-            e.printStackTrace();
-        }
+        drawingView.getPath().load(fileName);
+//        //end testing blcok
+//        ourPath path = drawingView.getPath(); //Sends derserilized info to ourPath.java
+//
+//        //loading
+//        try {
+//            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName));
+//            path.readObject(ois);//error occuring here
+//            ois.close();
+//        } catch (Exception e) {
+//            Log.d("TAG","error boiiiii");//testing
+//            e.printStackTrace();
+//        }
     }
 
     //onCLick method for save button
