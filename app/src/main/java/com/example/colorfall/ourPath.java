@@ -55,10 +55,7 @@ public class ourPath extends Path implements Serializable {
             Log.d("TAG","after perform");
         }
 
-        /*for (Action action : actions) {
-            //System.out.println("for loop went through this many times");
-            action.perform(this);
-        }*/
+
     }//end readObject
 
     private interface Action extends Serializable {
@@ -88,7 +85,7 @@ public class ourPath extends Path implements Serializable {
 
 
     /**************inner MOVE class*******************/
-    private static final class Move implements Action {
+    private static final class Move implements Action, Serializable {
 
         private final float x, y;
 
@@ -110,7 +107,7 @@ public class ourPath extends Path implements Serializable {
 
 
     /**************inner LINE class*******************/
-    private static final class Line implements Action {
+    private static final class Line implements Action, Serializable {
 
         private final float x, y;
 

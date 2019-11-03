@@ -297,16 +297,24 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             FileOutputStream file = new FileOutputStream(fileName);
             ObjectOutputStream out = new ObjectOutputStream(file);
             out.writeObject(drawingView.getPath());
-            out.close();
             file.close();
+            out.close();
             Log.d("TAG","end of try block reached");//testing
+
 
         } catch (Exception ex) {
             Log.d("TAG","Exception is caught");
         }
 
         //saving .ser file to internal storage
-        File file = new File(context.getFilesDir(), fileName);
+        File file = new File(fileName);
+
+        if(file.exists()) {
+            double bytes = file.length();
+            Log.d("TAG", "bytes: " + bytes);
+        } else {
+            Log.d("TAG", "file does not exist");
+        }
     }
 
     void printSavedFiles() {
@@ -314,6 +322,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         System.out.println(context.getFilesDir().getAbsolutePath());
         String[] fList = context.fileList();
         System.out.println(Arrays.toString(fList) + "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+        Log.d("TAG", "files:" + Arrays.toString(fList));
         files+=Arrays.toString(fList) + "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n";
         //code for gallery
 
@@ -333,6 +342,17 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         //setup
         Context context = getApplicationContext();//if errors occur down the road, its likely from this
         String fileName = context.getFilesDir().getPath() + "/drawing.ser";
+
+        //check if file existss and is non empty
+        File file = new File(fileName);
+
+        if(file.exists()) {
+            double bytes = file.length();
+            Log.d("TAG", "bytes: " + bytes);
+        } else {
+            Log.d("TAG", "file does not exist");
+        }
+        //end testing blcok
         ourPath path = drawingView.getPath();
 
         //loading
