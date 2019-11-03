@@ -2,6 +2,7 @@ package com.example.colorfall;
 
 import android.content.Context;
 import android.graphics.Path;
+import android.util.Log;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -43,15 +44,15 @@ public class ourPath extends Path implements Serializable {
     public void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         //in.defaultReadObject();//errror here
         in.readObject();
-        System.out.println("defaultReadObject passed");//testing
+        Log.d("TAG","defaultReadObject passed");//testing
 
         ListIterator<Action> iter = actions.listIterator(0);
 
         while(iter.hasNext()==true){
             Action action = iter.next();
-            System.out.println("for loop went through this many times");
+            Log.d("TAG","for loop went through this many times");
             action.perform(this);
-            System.out.println("after perform");
+            Log.d("TAG","after perform");
         }
 
         /*for (Action action : actions) {
@@ -72,12 +73,14 @@ public class ourPath extends Path implements Serializable {
     public void moveTo(float x, float y) {
         actions.add(new Move(x, y));
         super.moveTo(x, y);
+        Log.d("TAG","move 1. x=" + x + " y=" +y);
     }
 
     @Override
     public void lineTo(float x, float y) {
         actions.add(new Line(x, y));
         super.lineTo(x, y);
+        Log.d("TAG","line 1. x=" + x + " y=" +y);
     }
     /*****************end overrides**********************/
 
@@ -92,7 +95,7 @@ public class ourPath extends Path implements Serializable {
         public Move(float x, float y) {
             this.x = x;
             this.y = y;
-            System.out.println("it moved. x=" + x + " y=" +y);
+            Log.d("TAG","it moved. x=" + x + " y=" +y);
         }
 
         @Override
@@ -114,6 +117,7 @@ public class ourPath extends Path implements Serializable {
         public Line(float x, float y) {
             this.x = x;
             this.y = y;
+            Log.d("TAG","it lined. x=" + x + " y=" +y);
         }
 
         @Override
