@@ -269,34 +269,6 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         } else {
             Log.d("TAG", "file does not exist");
         }
-        //Save Mk1 implimention ; may need to revert to DO NOT DELETE
-//        Context context = getApplicationContext();
-//        String fileName = context.getFilesDir().getPath() + "/drawing.ser";
-//
-//        try {
-//            FileOutputStream file = new FileOutputStream(fileName);
-//            ObjectOutputStream out = new ObjectOutputStream(file);
-//            Log.d("TAG","file made");//testing
-//            out.writeObject(ourPath.getLL());
-//            Log.d("TAG","write complete");//testing
-//            file.close();
-//            out.close();
-//            Log.d("TAG","end of try block reached");//testing
-//
-//
-//        } catch (Exception ex) {
-//            Log.d("TAG","Exception is caught");
-//        }
-//
-//        //saving .ser file to internal storage
-//        File file = new File(fileName);
-//
-//        if(file.exists()) {
-//            double bytes = file.length();
-//            Log.d("TAG", "bytes: " + bytes);
-//        } else {
-//            Log.d("TAG", "file does not exist");
-//        }
     }
 
     void printSavedFiles() {
@@ -336,18 +308,6 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         }
 
         drawingView.getPath().load(fileName);
-//        //end testing blcok
-//        ourPath path = drawingView.getPath(); //Sends derserilized info to ourPath.java
-//
-//        //loading
-//        try {
-//            ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName));
-//            path.readObject(ois);//error occuring here
-//            ois.close();
-//        } catch (Exception e) {
-//            Log.d("TAG","error boiiiii");//testing
-//            e.printStackTrace();
-//        }
     }
 
     //onCLick method for save button

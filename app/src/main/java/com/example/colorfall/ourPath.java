@@ -49,8 +49,8 @@ public class ourPath extends Path implements Serializable {
             saving.writeObject(actions);
             Log.d("TAG", "write complete");//testing
             saving.close();
-        } catch (IOException ioe) {
-            Log.d("TAG", "Exception is caught");
+        } catch (IOException sv) {
+            Log.d("TAG", "Save exception is caught");
         }
     }
 
@@ -61,37 +61,35 @@ public class ourPath extends Path implements Serializable {
             Log.d("TAG", "file opened ");//testing
             Object loadedList = loading.readObject();
             Log.d("TAG", "read complete");//testing
-            actions = (LinkedList<Action>)loadedList;
+            List<Action> tmpLL = (LinkedList<Action>)loadedList;
             loading.close();
             Log.d("TAG", "LL saved locally; file closed");//testing
-            Log.d("TAG", "LL size = " + actions.size());//testing
-
+            Log.d("TAG", "LL size = " + tmpLL.size());//testing
+            redraw(tmpLL);
         } catch (Exception ld) {
-            Log.d("TAG", "Exception is caught");
+            Log.d("TAG", "Load Exception is caught");
         }
     }
 
-    public void testinhjt() {
-        Log.d("TAG", "erhjklsldjgwehnwknwhjkg;wthjlakg");//testing
-    }
+
     /******************reading obj/ re-drawing stored paths on load********************************/
-    public void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
-        //in.defaultReadObject();//errror here
-        //Object loadedLL = in.readObject();
+    public void redraw(List<Action> tmpLL) {
         Log.d("TAG","defaultReadObject passed");//testing
 
-        //actions = (LinkedList<Action>)loadedLL; //Stores loaded LL into the local LL
-
         //Iterates throught local LL to redraw image
-        ListIterator<Action> iter = actions.listIterator(0);
+        ListIterator<Action> iter = tmpLL.listIterator(0);
+        int count = 1;
 
         while(iter.hasNext()==true){
-            Action action = iter.next();
-            Log.d("TAG","for loop went through this many times");
-            action.perform(this);
-            Log.d("TAG","after perform");
+            //Action action = iter.next();
+
+            iter.next().perform(this);
+            Log.d("TAG","looped " + count);
+            count ++;
         }
 
+        actions = tmpLL;
+        Log.d("TAG", "'actions' size = " + actions.size());//testing
 
     }//end readObject
 
