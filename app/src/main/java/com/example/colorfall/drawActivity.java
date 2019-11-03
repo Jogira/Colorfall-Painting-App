@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -298,10 +299,10 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             out.writeObject(drawingView.getPath());
             out.close();
             file.close();
-            System.out.println("end of try block reached");//testing
+            Log.d("TAG","end of try block reached");//testing
 
         } catch (Exception ex) {
-            System.out.println("Exception is caught");
+            Log.d("TAG","Exception is caught");
         }
 
         //saving .ser file to internal storage
@@ -340,7 +341,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             path.readObject(ois);//error occuring here
             ois.close();
         } catch (Exception e) {
-            System.out.println("error boiiiii");//testing
+            Log.d("TAG","error boiiiii");//testing
             e.printStackTrace();
         }
     }
