@@ -19,81 +19,135 @@
 
 
     <LinearLayout
+        android:id="@+id/paint_colors"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:orientation="horizontal">
 
+        <ImageButton
+            android:id="@+id/blueColor"
+            android:layout_width="@dimen/pixel_brush"
+            android:layout_height="@dimen/pixel_brush"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:background="#072F5F"
+            android:tag="#072F5F" />
 
-        <LinearLayout
-            android:id="@+id/paint_colors"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+        <ImageButton
+            android:id="@+id/redColor"
+            android:layout_width="@dimen/pixel_brush"
+            android:layout_height="@dimen/pixel_brush"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:background="#FFFF0000"
+            android:contentDescription="@string/pixel"
+            android:tag="#FFFF0000" />
 
-            <ImageButton
-                android:id="@+id/blueColor"
-                android:layout_width="@dimen/pixel_brush"
-                android:layout_height="@dimen/pixel_brush"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="2dp"
-                android:background="#072F5F"
-                android:tag="#072F5F" />
+        <ImageButton
+            android:id="@+id/yellowColor"
+            android:layout_width="@dimen/pixel_brush"
+            android:layout_height="@dimen/pixel_brush"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:background="#FFFF00"
+            android:contentDescription="@string/pixel"
+            android:tag="#FFFF00" />
 
-            <ImageButton
-                android:id="@+id/redColor"
-                android:layout_width="@dimen/pixel_brush"
-                android:layout_height="@dimen/pixel_brush"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="2dp"
-                android:background="#FFFF0000"
-                android:contentDescription="@string/pixel"
-                android:tag="#FFFF0000" />
+        <ImageButton
+            android:id="@+id/blackColor"
+            android:layout_width="@dimen/pixel_brush"
+            android:layout_height="@dimen/pixel_brush"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:background="#FF000000"
+            android:contentDescription="@string/pixel"
+            android:tag="#FFFF0000" />
 
-            <ImageButton
-                android:id="@+id/yellowColor"
-                android:layout_width="@dimen/pixel_brush"
-                android:layout_height="@dimen/pixel_brush"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="2dp"
-                android:background="#FFFF00"
-                android:contentDescription="@string/pixel"
-                android:tag="#FFFF00" />
+        <ImageButton
+            android:id="@+id/greenColor"
+            android:layout_width="@dimen/pixel_brush"
+            android:layout_height="@dimen/pixel_brush"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:background="#00FF3E"
+            android:contentDescription="@string/pixel"
+            android:tag="#00FF3E" />
 
-            <ImageButton
-                android:id="@+id/blackColor"
-                android:layout_width="@dimen/pixel_brush"
-                android:layout_height="@dimen/pixel_brush"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="2dp"
-                android:background="#FF000000"
-                android:contentDescription="@string/pixel"
-                android:tag="#FFFF0000" />
+        <ImageButton
+            android:id="@+id/new_colors"
+            android:layout_width="@dimen/pixel_brush"
+            android:layout_height="@dimen/pixel_brush"
+            android:background="#00FFFFFF"
+            android:src="@drawable/add_colors" />
 
-            <ImageButton
-                android:id="@+id/greenColor"
-                android:layout_width="@dimen/pixel_brush"
-                android:layout_height="@dimen/pixel_brush"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="2dp"
-                android:background="#00FF3E"
-                android:contentDescription="@string/pixel"
-                android:tag="#00FF3E" />
+        <ImageButton
+            android:id="@+id/recentOne"
+            android:layout_width="@dimen/pixel_brush"
+            android:layout_height="@dimen/pixel_brush"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:background="#ffffff"
+            android:contentDescription="@string/pixel"
+            android:tag="#00FF3E" />
 
-            <ImageButton
-                android:id="@+id/new_colors"
-                android:layout_width="@dimen/pixel_brush"
-                android:layout_height="@dimen/pixel_brush"
-                android:background="#00FFFFFF"
-                android:src="@drawable/add_colors" />
-        </LinearLayout>
+        <ImageButton
+            android:id="@+id/recentTwo"
+            android:layout_width="@dimen/pixel_brush"
+            android:layout_height="@dimen/pixel_brush"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:background="#ffffff"
+            android:contentDescription="@string/pixel"
+            android:tag="#00FF3E" />
 
+        <ImageButton
+            android:id="@+id/recentThree"
+            android:layout_width="@dimen/pixel_brush"
+            android:layout_height="@dimen/pixel_brush"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:background="#ffffff"
+            android:contentDescription="@string/pixel"
+            android:tag="#00FF3E" />
+
+        <ImageButton
+            android:id="@+id/recentFour"
+            android:layout_width="@dimen/pixel_brush"
+            android:layout_height="@dimen/pixel_brush"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:background="#ffffff"
+            android:contentDescription="@string/pixel"
+            android:tag="#00FF3E" />
+
+        <ImageButton
+            android:id="@+id/recentFive"
+            android:layout_width="@dimen/pixel_brush"
+            android:layout_height="@dimen/pixel_brush"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:background="#ffffff"
+            android:contentDescription="@string/pixel"
+            android:tag="#00FF3E" />
     </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
