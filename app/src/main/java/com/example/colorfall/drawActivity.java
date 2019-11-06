@@ -24,10 +24,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Arrays;
 
+import yuku.ambilwarna.AmbilWarnaDialog;
+
 
 //this is a View in Model-View-Controller architecture
-public class drawActivity extends AppCompatActivity implements java.io.Serializable
-{
+public class drawActivity extends AppCompatActivity implements java.io.Serializable {
 
     private drawView drawingView;
     private ImageButton selectedColor;
@@ -39,8 +40,10 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     private ImageButton eraseButton;
     private ImageButton drawButton;
     private ImageButton wipeCanvas;
+    private ImageButton newColors;
     private ImageButton saveButton;
     private Button loadButton;
+    int DefaultColor;
     //testing save file -> gallery
     private String files;
     private String file_name = "";
@@ -50,19 +53,17 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_draw);
-        LinearLayout paintLayout = (LinearLayout)findViewById(R.id.paint_colors);
-        selectedColor = (ImageButton)paintLayout.getChildAt(0);
+        LinearLayout paintLayout = (LinearLayout) findViewById(R.id.paint_colors);
+        selectedColor = (ImageButton) paintLayout.getChildAt(0);
         drawingView = (drawView) findViewById(R.id.drawing);
 
 
         blueColor = (ImageButton) findViewById(R.id.blueColor);
-        blueColor.setOnClickListener(new View.OnClickListener()
-        {
+        blueColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onSelectColor(view);
@@ -70,8 +71,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         });
 
         saveButton = (ImageButton) findViewById(R.id.save_file);
-        saveButton.setOnClickListener(new View.OnClickListener()
-        {
+        saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onClickSave(view);
@@ -79,8 +79,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         });
 
         loadButton = findViewById(R.id.load_file);
-        loadButton.setOnClickListener(new View.OnClickListener()
-        {
+        loadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onClickLoad(view);
@@ -88,8 +87,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         });
 
         redColor = (ImageButton) findViewById(R.id.redColor);
-        redColor.setOnClickListener(new View.OnClickListener()
-        {
+        redColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onSelectColor(view);
@@ -97,8 +95,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         });
 
         greenColor = (ImageButton) findViewById(R.id.greenColor);
-        greenColor.setOnClickListener(new View.OnClickListener()
-        {
+        greenColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onSelectColor(view);
@@ -106,8 +103,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         });
 
         yellowColor = (ImageButton) findViewById(R.id.yellowColor);
-        yellowColor.setOnClickListener(new View.OnClickListener()
-        {
+        yellowColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onSelectColor(view);
@@ -115,8 +111,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         });
 
         blackColor = (ImageButton) findViewById(R.id.blackColor);
-        blackColor.setOnClickListener(new View.OnClickListener()
-        {
+        blackColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onSelectColor(view);
@@ -124,8 +119,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         });
 
         wipeCanvas = (ImageButton) findViewById(R.id.delete_canvas);
-        wipeCanvas.setOnClickListener(new View.OnClickListener()
-        {
+        wipeCanvas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onSelectColor(view);
@@ -133,8 +127,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         });
 
         eraseButton = (ImageButton) findViewById(R.id.eraser);
-        eraseButton.setOnClickListener(new View.OnClickListener()
-        {
+        eraseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onSelectColor(view);
@@ -142,12 +135,18 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         });
 
         drawButton = (ImageButton) findViewById(R.id.pixel_pen);
-        drawButton.setOnClickListener(new View.OnClickListener()
-
-        {
+        drawButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onSelectColor(view);
+            }
+        });
+
+        newColors = (ImageButton) findViewById(R.id.new_colors);
+        newColors.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ColorWheel(false);
             }
         });
     }
@@ -169,10 +168,8 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 //    }
 
     //Sets vales based on btn press
-    public void onSelectColor(View view)
-    {
-        if (view.getId() == blueColor.getId())
-        {
+    public void onSelectColor(View view) {
+        if (view.getId() == blueColor.getId()) {
             drawingView.setColor("#072F5F");
             //Log.v(TAG,"color now blue" + blueColor);  //May not need for test
 
@@ -181,8 +178,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             T.show();
         }
 
-        if (view.getId() == redColor.getId())
-        {
+        if (view.getId() == redColor.getId()) {
             drawingView.setColor("#FFFF0000");
 
             //Used for Espresso test
@@ -190,8 +186,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             T.show();
         }
 
-        if (view.getId() == yellowColor.getId())
-        {
+        if (view.getId() == yellowColor.getId()) {
             drawingView.setColor("#FFFF00");
 
             //Used for Espresso test
@@ -199,8 +194,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             T.show();
         }
 
-        if (view.getId() == greenColor.getId())
-        {
+        if (view.getId() == greenColor.getId()) {
             drawingView.setColor("#00FF3E");
 
             //Used for Espresso test
@@ -208,8 +202,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             T.show();
         }
 
-        if (view.getId() == blackColor.getId())
-        {
+        if (view.getId() == blackColor.getId()) {
             drawingView.setColor("#FF000000");
 
             //Used for Espresso test
@@ -217,8 +210,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             T.show();
         }
 
-        if (view.getId() == eraseButton.getId())
-        {
+        if (view.getId() == eraseButton.getId()) {
             drawingView.setColor("#ffffff");
 
             //Used for Espresso test
@@ -226,8 +218,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             T.show();
         }
 
-        if (view.getId() == drawButton.getId())
-        {
+        if (view.getId() == drawButton.getId()) {
             drawingView.setColor("#FF000000");
 
             //Used for Espresso test
@@ -235,19 +226,18 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             T.show();
         }
 
-        if (view.getId() == wipeCanvas.getId())
-        {
+        if (view.getId() == wipeCanvas.getId()) {
             //Delete canvas
             AlertDialog.Builder newDialog = new AlertDialog.Builder(this);
             newDialog.setTitle("           Would you like to restart?");
-            newDialog.setPositiveButton("[Delete Canvas]", new DialogInterface.OnClickListener(){
-                public void onClick(DialogInterface dialog, int which){
+            newDialog.setPositiveButton("[Delete Canvas]", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
                     drawingView.wipeCanvas();
                     dialog.dismiss();
                 }
             });
-            newDialog.setNegativeButton("[Continue]", new DialogInterface.OnClickListener(){
-                public void onClick(DialogInterface dialog, int which){
+            newDialog.setNegativeButton("[Continue]", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
                     dialog.cancel();
                 }
             });
@@ -263,7 +253,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         drawingView.getPath().save(fileName);
 
         File file = new File(fileName);
-        if(file.exists()) {
+        if (file.exists()) {
             double bytes = file.length();
             Log.d("TAG", "bytes: " + bytes);
         } else {
@@ -271,6 +261,23 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         }
     }
 
+    public void ColorWheel(boolean AlphaSupport)
+    {
+        AmbilWarnaDialog ambilWarnaDialog = new AmbilWarnaDialog(this, DefaultColor, new AmbilWarnaDialog.OnAmbilWarnaListener() {
+            @Override
+            public void onCancel(AmbilWarnaDialog dialog) {
+
+            }
+
+            @Override
+            public void onOk(AmbilWarnaDialog dialog, int color) {
+                DefaultColor = color;
+                String colorStr= "#"+Integer.toHexString(color);
+                drawingView.setColor(colorStr);
+            }
+        });
+        ambilWarnaDialog.show();
+    }
     void printSavedFiles() {
         Context context = getApplicationContext();
         System.out.println(context.getFilesDir().getAbsolutePath());
