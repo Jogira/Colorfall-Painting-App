@@ -40,11 +40,13 @@ public class ourPath extends Path implements Serializable {
 
     public void save(String fileName) {
         Log.d("TAG", "starting ourPath save");//testing
-        Log.d("TAG", "LL size = " + actions.size());//testing
+        Log.d("TAG", "Brushes LL size = " + brushes.size());//testing
+        Log.d("TAG", "Actions LL size = " + actions.size());//testing
+
         try {
             ObjectOutputStream saving = new ObjectOutputStream(new FileOutputStream(fileName));
             Log.d("TAG", "file made");//testing
-            saving.writeObject(actions);
+            saving.writeObject(container);
             Log.d("TAG", "write complete");//testing
             saving.close();
         } catch (IOException sv) {
@@ -59,11 +61,11 @@ public class ourPath extends Path implements Serializable {
             Log.d("TAG", "file opened ");//testing
             Object loadedList = loading.readObject();
             Log.d("TAG", "read complete");//testing
-            List<Action> tmpLL = (LinkedList<Action>)loadedList;
+            List<List> tmpLL = (LinkedList<List>)loadedList;
             loading.close();
             Log.d("TAG", "LL saved locally; file closed");//testing
             Log.d("TAG", "LL size = " + tmpLL.size());//testing
-            redraw(tmpLL);
+            unpack(tmpLL);
         } catch (Exception ld) {
             Log.d("TAG", "Load Exception is caught");
         }
@@ -71,27 +73,41 @@ public class ourPath extends Path implements Serializable {
 
 
     /******************reading obj/ re-drawing stored paths on load********************************/
-    public void redraw(List<Action> tmpLL) {
+    public void unpack(List<List> tmpLL) {
         Log.d("TAG","defaultReadObject passed");//testing
 
-        //Iterates throught local LL to redraw image
-        ListIterator<Action> iter = tmpLL.listIterator(0);
-        int count = 1;
+        List<Paint> tmpBrushes = tmpLL.get(0);   //Hardcoded 0 & 1 as .getFirst() and getLast() aren't recognized for some reason
+        List<Action> tmpLines = tmpLL.get(1);
 
-        while(iter.hasNext()==true){
-            //is iter.next a str?
-            //yes: set brush color
-            //no: do below actions (except cannot call iter.next again so hmm
-
-            iter.next().perform(this);
-            Log.d("TAG","looped " + count);
-            count ++;
-        }
-
-        actions = tmpLL;
+        brushes = tmpBrushes;
+        actions = tmpLines;
         Log.d("TAG", "'actions' size = " + actions.size());//testing
 
+        redraw(brushes, actions);
+
     }//end readObject
+
+    public void redraw(List<Paint> brush, List<Action> lines){
+        //Iterates throughout local LL to redraw image
+        ListIterator<Paint> iterBrush = brush.listIterator(0);
+        ListIterator<Action> iterLine = lines.listIterator(0);
+
+        int count = 1; //FOR DEBUG
+
+        while(iterLine.hasNext()==true){           //We still want to look depend on the larger line-data LL when redrawing
+            //is iterLine.next a moveTo?
+            Action redrawLine = iterLine.next();
+            //IF yes: set brush data
+//            if (redrawLine = moveTo()) {            //HOW TO check if this is in fact a move to???
+//                Paint redrawBrush = iterBrush.next();
+//            }
+            //IF no: do below actions (except cannot call get prev checked data from iter.next)
+
+            iterLine.next().perform(this);
+            Log.d("TAG","looped " + count); //FOR DEBUG
+            count ++;
+        }
+    }
 
     private interface Action extends Serializable {
         void perform(Path path);
