@@ -77,7 +77,6 @@ import java.io.Serializable;
 
     private void initializePixelArt()
     {
-        //path = new Path();//commented out for testing ourPath
         path = new ourPath();
         gridLines = new Paint();
         drawPixel = new Paint();
