@@ -13,13 +13,17 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
+import android.graphics.Paint;
 
 //WORK IN PROGRESS//
 public class ourPath extends Path implements Serializable {
 
     private static final long serialVersionUID = -5974912367682897467L;//used for serializing
 
+    //private drawView drawingView;
+    private List<List> container = new LinkedList<>();
     private List<Action> actions = new LinkedList<>();//list where all user actions are stored
+    private List<Paint> brushes = new LinkedList<>();//list of brushes which contains color, size etc.
 
 
     /***********************************Testing methods***************************/
@@ -31,12 +35,6 @@ public class ourPath extends Path implements Serializable {
             i++;
         }
     }
-    /******************own write object testing********************************************/
-    public void writeObject(ObjectOutputStream out) throws IOException {
-        out.defaultWriteObject();
-        out.writeObject(this.actions);
-    }//end readObject
-    /*************End write object testing**********************************************/
     /*******************************end Testing methods***************************/
 
 
@@ -81,7 +79,9 @@ public class ourPath extends Path implements Serializable {
         int count = 1;
 
         while(iter.hasNext()==true){
-            //Action action = iter.next();
+            //is iter.next a str?
+            //yes: set brush color
+            //no: do below actions (except cannot call iter.next again so hmm
 
             iter.next().perform(this);
             Log.d("TAG","looped " + count);
@@ -99,10 +99,17 @@ public class ourPath extends Path implements Serializable {
     /*************End redrawing stored paths on load**********************************************/
 
 
+    public List createContainerList() {
+        container.add(brushes);
+        container.add(actions);
+        return container;
+    }
 
     /****************Overrides****************************/
     @Override
     public void moveTo(float x, float y) {
+        brushes.add(drawView.getBrush());
+
         actions.add(new Move(x, y));
         super.moveTo(x, y);
         Log.d("TAG","move 1. x=" + x + " y=" +y + " SIZE = " +  + actions.size());
