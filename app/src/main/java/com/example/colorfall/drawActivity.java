@@ -48,6 +48,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     String colorThree = "#FF000000";
     String colorFour = "#FF000000";
     String colorFive = "#FF000000";
+    String currentColor;
     //testing save file -> gallery
     private String files;
     private String file_name = "";
@@ -232,6 +233,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 
         if (view.getId() == redColor.getId()) {
             drawingView.setColor("#FFFF0000");
+            currentColor = "#FFFF0000";
 
             //Used for Espresso test
             Toast T = Toast.makeText(this, "Red selected.", Toast.LENGTH_SHORT);
@@ -240,7 +242,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 
         if (view.getId() == yellowColor.getId()) {
             drawingView.setColor("#FFFF00");
-
+            currentColor = "#FFFF00";
             //Used for Espresso test
             Toast T = Toast.makeText(this, "Yellow selected.", Toast.LENGTH_SHORT);
             T.show();
@@ -248,7 +250,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 
         if (view.getId() == greenColor.getId()) {
             drawingView.setColor("#00FF3E");
-
+            currentColor = "#00FF3E";
             //Used for Espresso test
             Toast T = Toast.makeText(this, "Green selected.", Toast.LENGTH_SHORT);
             T.show();
@@ -256,7 +258,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 
         if (view.getId() == blackColor.getId()) {
             drawingView.setColor("#FF000000");
-
+            currentColor = "#FF000000";
             //Used for Espresso test
             Toast T = Toast.makeText(this, "Black selected.", Toast.LENGTH_SHORT);
             T.show();
@@ -278,6 +280,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
                 T.show();
             }
             drawingView.setColor(colorOne);
+            currentColor = colorOne;
         }
 
         if (view.getId() == recentTwo.getId())
@@ -288,6 +291,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
                 T.show();
             }
             drawingView.setColor(colorTwo);
+            currentColor = colorTwo;
         }
 
         if (view.getId() == recentThree.getId())
@@ -298,6 +302,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
                 T.show();
             }
             drawingView.setColor(colorThree);
+            currentColor = colorThree;
         }
 
         if (view.getId() == recentFour.getId())
@@ -308,6 +313,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
                 T.show();
             }
             drawingView.setColor(colorFour);
+            currentColor = colorFour;
         }
 
         if (view.getId() == recentFive.getId())
@@ -318,6 +324,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
                 T.show();
             }
             drawingView.setColor(colorFive);
+            currentColor = colorFive;
         }
 
         if (view.getId() == drawButton.getId()) {
@@ -369,7 +376,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         AmbilWarnaDialog ambilWarnaDialog = new AmbilWarnaDialog(this, DefaultColor, new AmbilWarnaDialog.OnAmbilWarnaListener() {
             @Override
             public void onCancel(AmbilWarnaDialog dialog) {
-
+            System.out.println("Color wheel canceled.");
             }
 
             @Override
