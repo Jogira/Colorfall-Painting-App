@@ -103,5 +103,6 @@
     <string name="add_grid">add_grid</string>
     <string name="save_file">save_file</string>
     <string name="pixel">pixel</string>
+    <string name="colorPicker">colorPicker</string>
 
 </resources>

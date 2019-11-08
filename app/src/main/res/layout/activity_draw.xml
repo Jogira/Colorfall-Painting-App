@@ -177,6 +177,14 @@
             android:src="@drawable/eraser" />
 
         <ImageButton
+            android:id="@+id/colorPicker"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="#00FFFFFF"
+            android:contentDescription="@string/colorPicker"
+            android:src="@drawable/color_pick" />
+
+        <ImageButton
             android:id="@+id/pixel_pen"
             android:layout_width="50dp"
             android:layout_height="50dp"

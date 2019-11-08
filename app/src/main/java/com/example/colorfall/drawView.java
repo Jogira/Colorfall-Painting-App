@@ -149,4 +149,18 @@ import java.io.Serializable;
     }
 
     public Paint getBrush() {return drawPixel; }
+
+
+
+        public float getY(MotionEvent event)
+        {
+            float Ycord = event.getY();
+            return Ycord;
+        }
+
+        public float getX(MotionEvent event)
+        {
+            float Xcord = event.getX();
+            return Xcord;
+        }
 }

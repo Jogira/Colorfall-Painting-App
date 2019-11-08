@@ -32,6 +32,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     private ImageButton blackColor;
     private ImageButton eraseButton;
     private ImageButton drawButton;
+    private ImageButton colorPicker;
     private ImageButton wipeCanvas;
     private ImageButton newColors;
     private ImageButton saveButton;
@@ -40,6 +41,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     private ImageButton recentThree;
     private ImageButton recentFour;
     private ImageButton recentFive;
+
     private Button loadButton;
     int DefaultColor;
     int recentCounter = 0;
@@ -69,6 +71,14 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 
         blueColor = (ImageButton) findViewById(R.id.blueColor);
         blueColor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onSelectColor(view);
+            }
+        });
+
+        colorPicker = (ImageButton) findViewById(R.id.colorPicker);
+        colorPicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onSelectColor(view);
@@ -329,9 +339,17 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 
         if (view.getId() == drawButton.getId()) {
             drawingView.setColor("#FF000000");
-
             //Used for Espresso test
             Toast T = Toast.makeText(this, "Draw selected.", Toast.LENGTH_SHORT);
+            T.show();
+        }
+
+        if (view.getId() == colorPicker.getId()) {
+            drawingView.setColor("#FF123456");
+            drawingView.getX();
+            System.out.println(drawingView.Ycord);
+            //Used for Espresso test
+            Toast T = Toast.makeText(this, "Color picker selected.", Toast.LENGTH_SHORT);
             T.show();
         }
 
