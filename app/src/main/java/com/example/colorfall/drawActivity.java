@@ -11,17 +11,10 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-import android.content.Intent;
-
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.Arrays;
 
 import yuku.ambilwarna.AmbilWarnaDialog;
@@ -42,8 +35,19 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     private ImageButton wipeCanvas;
     private ImageButton newColors;
     private ImageButton saveButton;
+    private ImageButton recentOne;
+    private ImageButton recentTwo;
+    private ImageButton recentThree;
+    private ImageButton recentFour;
+    private ImageButton recentFive;
     private Button loadButton;
     int DefaultColor;
+    int recentCounter = 0;
+    String colorOne = "#FF000000";
+    String colorTwo = "#FF000000";
+    String colorThree = "#FF000000";
+    String colorFour = "#FF000000";
+    String colorFive = "#FF000000";
     //testing save file -> gallery
     private String files;
     private String file_name = "";
@@ -149,6 +153,55 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
                 ColorWheel(false);
             }
         });
+
+        saveButton = (ImageButton) findViewById(R.id.save_file);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickSave(view);
+            }
+        });
+
+        recentOne = (ImageButton) findViewById(R.id.recentOne);
+        recentOne.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onSelectColor(view);
+            }
+        });
+
+        recentTwo = (ImageButton) findViewById(R.id.recentTwo);
+        recentTwo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onSelectColor(view);
+            }
+        });
+
+        recentThree = (ImageButton) findViewById(R.id.recentThree);
+        recentThree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onSelectColor(view);
+            }
+        });
+
+        recentFour = (ImageButton) findViewById(R.id.recentFour);
+        recentFour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onSelectColor(view);
+            }
+        });
+
+        recentFive = (ImageButton) findViewById(R.id.recentFive);
+        recentFive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onSelectColor(view);
+            }
+        });
+
     }
 
 //WORK IN PROGRESS//
@@ -172,7 +225,6 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         if (view.getId() == blueColor.getId()) {
             drawingView.setColor("#072F5F");
             //Log.v(TAG,"color now blue" + blueColor);  //May not need for test
-
             //Used for Espresso test
             Toast T = Toast.makeText(this, "Blue selected.", Toast.LENGTH_SHORT);
             T.show();
@@ -216,6 +268,56 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             //Used for Espresso test
             Toast T = Toast.makeText(this, "Eraser selected.", Toast.LENGTH_SHORT);
             T.show();
+        }
+
+        if (view.getId() == recentOne.getId())
+        {
+            if(colorOne.equals("#FF000000"))
+            {
+                Toast T = Toast.makeText(this, "No recent colors!\nColor set to black instead.", Toast.LENGTH_SHORT);
+                T.show();
+            }
+            drawingView.setColor(colorOne);
+        }
+
+        if (view.getId() == recentTwo.getId())
+        {
+            if(colorTwo.equals("#FF000000"))
+            {
+                Toast T = Toast.makeText(this, "No recent colors!\nColor set to black instead.", Toast.LENGTH_SHORT);
+                T.show();
+            }
+            drawingView.setColor(colorTwo);
+        }
+
+        if (view.getId() == recentThree.getId())
+        {
+            if(colorThree.equals("#FF000000"))
+            {
+                Toast T = Toast.makeText(this, "No recent colors!\nColor set to black instead.", Toast.LENGTH_SHORT);
+                T.show();
+            }
+            drawingView.setColor(colorThree);
+        }
+
+        if (view.getId() == recentFour.getId())
+        {
+            if(colorFour.equals("#FF000000"))
+            {
+                Toast T = Toast.makeText(this, "No recent colors!\nColor set to black instead.", Toast.LENGTH_SHORT);
+                T.show();
+            }
+            drawingView.setColor(colorFour);
+        }
+
+        if (view.getId() == recentFive.getId())
+        {
+            if(colorFive.equals("#FF000000"))
+            {
+                Toast T = Toast.makeText(this, "No recent colors!\nColor set to black instead.", Toast.LENGTH_SHORT);
+                T.show();
+            }
+            drawingView.setColor(colorFive);
         }
 
         if (view.getId() == drawButton.getId()) {
@@ -263,6 +365,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 
     public void ColorWheel(boolean AlphaSupport)
     {
+
         AmbilWarnaDialog ambilWarnaDialog = new AmbilWarnaDialog(this, DefaultColor, new AmbilWarnaDialog.OnAmbilWarnaListener() {
             @Override
             public void onCancel(AmbilWarnaDialog dialog) {
@@ -270,10 +373,42 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
 
             @Override
-            public void onOk(AmbilWarnaDialog dialog, int color) {
+            public void onOk(AmbilWarnaDialog dialog, int color)
+            {
                 DefaultColor = color;
                 String colorStr= "#"+Integer.toHexString(color);
                 drawingView.setColor(colorStr);
+                recentCounter++;
+                if (recentCounter == 1)
+                {
+                    recentOne.setBackgroundColor(color);
+                    colorOne = colorStr;
+                }
+
+                if (recentCounter == 2)
+                {
+                    recentTwo.setBackgroundColor(color);
+                    colorTwo = colorStr;
+                }
+
+                if (recentCounter == 3)
+                {
+                    recentThree.setBackgroundColor(color);
+                    colorThree = colorStr;
+                }
+
+                if (recentCounter == 4)
+                {
+                    recentFour.setBackgroundColor(color);
+                    colorFour = colorStr;
+                }
+
+                if (recentCounter == 5)
+                {
+                    recentFive.setBackgroundColor(color);
+                    colorFive = colorStr;
+                    recentCounter = 0;
+                }
             }
         });
         ambilWarnaDialog.show();

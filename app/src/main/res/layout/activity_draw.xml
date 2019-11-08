@@ -18,6 +18,17 @@
         android:background="#FFFFFFFF" />
 
 
+    <TextView
+        android:id="@+id/recent_colors"
+        android:layout_width="106dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="230dp"
+        android:baselineAligned="false"
+        android:fontFamily="casual"
+        android:text=" Recent Colors:"
+        android:textColor="#630000"
+        android:textStyle="bold" />
+
     <LinearLayout
         android:id="@+id/paint_colors"
         android:layout_width="wrap_content"
@@ -139,6 +150,7 @@
             android:background="#ffffff"
             android:contentDescription="@string/pixel"
             android:tag="#00FF3E" />
+
     </LinearLayout>
 
     <RelativeLayout
@@ -159,16 +171,16 @@
             android:id="@+id/eraser"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:contentDescription="@string/erase"
             android:background="#00FFFFFF"
+            android:contentDescription="@string/erase"
             android:src="@drawable/eraser" />
 
         <ImageButton
             android:id="@+id/pixel_pen"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:contentDescription="@string/pixel_pen"
             android:background="#00FFFFFF"
+            android:contentDescription="@string/pixel_pen"
             android:src="@drawable/pixel_pen" />
 
         <ImageButton
@@ -177,7 +189,6 @@
             android:layout_height="50dp"
             android:background="#00FFFFFF"
             android:src="@drawable/save_file" />
-
 
 
         <ImageButton
@@ -200,12 +211,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
             </LinearLayout>
 
