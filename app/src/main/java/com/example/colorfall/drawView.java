@@ -31,7 +31,7 @@ import java.io.Serializable;
     {
         //private Path path;//commented for new path
         private ourPath path;
-        private Paint drawPixel;
+        private Paint drawPixel;                //Our brush object
         private Paint gridLines;
         private Paint pixelCanvasPaint;
         private int currentColor = 0xFF000000;
@@ -148,4 +148,5 @@ import java.io.Serializable;
         return path;
     }
 
+    public Paint getBrush() {return drawPixel; }
 }
