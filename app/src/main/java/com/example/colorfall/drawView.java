@@ -31,7 +31,7 @@ import java.io.Serializable;
     {
         //private Path path;//commented for new path
         private ourPath path;
-        private Paint drawPixel;                //Our brush object
+        private static Paint drawPixel;                //Our brush object
         private Paint gridLines;
         private Paint pixelCanvasPaint;
         private int currentColor = 0xFF000000;
@@ -77,7 +77,6 @@ import java.io.Serializable;
 
     private void initializePixelArt()
     {
-        //path = new Path();//commented out for testing ourPath
         path = new ourPath();
         gridLines = new Paint();
         drawPixel = new Paint();
@@ -163,4 +162,5 @@ import java.io.Serializable;
             float Xcord = event.getX();
             return Xcord;
         }
+    public static Paint getBrush() {return drawPixel; }
 }

@@ -50,7 +50,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     String colorThree = "#FF000000";
     String colorFour = "#FF000000";
     String colorFive = "#FF000000";
-    String currentColor;
+    static String currentColor;
     //testing save file -> gallery
     private String files;
     private String file_name = "";
