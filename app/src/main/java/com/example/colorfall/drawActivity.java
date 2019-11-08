@@ -347,7 +347,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         if (view.getId() == colorPicker.getId()) {
             drawingView.setColor("#FF123456");
             drawingView.getX();
-            System.out.println(drawingView.Ycord);
+            //System.out.println(drawingView.Ycord);
             //Used for Espresso test
             Toast T = Toast.makeText(this, "Color picker selected.", Toast.LENGTH_SHORT);
             T.show();

@@ -147,7 +147,7 @@ import java.io.Serializable;
         return path;
     }
 
-    public Paint getBrush() {return drawPixel; }
+    public static Paint getBrush() {return drawPixel; }
 
 
 
@@ -162,5 +162,4 @@ import java.io.Serializable;
             float Xcord = event.getX();
             return Xcord;
         }
-    public static Paint getBrush() {return drawPixel; }
 }
