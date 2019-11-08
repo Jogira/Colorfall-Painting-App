@@ -110,7 +110,7 @@ import java.io.Serializable;
 
     public void wipeCanvas()
     {
-        drawPixelCanvas.drawColor(0,PorterDuff.Mode.CLEAR);
+        drawPixelCanvas.drawColor(Color.TRANSPARENT,PorterDuff.Mode.CLEAR);
         invalidate();
     }
 
