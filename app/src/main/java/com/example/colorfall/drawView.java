@@ -37,8 +37,14 @@ import java.io.Serializable;
         private int currentColor = 0xFF000000;
         private Canvas drawPixelCanvas;
         private Bitmap canvasPixelBitmap;
+        static float xCord;
+        static float yCord;
+        static String hexValuePicked = "#0";
+        int pixel;
+        int redValue;
+        int blueValue;
+        int greenValue;
 
-        private Bitmap mBitmapBrush;
 
 
 
@@ -53,16 +59,31 @@ import java.io.Serializable;
         public boolean onTouchEvent(MotionEvent event)
         {
 
+
             float pointX = event.getX();
             float pointY = event.getY();
+            xCord = pointX;
+            yCord = pointY;
 
             switch(event.getAction())
             {
                 case MotionEvent.ACTION_DOWN:
                     path.moveTo(pointX, pointY);
+
+                    pixel = canvasPixelBitmap.getPixel((int) pointX, (int) pointY);
+                    if(pointX > 0 && pointY > 0)
+                    {
+                        redValue = Color.red(pixel);
+                        blueValue = Color.blue(pixel);
+                        greenValue = Color.green(pixel);
+                        hexValuePicked = "#" + Integer.toHexString(pixel);
+                        System.out.println("\n"+hexValuePicked);
+                    }
+
                     return true;
                 case MotionEvent.ACTION_MOVE:
                     path.lineTo(pointX, pointY);
+
                     break;
                 case MotionEvent.ACTION_UP:
                     drawPixelCanvas.drawPath(path, drawPixel);
@@ -150,16 +171,4 @@ import java.io.Serializable;
     public static Paint getBrush() {return drawPixel; }
 
 
-
-        public float getY(MotionEvent event)
-        {
-            float Ycord = event.getY();
-            return Ycord;
-        }
-
-        public float getX(MotionEvent event)
-        {
-            float Xcord = event.getX();
-            return Xcord;
-        }
 }
