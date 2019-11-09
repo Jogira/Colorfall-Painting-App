@@ -51,6 +51,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     String colorFour = "#FF000000";
     String colorFive = "#FF000000";
     String colorPicked = "#ffffff";
+    static boolean pickerClicked = false;
     static String currentColor;
     //testing save file -> gallery
     private String files;
@@ -345,19 +346,19 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             T.show();
         }
 
-        if (view.getId() == colorPicker.getId()) {
+        if (view.getId() == colorPicker.getId())
+        {
+            pickerClicked = true;
             if(drawingView.hexValuePicked.equals("#0") || drawingView.hexValuePicked.equals(null))
             {
                 System.out.println("\nNo colors at that spot.");
             }
-
             else
             {
-                colorPicked = drawingView.hexValuePicked;
-                drawingView.setColor(colorPicked);
+                currentColor = drawingView.hexValuePicked;
             }
             //Used for Espresso test
-            Toast T = Toast.makeText(this, "Color picker selected.", Toast.LENGTH_SHORT);
+            Toast T = Toast.makeText(this, "Color picked.", Toast.LENGTH_SHORT);
             T.show();
         }
 

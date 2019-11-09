@@ -35,15 +35,16 @@ import java.io.Serializable;
         private Paint gridLines;
         private Paint pixelCanvasPaint;
         private int currentColor = 0xFF000000;
+        private int pickedColor = 0xFF000000;
         private Canvas drawPixelCanvas;
-        private Bitmap canvasPixelBitmap;
-        static float xCord;
-        static float yCord;
+        public static Bitmap canvasPixelBitmap;
         static String hexValuePicked = "#0";
-        int pixel;
-        int redValue;
-        int blueValue;
-        int greenValue;
+        static int pixel;
+        static int redValue;
+        static int blueValue;
+        static int greenValue;
+        static float pointX;
+        static float pointY;
 
 
 
@@ -60,10 +61,9 @@ import java.io.Serializable;
         {
 
 
-            float pointX = event.getX();
-            float pointY = event.getY();
-            xCord = pointX;
-            yCord = pointY;
+             pointX = event.getX();
+             pointY = event.getY();
+
 
             switch(event.getAction())
             {
@@ -71,13 +71,13 @@ import java.io.Serializable;
                     path.moveTo(pointX, pointY);
 
                     pixel = canvasPixelBitmap.getPixel((int) pointX, (int) pointY);
-                    if(pointX > 0 && pointY > 0)
+                    if(pointX > 0 && pointY > 0 && drawActivity.pickerClicked == true)
                     {
                         redValue = Color.red(pixel);
                         blueValue = Color.blue(pixel);
                         greenValue = Color.green(pixel);
-                        hexValuePicked = "#" + Integer.toHexString(pixel);
-                        System.out.println("\n"+hexValuePicked);
+                        drawPixel.setColor(pixel);
+                        drawActivity.pickerClicked = false;
                     }
 
                     return true;
