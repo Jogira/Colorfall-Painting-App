@@ -53,9 +53,11 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     String colorPicked = "#ffffff";
     static boolean pickerClicked = false;
     static String currentColor;
+    float currentSize = 70F;
     //testing save file -> gallery
     private String files;
     private String file_name = "";
+    private String currentTool = "pencil";
 
     //WORK IN PROGRESS//
     //private static final String TAG = "drawActivity";
@@ -83,7 +85,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         colorPicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onSelectColor(view);
+                onSelectTool(view);
             }
         });
 
@@ -147,7 +149,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         eraseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onSelectColor(view);
+                onSelectTool(view);
             }
         });
 
@@ -155,7 +157,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         drawButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onSelectColor(view);
+                onSelectTool(view);
             }
         });
 
@@ -234,120 +236,30 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 //    }
 
     //Sets vales based on btn press
-    public void onSelectColor(View view) {
-        if (view.getId() == blueColor.getId()) {
-            drawingView.setColor("#072F5F");
-            //Log.v(TAG,"color now blue" + blueColor);  //May not need for test
-            //Used for Espresso test
-            Toast T = Toast.makeText(this, "Blue selected.", Toast.LENGTH_SHORT);
-            T.show();
-        }
 
-        if (view.getId() == redColor.getId()) {
-            drawingView.setColor("#FFFF0000");
-            currentColor = "#FFFF0000";
-
-            //Used for Espresso test
-            Toast T = Toast.makeText(this, "Red selected.", Toast.LENGTH_SHORT);
-            T.show();
-        }
-
-        if (view.getId() == yellowColor.getId()) {
-            drawingView.setColor("#FFFF00");
-            currentColor = "#FFFF00";
-            //Used for Espresso test
-            Toast T = Toast.makeText(this, "Yellow selected.", Toast.LENGTH_SHORT);
-            T.show();
-        }
-
-        if (view.getId() == greenColor.getId()) {
-            drawingView.setColor("#00FF3E");
-            currentColor = "#00FF3E";
-            //Used for Espresso test
-            Toast T = Toast.makeText(this, "Green selected.", Toast.LENGTH_SHORT);
-            T.show();
-        }
-
-        if (view.getId() == blackColor.getId()) {
+    public void onSelectTool(View view)
+    {
+        if (view.getId() == drawButton.getId())
+        {
             drawingView.setColor("#FF000000");
-            currentColor = "#FF000000";
-            //Used for Espresso test
-            Toast T = Toast.makeText(this, "Black selected.", Toast.LENGTH_SHORT);
-            T.show();
-        }
-
-        if (view.getId() == eraseButton.getId()) {
-            drawingView.setColor("#ffffff");
-
-            //Used for Espresso test
-            Toast T = Toast.makeText(this, "Eraser selected.", Toast.LENGTH_SHORT);
-            T.show();
-        }
-
-        if (view.getId() == recentOne.getId())
-        {
-            if(colorOne.equals("#FF000000"))
-            {
-                Toast T = Toast.makeText(this, "No recent colors!\nColor set to black instead.", Toast.LENGTH_SHORT);
-                T.show();
-            }
-            drawingView.setColor(colorOne);
-            currentColor = colorOne;
-        }
-
-        if (view.getId() == recentTwo.getId())
-        {
-            if(colorTwo.equals("#FF000000"))
-            {
-                Toast T = Toast.makeText(this, "No recent colors!\nColor set to black instead.", Toast.LENGTH_SHORT);
-                T.show();
-            }
-            drawingView.setColor(colorTwo);
-            currentColor = colorTwo;
-        }
-
-        if (view.getId() == recentThree.getId())
-        {
-            if(colorThree.equals("#FF000000"))
-            {
-                Toast T = Toast.makeText(this, "No recent colors!\nColor set to black instead.", Toast.LENGTH_SHORT);
-                T.show();
-            }
-            drawingView.setColor(colorThree);
-            currentColor = colorThree;
-        }
-
-        if (view.getId() == recentFour.getId())
-        {
-            if(colorFour.equals("#FF000000"))
-            {
-                Toast T = Toast.makeText(this, "No recent colors!\nColor set to black instead.", Toast.LENGTH_SHORT);
-                T.show();
-            }
-            drawingView.setColor(colorFour);
-            currentColor = colorFour;
-        }
-
-        if (view.getId() == recentFive.getId())
-        {
-            if(colorFive.equals("#FF000000"))
-            {
-                Toast T = Toast.makeText(this, "No recent colors!\nColor set to black instead.", Toast.LENGTH_SHORT);
-                T.show();
-            }
-            drawingView.setColor(colorFive);
-            currentColor = colorFive;
-        }
-
-        if (view.getId() == drawButton.getId()) {
-            drawingView.setColor("#FF000000");
+            currentTool = "pencil";
             //Used for Espresso test
             Toast T = Toast.makeText(this, "Draw selected.", Toast.LENGTH_SHORT);
             T.show();
         }
 
+        if (view.getId() == eraseButton.getId())
+        {
+            drawingView.setColor("#ffffff");
+            currentTool = "eraser";
+            //Used for Espresso test
+            Toast T = Toast.makeText(this, "Eraser selected.", Toast.LENGTH_SHORT);
+            T.show();
+        }
+
         if (view.getId() == colorPicker.getId())
         {
+            currentTool = "picker";
             pickerClicked = true;
             if(drawingView.hexValuePicked.equals("#0") || drawingView.hexValuePicked.equals(null))
             {
@@ -358,9 +270,115 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
                 currentColor = drawingView.hexValuePicked;
             }
             //Used for Espresso test
-            Toast T = Toast.makeText(this, "Color picked.", Toast.LENGTH_SHORT);
+            Toast T = Toast.makeText(this, "Color picker selected.", Toast.LENGTH_SHORT);
             T.show();
         }
+    }
+
+    public void onSelectColor(View view) {
+
+        toolSelectionFacade verifyingTools = new toolSelectionFacade(currentTool, currentSize);
+
+        if (view.getId() == blueColor.getId()) {
+            drawingView.setColor("#072F5F");
+            verifyingTools.verifyToolandSwapColor("#072F5F");
+            //Log.v(TAG,"color now blue" + blueColor);  //May not need for test
+            //Used for Espresso test
+            Toast T = Toast.makeText(this, "Blue selected.", Toast.LENGTH_SHORT);
+            T.show();
+        }
+
+        if (view.getId() == redColor.getId()) {
+            drawingView.setColor("#FFFF0000");
+            verifyingTools.verifyToolandSwapColor("#FFFF0000");
+
+            //Used for Espresso test
+            Toast T = Toast.makeText(this, "Red selected.", Toast.LENGTH_SHORT);
+            T.show();
+        }
+
+        if (view.getId() == yellowColor.getId()) {
+            drawingView.setColor("#FFFF00");
+            verifyingTools.verifyToolandSwapColor("#FFFF00");
+            //Used for Espresso test
+            Toast T = Toast.makeText(this, "Yellow selected.", Toast.LENGTH_SHORT);
+            T.show();
+        }
+
+        if (view.getId() == greenColor.getId()) {
+            drawingView.setColor("#00FF3E");
+            verifyingTools.verifyToolandSwapColor("#00FF3E");
+            //Used for Espresso test
+            Toast T = Toast.makeText(this, "Green selected.", Toast.LENGTH_SHORT);
+            T.show();
+        }
+
+        if (view.getId() == blackColor.getId()) {
+            drawingView.setColor("#FF000000");
+            verifyingTools.verifyToolandSwapColor("#FF000000");
+            //Used for Espresso test
+            Toast T = Toast.makeText(this, "Black selected.", Toast.LENGTH_SHORT);
+            T.show();
+        }
+
+
+
+        if (view.getId() == recentOne.getId())
+        {
+            if(colorOne.equals("#FF000000"))
+            {
+                Toast T = Toast.makeText(this, "No recent colors!\nColor set to black instead.", Toast.LENGTH_SHORT);
+                T.show();
+            }
+            drawingView.setColor(colorOne);
+            verifyingTools.verifyToolandSwapColor(colorOne);
+        }
+
+        if (view.getId() == recentTwo.getId())
+        {
+            if(colorTwo.equals("#FF000000"))
+            {
+                Toast T = Toast.makeText(this, "No recent colors!\nColor set to black instead.", Toast.LENGTH_SHORT);
+                T.show();
+            }
+            drawingView.setColor(colorTwo);
+            verifyingTools.verifyToolandSwapColor(colorTwo);
+        }
+
+        if (view.getId() == recentThree.getId())
+        {
+            if(colorThree.equals("#FF000000"))
+            {
+                Toast T = Toast.makeText(this, "No recent colors!\nColor set to black instead.", Toast.LENGTH_SHORT);
+                T.show();
+            }
+            drawingView.setColor(colorThree);
+            verifyingTools.verifyToolandSwapColor(colorThree);
+        }
+
+        if (view.getId() == recentFour.getId())
+        {
+            if(colorFour.equals("#FF000000"))
+            {
+                Toast T = Toast.makeText(this, "No recent colors!\nColor set to black instead.", Toast.LENGTH_SHORT);
+                T.show();
+            }
+            drawingView.setColor(colorFour);
+            verifyingTools.verifyToolandSwapColor(colorFour);
+        }
+
+        if (view.getId() == recentFive.getId())
+        {
+            if(colorFive.equals("#FF000000"))
+            {
+                Toast T = Toast.makeText(this, "No recent colors!\nColor set to black instead.", Toast.LENGTH_SHORT);
+                T.show();
+            }
+            drawingView.setColor(colorFive);
+            verifyingTools.verifyToolandSwapColor(colorFive);
+        }
+
+
 
         if (view.getId() == wipeCanvas.getId()) {
             //Delete canvas

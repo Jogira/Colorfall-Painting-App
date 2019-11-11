@@ -31,7 +31,7 @@ import java.io.Serializable;
     {
         //private Path path;//commented for new path
         private ourPath path;
-        private static Paint drawPixel;                //Our brush object
+        public static Paint drawPixel;                //Our brush object
         private Paint gridLines;
         private Paint pixelCanvasPaint;
         private int currentColor = 0xFF000000;
@@ -109,7 +109,7 @@ import java.io.Serializable;
         drawPixel.setStrokeWidth(70F);
         drawPixel.setStyle(Paint.Style.STROKE);
         drawPixel.setStrokeJoin(Paint.Join.MITER);
-        drawPixel.setStrokeCap(Paint.Cap.SQUARE);
+        drawPixel.setStrokeCap(Paint.Cap.ROUND);
 
         pixelCanvasPaint = new Paint(Paint.DITHER_FLAG);
     }
