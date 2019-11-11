@@ -5,6 +5,7 @@ import android.graphics.Path;
 import android.util.Log;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -40,8 +41,13 @@ public class ourPath extends Path implements Serializable {
 
     public void save(String fileName) {
         Log.d("TAG", "starting ourPath save");//testing
+
+        createContainerList();
+
         Log.d("TAG", "Brushes LL size = " + brushes.size());//testing
         Log.d("TAG", "Actions LL size = " + actions.size());//testing
+        Log.d("TAG", "container size = " + container.size());//testing
+
 
         try {
             ObjectOutputStream saving = new ObjectOutputStream(new FileOutputStream(fileName));
@@ -55,7 +61,7 @@ public class ourPath extends Path implements Serializable {
     }
 
     public void load(String fileName) {
-        Log.d("TAG", "starting ourPath save");//testing
+        Log.d("TAG", "starting ourPath load");//testing
         try {
             ObjectInputStream loading = new ObjectInputStream(new FileInputStream(fileName));
             Log.d("TAG", "file opened ");//testing
@@ -66,8 +72,12 @@ public class ourPath extends Path implements Serializable {
             Log.d("TAG", "LL saved locally; file closed");//testing
             Log.d("TAG", "LL size = " + tmpLL.size());//testing
             unpack(tmpLL);
-        } catch (Exception ld) {
-            Log.d("TAG", "Load Exception is caught");
+        } catch (FileNotFoundException f) {
+            Log.d("TAG", "Load FileNotFound Exception is caught");
+        }catch (IOException i) {
+            Log.d("TAG", "Load IOException Exception is caught");
+        }catch (ClassNotFoundException c) {
+            Log.d("TAG", "Load ClassNotFound Exception is caught");
         }
     }
 
@@ -76,12 +86,24 @@ public class ourPath extends Path implements Serializable {
     public void unpack(List<List> tmpLL) {
         Log.d("TAG","defaultReadObject passed");//testing
 
+        /*
         List<Paint> tmpBrushes = tmpLL.get(0);   //Hardcoded 0 & 1 as .getFirst() and getLast() aren't recognized for some reason
+        Log.d("TAG","tempbrushes set");//testing
         List<Action> tmpLines = tmpLL.get(1);
+        Log.d("TAG","dtempLines set");//testing
 
         brushes = tmpBrushes;
         actions = tmpLines;
         Log.d("TAG", "'actions' size = " + actions.size());//testing
+        */
+        //testing if the ll we load is empty:
+        if(tmpLL.isEmpty()){
+            Log.d("TAG", "tmpLL is fucking empty");//testing
+        }
+        //end testing
+        brushes = tmpLL.get(0);
+        actions = tmpLL.get(1);
+
 
         redraw(brushes, actions);
 

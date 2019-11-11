@@ -400,28 +400,13 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         }
     }
 
-    public void save() {
-        Context context = getApplicationContext();
-        String fileName = context.getFilesDir().getPath() + "/drawing.ser";
-        //OURRPATHTEST.testinhjt();
-        drawingView.getPath().save(fileName);
-
-        File file = new File(fileName);
-        if (file.exists()) {
-            double bytes = file.length();
-            Log.d("TAG", "bytes: " + bytes);
-        } else {
-            Log.d("TAG", "file does not exist");
-        }
-    }
-
     public void ColorWheel(boolean AlphaSupport)
     {
 
         AmbilWarnaDialog ambilWarnaDialog = new AmbilWarnaDialog(this, DefaultColor, new AmbilWarnaDialog.OnAmbilWarnaListener() {
             @Override
             public void onCancel(AmbilWarnaDialog dialog) {
-            System.out.println("Color wheel canceled.");
+                System.out.println("Color wheel canceled.");
             }
 
             @Override
@@ -466,6 +451,22 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         });
         ambilWarnaDialog.show();
     }
+
+    public void save() {
+        Context context = getApplicationContext();
+        String fileName = context.getFilesDir().getPath() + "/drawing.ser";
+        drawingView.getPath().save(fileName);
+
+        File file = new File(fileName);
+        if (file.exists()) {
+            double bytes = file.length();
+            Log.d("TAG", "bytes: " + bytes);
+        } else {
+            Log.d("TAG", "file does not exist");
+        }
+    }
+
+
     void printSavedFiles() {
         Context context = getApplicationContext();
         System.out.println(context.getFilesDir().getAbsolutePath());
