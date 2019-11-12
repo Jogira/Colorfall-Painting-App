@@ -23,7 +23,7 @@ import yuku.ambilwarna.AmbilWarnaDialog;
 //this is a View in Model-View-Controller architecture
 public class drawActivity extends AppCompatActivity implements java.io.Serializable {
 
-    private drawView drawingView;
+    public static drawView drawingView;
     private ImageButton selectedColor;
     private ImageButton blueColor;
     private ImageButton yellowColor;
@@ -53,11 +53,11 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     String colorPicked = "#ffffff";
     static boolean pickerClicked = false;
     static String currentColor;
-    float currentSize = 70F;
+    public static float currentSize = 70F;
     //testing save file -> gallery
     private String files;
     private String file_name = "";
-    private String currentTool = "pencil";
+    public static String currentTool = "pencil";
 
     //WORK IN PROGRESS//
     //private static final String TAG = "drawActivity";
