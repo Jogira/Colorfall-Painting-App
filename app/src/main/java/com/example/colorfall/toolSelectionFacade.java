@@ -27,5 +27,9 @@ public class toolSelectionFacade
         {
             drawActivity.currentColor = colorToSwapTo;
         }
+        else
+        {
+            System.out.println("\n The tool is not a valid tool that can change colors or size.");
+        }
     }
 }
