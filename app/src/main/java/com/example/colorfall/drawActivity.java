@@ -734,8 +734,8 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 
     public void save() {
         Context context = getApplicationContext();
-        String fileName = context.getFilesDir().getPath() + "/drawing.ser";
-        fileName += nameOfFile;
+        String fileName = context.getFilesDir().getPath() + "/";
+        fileName = fileName + nameOfFile + ".ser";
         drawingView.getPath().save(fileName);
 
         File file = new File(fileName);
@@ -797,6 +797,9 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 nameOfFile = input.getText().toString();
+                save();
+                Toast.makeText(getApplicationContext(), "Drawing saved...", Toast.LENGTH_SHORT).show();
+                printSavedFiles();
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -808,18 +811,9 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 
         builder.show();
 
-        save();
-
-        Toast.makeText(getApplicationContext(), "Drawing saved...", Toast.LENGTH_SHORT).show();
-
-
-        printSavedFiles();
-        //testing
-        ourPath path = drawingView.getPath();
-        path.printList();
-        //end testing
-
-        //sending file names to gallery
+        //was being saved like: our/app/path/drawing.serUserInputName
+        //was running "save()" even if someone clicked "cancel", obvious issue
+        //currently still throwing exception in ourPath.save() on saving.writeObject(container);
 
     }
 
