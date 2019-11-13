@@ -774,7 +774,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     public void load() {
         //setup
         Context context = getApplicationContext();//if errors occur down the road, its likely from this
-        String fileName = context.getFilesDir().getPath() + "/drawing.ser";
+        String fileName = context.getFilesDir().getPath() + "/gg.ser";
 
         //check if file existss and is non empty
         File file = new File(fileName);

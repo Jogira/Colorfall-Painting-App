@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -31,7 +32,7 @@ import java.io.Serializable;
     {
         //private Path path;//commented for new path
         private ourPath path;
-        public static Paint drawPixel;                //Our brush object
+        public static ourPaint drawPixel;                //Our brush object
         private Paint gridLines;
         private Paint pixelCanvasPaint;
         private int currentColor = 0xFF000000;
@@ -102,7 +103,7 @@ import java.io.Serializable;
     {
         path = new ourPath();
         gridLines = new Paint();
-        drawPixel = new Paint();
+        drawPixel = new ourPaint();
 
         gridLines.setColor(Color.BLACK);
         gridLines.setStrokeWidth(1F);
@@ -177,7 +178,13 @@ import java.io.Serializable;
         return path;
     }
 
-    public static Paint getBrush() {return drawPixel; }
+    public static ourPaint getBrush() {return drawPixel; }
+
+    public static void setBrush(ourPaint brush) {
+        Log.d("TAG","drawPixel color Before change: " + drawPixel.getColor());
+        drawPixel = brush;
+        Log.d("TAG","drawPixel color After chamge: " + drawPixel.getColor());
+    }
 
 
 }

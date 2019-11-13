@@ -24,7 +24,9 @@ public class ourPath extends Path implements Serializable {
     //private drawView drawingView;
     private List<List> container = new LinkedList<>();
     private List<Action> actions = new LinkedList<>();//list where all user actions are stored
-    private List<Paint> brushes = new LinkedList<>();//list of brushes which contains color, size etc.
+    private List<ourPaint> brushes = new LinkedList<>();//list of brushes which contains color, size etc.
+    ListIterator<ourPaint> iterBrush;
+    private boolean isAuto = false;
 
 
     /***********************************Testing methods***************************/
@@ -86,16 +88,6 @@ public class ourPath extends Path implements Serializable {
     public void unpack(List<List> tmpLL) {
         Log.d("TAG","defaultReadObject passed");//testing
 
-        /*
-        List<Paint> tmpBrushes = tmpLL.get(0);   //head
-        Log.d("TAG","tempbrushes set");//testing
-        List<Action> tmpLines = tmpLL.get(1);
-        Log.d("TAG","dtempLines set");//testing
-
-        brushes = tmpBrushes;
-        actions = tmpLines;
-        Log.d("TAG", "'actions' size = " + actions.size());//testing
-        */
         //testing if the ll we load is empty:
         if(tmpLL.isEmpty()){
             Log.d("TAG", "tmpLL is empty for some reason");//testing
@@ -104,31 +96,37 @@ public class ourPath extends Path implements Serializable {
         brushes = tmpLL.get(0);
         actions = tmpLL.get(1);
 
+        Log.d("TAG", "Brushes LL size = " + brushes.size());//testing
+        Log.d("TAG", "Actions LL size = " + actions.size());//testing
+        Log.d("TAG", "container size = " + container.size());//testing
 
-        redraw(brushes, actions);
+        redraw();
 
     }//end readObject
 
-    public void redraw(List<Paint> brush, List<Action> lines){
+    public void redraw(){
+        isAuto = true;
         //Iterates throughout local LL to redraw image
-        ListIterator<Paint> iterBrush = brush.listIterator(0);
-        ListIterator<Action> iterLine = lines.listIterator(0);
+        iterBrush = brushes.listIterator();
+        ListIterator<Action> iterLine = actions.listIterator();
 
         int count = 1; //FOR DEBUG
 
+
         while(iterLine.hasNext()==true){           //We still want to look depend on the larger line-data LL when redrawing
             //is iterLine.next a moveTo?
-            Action redrawLine = iterLine.next();
-            //IF yes: set brush data
-//            if (redrawLine = moveTo()) {            //HOW TO check if this is in fact a move to???
-//                Paint redrawBrush = iterBrush.next();
-//            }
-            //IF no: do below actions (except cannot call get prev checked data from iter.next)
+            //Action redrawLine = iterLine.next();
+
+            //if action.next is a move to: (or put in where moveTo executes and pop from front of brush list)
+            if(0==1)
+                drawView.setBrush(iterBrush.next());
+
 
             iterLine.next().perform(this);
             Log.d("TAG","looped " + count); //FOR DEBUG
             count ++;
         }
+        isAuto = false;
     }
 
     private interface Action extends Serializable {
@@ -146,16 +144,21 @@ public class ourPath extends Path implements Serializable {
     /****************Overrides****************************/
     @Override
     public void moveTo(float x, float y) {
-        brushes.add(drawView.getBrush());
-
-        actions.add(new Move(x, y));
+        if(!(isAuto)) {
+            brushes.add(drawView.getBrush());
+            actions.add(new Move(x, y));
+        } else {
+            drawView.setBrush(iterBrush.next());
+        }
         super.moveTo(x, y);
         Log.d("TAG","move 1. x=" + x + " y=" +y + " SIZE = " +  + actions.size());
     }
 
     @Override
     public void lineTo(float x, float y) {
-        actions.add(new Line(x, y));
+        if(!(isAuto)) {
+            actions.add(new Line(x, y));
+        }
         super.lineTo(x, y);
         Log.d("TAG","line 1. x=" + x + " y=" +y + " SIZE = " +  + actions.size());
     }
