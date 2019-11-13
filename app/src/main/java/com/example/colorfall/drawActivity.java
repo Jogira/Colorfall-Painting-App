@@ -41,6 +41,11 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     private ImageButton redColor;
     private ImageButton greenColor;
     private ImageButton blackColor;
+    private ImageButton violetColor;
+    private ImageButton cinnamonColor;
+    private ImageButton orangeMintColor;
+    private ImageButton whiteColor;
+    private ImageButton azureColor;
     private ImageButton eraseButton;
     private ImageButton drawButton;
     private ImageButton colorPicker;
@@ -52,6 +57,11 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     private ImageButton recentThree;
     private ImageButton recentFour;
     private ImageButton recentFive;
+    private ImageButton recentSix;
+    private ImageButton recentSeven;
+    private ImageButton recentEight;
+    private ImageButton recentNine;
+    private ImageButton recentTen;
     private TextView currentSizeText;
     private Button loadButton;
     int DefaultColor;
@@ -61,6 +71,11 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     String colorThree = "#FF000000";
     String colorFour = "#FF000000";
     String colorFive = "#FF000000";
+    String colorSix = "#FF000000";
+    String colorSeven = "#FF000000";
+    String colorEight = "#FF000000";
+    String colorNine = "#FF000000";
+    String colorTen = "#FF000000";
     String colorPicked = "#ffffff";
     public static int eraserSize = 70;
     static boolean pickerClicked = false;
@@ -116,14 +131,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         });
 
 
-        blueColor = (ImageButton) findViewById(R.id.blueColor);
-        blueColor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                currentTool = "pencil";
-                onSelectColor(view);
-            }
-        });
+
 
         colorPicker = (ImageButton) findViewById(R.id.colorPicker);
         colorPicker.setOnClickListener(new View.OnClickListener() {
@@ -147,6 +155,15 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             @Override
             public void onClick(View view) {
                 onClickLoad(view);
+            }
+        });
+
+        blueColor = (ImageButton) findViewById(R.id.blueColor);
+        blueColor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                currentTool = "pencil";
+                onSelectColor(view);
             }
         });
 
@@ -179,6 +196,51 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 
         blackColor = (ImageButton) findViewById(R.id.blackColor);
         blackColor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                currentTool = "pencil";
+                onSelectColor(view);
+            }
+        });
+
+        cinnamonColor = (ImageButton) findViewById(R.id.cinnamonColor);
+        cinnamonColor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                currentTool = "pencil";
+                onSelectColor(view);
+            }
+        });
+
+        orangeMintColor = (ImageButton) findViewById(R.id.orangeMintColor);
+        orangeMintColor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                currentTool = "pencil";
+                onSelectColor(view);
+            }
+        });
+
+        azureColor = (ImageButton) findViewById(R.id.azureColor);
+        azureColor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                currentTool = "pencil";
+                onSelectColor(view);
+            }
+        });
+
+        whiteColor = (ImageButton) findViewById(R.id.whiteColor);
+        whiteColor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                currentTool = "pencil";
+                onSelectColor(view);
+            }
+        });
+
+        violetColor = (ImageButton) findViewById(R.id.violetColor);
+        violetColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 currentTool = "pencil";
@@ -271,6 +333,51 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
         });
 
+        recentSix = (ImageButton) findViewById(R.id.recentSix);
+        recentSix.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                currentTool = "pencil";
+                onSelectColor(view);
+            }
+        });
+
+        recentSeven = (ImageButton) findViewById(R.id.recentSeven);
+        recentSeven.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                currentTool = "pencil";
+                onSelectColor(view);
+            }
+        });
+
+        recentEight = (ImageButton) findViewById(R.id.recentEight);
+        recentEight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                currentTool = "pencil";
+                onSelectColor(view);
+            }
+        });
+
+        recentNine = (ImageButton) findViewById(R.id.recentNine);
+        recentNine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                currentTool = "pencil";
+                onSelectColor(view);
+            }
+        });
+
+        recentTen = (ImageButton) findViewById(R.id.recentTen);
+        recentTen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                currentTool = "pencil";
+                onSelectColor(view);
+            }
+        });
+
     }
 
 //WORK IN PROGRESS//
@@ -336,9 +443,42 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         if (view.getId() == blueColor.getId()) {
             drawingView.setColor("#072F5F");
             verifyingTools.verifyToolandSwapColor("#072F5F");
-            //Log.v(TAG,"color now blue" + blueColor);  //May not need for test
-            //Used for Espresso test
             Toast T = Toast.makeText(this, "Blue selected.", Toast.LENGTH_SHORT);
+            T.show();
+        }
+
+        if (view.getId() == orangeMintColor.getId()) {
+            drawingView.setColor("#ff7518");
+            verifyingTools.verifyToolandSwapColor("#ff7518");
+            Toast T = Toast.makeText(this, "Orange selected.", Toast.LENGTH_SHORT);
+            T.show();
+        }
+
+        if (view.getId() == violetColor.getId()) {
+            drawingView.setColor("#800080");
+            verifyingTools.verifyToolandSwapColor("#800080");
+            Toast T = Toast.makeText(this, "Violet selected.", Toast.LENGTH_SHORT);
+            T.show();
+        }
+
+        if (view.getId() == cinnamonColor.getId()) {
+            drawingView.setColor("#D2691E");
+            verifyingTools.verifyToolandSwapColor("#D2691E");
+            Toast T = Toast.makeText(this, "Brown selected.", Toast.LENGTH_SHORT);
+            T.show();
+        }
+
+        if (view.getId() == azureColor.getId()) {
+            drawingView.setColor("#2471A3");
+            verifyingTools.verifyToolandSwapColor("#2471A3");
+            Toast T = Toast.makeText(this, "Azure selected.", Toast.LENGTH_SHORT);
+            T.show();
+        }
+
+        if (view.getId() == whiteColor.getId()) {
+            drawingView.setColor("#ffffff");
+            verifyingTools.verifyToolandSwapColor("#ffffff");
+            Toast T = Toast.makeText(this, "White selected.", Toast.LENGTH_SHORT);
             T.show();
         }
 
@@ -432,6 +572,61 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             verifyingTools.verifyToolandSwapColor(colorFive);
         }
 
+        if (view.getId() == recentSix.getId())
+        {
+            if(colorSix.equals("#FF000000"))
+            {
+                Toast T = Toast.makeText(this, "No recent colors!\nColor set to black instead.", Toast.LENGTH_SHORT);
+                T.show();
+            }
+            drawingView.setColor(colorSix);
+            verifyingTools.verifyToolandSwapColor(colorSix);
+        }
+
+        if (view.getId() == recentSeven.getId())
+        {
+            if(colorThree.equals("#FF000000"))
+            {
+                Toast T = Toast.makeText(this, "No recent colors!\nColor set to black instead.", Toast.LENGTH_SHORT);
+                T.show();
+            }
+            drawingView.setColor(colorSeven);
+            verifyingTools.verifyToolandSwapColor(colorSeven);
+        }
+
+        if (view.getId() == recentEight.getId())
+        {
+            if(colorThree.equals("#FF000000"))
+            {
+                Toast T = Toast.makeText(this, "No recent colors!\nColor set to black instead.", Toast.LENGTH_SHORT);
+                T.show();
+            }
+            drawingView.setColor(colorEight);
+            verifyingTools.verifyToolandSwapColor(colorEight);
+        }
+
+        if (view.getId() == recentNine.getId())
+        {
+            if(colorThree.equals("#FF000000"))
+            {
+                Toast T = Toast.makeText(this, "No recent colors!\nColor set to black instead.", Toast.LENGTH_SHORT);
+                T.show();
+            }
+            drawingView.setColor(colorNine);
+            verifyingTools.verifyToolandSwapColor(colorNine);
+        }
+
+        if (view.getId() == recentTen.getId())
+        {
+            if(colorThree.equals("#FF000000"))
+            {
+                Toast T = Toast.makeText(this, "No recent colors!\nColor set to black instead.", Toast.LENGTH_SHORT);
+                T.show();
+            }
+            drawingView.setColor(colorTen);
+            verifyingTools.verifyToolandSwapColor(colorTen);
+        }
+
 
 
         if (view.getId() == wipeCanvas.getId()) {
@@ -499,6 +694,37 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
                 {
                     recentFive.setBackgroundColor(color);
                     colorFive = colorStr;
+
+                }
+
+                if (recentCounter == 6)
+                {
+                    recentSix.setBackgroundColor(color);
+                    colorSix = colorStr;
+                }
+
+                if (recentCounter == 7)
+                {
+                    recentSeven.setBackgroundColor(color);
+                    colorSeven = colorStr;
+                }
+
+                if (recentCounter == 8)
+                {
+                    recentEight.setBackgroundColor(color);
+                    colorEight = colorStr;
+                }
+
+                if (recentCounter == 9)
+                {
+                    recentNine.setBackgroundColor(color);
+                    colorNine = colorStr;
+                }
+
+                if (recentCounter == 10)
+                {
+                    recentTen.setBackgroundColor(color);
+                    colorTen = colorStr;
                     recentCounter = 0;
                 }
             }
