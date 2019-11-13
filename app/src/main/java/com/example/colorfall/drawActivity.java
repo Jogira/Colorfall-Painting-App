@@ -31,7 +31,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 
 
 
-    private drawView drawingView;
+   // private drawView drawingView;
     public static drawView drawingView;
     private ImageButton selectedColor;
     private ImageButton blueColor;
@@ -464,6 +464,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     public void save() {
         Context context = getApplicationContext();
         String fileName = context.getFilesDir().getPath() + "/drawing.ser";
+        fileName += nameOfFile;
         drawingView.getPath().save(fileName);
 
         File file = new File(fileName);
