@@ -32,6 +32,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 
 
     private drawView drawingView;
+    public static drawView drawingView;
     private ImageButton selectedColor;
     private ImageButton blueColor;
     private ImageButton yellowColor;
@@ -61,11 +62,11 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     String colorPicked = "#ffffff";
     static boolean pickerClicked = false;
     static String currentColor;
-    float currentSize = 70F;
+    public static float currentSize = 70F;
     //testing save file -> gallery
     private String files;
     private String file_name = "";
-    private String currentTool = "pencil";
+    public static String currentTool = "pencil";
 
     //WORK IN PROGRESS//
     //private static final String TAG = "drawActivity";
@@ -408,28 +409,13 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         }
     }
 
-    public void save() {
-        Context context = getApplicationContext();
-        String fileName = context.getFilesDir().getPath() + "/drawing.ser";
-        //OURRPATHTEST.testinhjt();
-        drawingView.getPath().save(fileName);
-
-        File file = new File(fileName);
-        if (file.exists()) {
-            double bytes = file.length();
-            Log.d("TAG", "bytes: " + bytes);
-        } else {
-            Log.d("TAG", "file does not exist");
-        }
-    }
-
     public void ColorWheel(boolean AlphaSupport)
     {
 
         AmbilWarnaDialog ambilWarnaDialog = new AmbilWarnaDialog(this, DefaultColor, new AmbilWarnaDialog.OnAmbilWarnaListener() {
             @Override
             public void onCancel(AmbilWarnaDialog dialog) {
-            System.out.println("Color wheel canceled.");
+                System.out.println("Color wheel canceled.");
             }
 
             @Override
@@ -474,6 +460,22 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         });
         ambilWarnaDialog.show();
     }
+
+    public void save() {
+        Context context = getApplicationContext();
+        String fileName = context.getFilesDir().getPath() + "/drawing.ser";
+        drawingView.getPath().save(fileName);
+
+        File file = new File(fileName);
+        if (file.exists()) {
+            double bytes = file.length();
+            Log.d("TAG", "bytes: " + bytes);
+        } else {
+            Log.d("TAG", "file does not exist");
+        }
+    }
+
+
     void printSavedFiles() {
         Context context = getApplicationContext();
         System.out.println(context.getFilesDir().getAbsolutePath());

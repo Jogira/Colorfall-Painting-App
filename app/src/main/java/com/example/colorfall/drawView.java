@@ -60,7 +60,7 @@ import java.io.Serializable;
         public boolean onTouchEvent(MotionEvent event)
         {
 
-
+            toolSelectionFacade verifyingTools = new toolSelectionFacade(drawActivity.currentTool, drawActivity.currentSize);
              pointX = event.getX();
              pointY = event.getY();
 
@@ -77,6 +77,8 @@ import java.io.Serializable;
                         blueValue = Color.blue(pixel);
                         greenValue = Color.green(pixel);
                         drawPixel.setColor(pixel);
+                        String pixelStr = Integer.toString(pixel);
+                        verifyingTools.verifyToolandSwapColor(pixelStr);
                         drawActivity.pickerClicked = false;
                     }
 
