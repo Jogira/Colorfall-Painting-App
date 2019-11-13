@@ -188,5 +188,4 @@ import java.io.Serializable;
         Log.d("TAG","drawPixel color After chamge: " + drawPixel.getColor());
     }
 
-
 }

@@ -25,7 +25,7 @@ public class ourPath extends Path implements Serializable {
     private List<List> container = new LinkedList<>();
     private List<Action> actions = new LinkedList<>();//list where all user actions are stored
     private List<ourPaint> brushes = new LinkedList<>();//list of brushes which contains color, size etc.
-    ListIterator<ourPaint> iterBrush;
+    private ListIterator<ourPaint> iterBrush;
     private boolean isAuto = false;
 
 
@@ -151,7 +151,7 @@ public class ourPath extends Path implements Serializable {
             drawView.setBrush(iterBrush.next());
         }
         super.moveTo(x, y);
-        Log.d("TAG","move 1. x=" + x + " y=" +y + " SIZE = " +  + actions.size());
+        Log.d("TAG","in move method. x=" + x + " y=" +y + " SIZE = " +  + actions.size());
     }
 
     @Override
@@ -160,7 +160,7 @@ public class ourPath extends Path implements Serializable {
             actions.add(new Line(x, y));
         }
         super.lineTo(x, y);
-        Log.d("TAG","line 1. x=" + x + " y=" +y + " SIZE = " +  + actions.size());
+        Log.d("TAG","in line method. x=" + x + " y=" +y + " SIZE = " +  + actions.size());
     }
     /*****************end overrides**********************/
 
@@ -177,7 +177,7 @@ public class ourPath extends Path implements Serializable {
         public Move(float x, float y) {
             this.x = x;
             this.y = y;
-            Log.d("TAG","it moved. x=" + x + " y=" +y);
+            Log.d("TAG","in move class. x=" + x + " y=" +y);
         }
 
         @Override
@@ -199,7 +199,7 @@ public class ourPath extends Path implements Serializable {
         public Line(float x, float y) {
             this.x = x;
             this.y = y;
-            Log.d("TAG","it lined. x=" + x + " y=" +y);
+            Log.d("TAG","in line class. x=" + x + " y=" +y);
         }
 
         @Override
