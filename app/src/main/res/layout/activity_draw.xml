@@ -243,13 +243,12 @@
 
 
         <ImageButton
-            android:id="@+id/currentColor"
+            android:id="@+id/current_Color"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginLeft="15dp"
-            android:background="#00FFFFFF"
-            android:contentDescription="@string/colorPicker"
-            android:src="@drawable/color_pick" />
+            android:background="#FF000000"
+            android:src="@drawable/border" />
 
         <ImageButton
             android:id="@+id/recentSix"

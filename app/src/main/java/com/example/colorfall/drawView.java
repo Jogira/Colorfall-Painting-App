@@ -77,8 +77,10 @@ import java.io.Serializable;
                         blueValue = Color.blue(pixel);
                         greenValue = Color.green(pixel);
                         drawPixel.setColor(pixel);
+                        drawActivity.selectedColor.setBackgroundColor(pixel);
                         String pixelStr = Integer.toString(pixel);
                         verifyingTools.verifyToolandSwapColor(pixelStr);
+
                         drawActivity.pickerClicked = false;
                     }
 
