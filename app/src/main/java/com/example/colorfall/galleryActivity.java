@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+import java.util.Arrays;
+
 
 import androidx.fragment.app.Fragment;
 import android.widget.TextView;
@@ -42,9 +44,10 @@ public class galleryActivity extends Activity {
         m.setTextColor(Color.WHITE);
 
 
+//
+//        drawActivity class1 = new drawActivity();
+//        String list1 = class1.getFiles();
 
-        drawActivity class1 = new drawActivity();
-        String list1 = class1.getFiles();
 
 
 //
@@ -60,9 +63,26 @@ public class galleryActivity extends Activity {
            // m1.setText(list);
         }
         Context context = getApplicationContext();
-        String fileName = context.getFilesDir().getPath() + "/drawing.ser";
+        System.out.println(context.getFilesDir().getAbsolutePath());
+        String[] fList = context.fileList();
+       // m1.setText(Arrays.toString(fList));
 
-
+        String gallery = Arrays.toString(fList);
+        String galleryList = "";
+//        for(int i = 0; i<gallery.length(); i++){
+//            if(gallery.charAt(i) !='[' || gallery.charAt(i)!=']'){
+//                if(gallery.charAt(i)==','){
+//                    galleryList += "\n";
+//                }
+//                galleryList += gallery.charAt(i);
+//            }
+//        }
+        for(int i = 0; i<fList.length; i++){
+            galleryList += fList[i];
+            galleryList += "\n";
+        }
+        m1.setText(galleryList);
+    
 
 
     }

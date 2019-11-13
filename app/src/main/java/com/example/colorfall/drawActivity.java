@@ -4,6 +4,7 @@ package com.example.colorfall;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -35,7 +36,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 
    // private drawView drawingView;
     public static drawView drawingView;
-    private ImageButton selectedColor;
+    public static ImageButton selectedColor;
     private ImageButton blueColor;
     private ImageButton yellowColor;
     private ImageButton redColor;
@@ -64,7 +65,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     private ImageButton recentTen;
     private TextView currentSizeText;
     private Button loadButton;
-    int DefaultColor;
+    int currentColor;
     int recentCounter = 0;
     String colorOne = "#FF000000";
     String colorTwo = "#FF000000";
@@ -79,7 +80,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     String colorPicked = "#ffffff";
     public static int eraserSize = 70;
     static boolean pickerClicked = false;
-    static String currentColor;
+    static String pickedColor;
     public static float currentSize = 70F;
     //testing save file -> gallery
     private String files;
@@ -94,10 +95,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_draw);
-        LinearLayout paintLayout = (LinearLayout) findViewById(R.id.paint_colors);
-        selectedColor = (ImageButton) paintLayout.getChildAt(0);
         drawingView = (drawView) findViewById(R.id.drawing);
         currentSizeText = (TextView) findViewById(R.id.current_size);
         seekSize = (SeekBar) findViewById(R.id.seekBar);
@@ -131,7 +129,14 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         });
 
 
-
+        selectedColor = (ImageButton) findViewById(R.id.current_Color);
+        selectedColor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                currentTool = "pencil";
+                onSelectTool(view);
+            }
+        });
 
         colorPicker = (ImageButton) findViewById(R.id.colorPicker);
         colorPicker.setOnClickListener(new View.OnClickListener() {
@@ -428,7 +433,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
             else
             {
-                currentColor = drawingView.hexValuePicked;
+                pickedColor = drawingView.hexValuePicked;
             }
             //Used for Espresso test
             Toast T = Toast.makeText(this, "Color picker selected.", Toast.LENGTH_SHORT);
@@ -443,76 +448,72 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         if (view.getId() == blueColor.getId()) {
             drawingView.setColor("#072F5F");
             verifyingTools.verifyToolandSwapColor("#072F5F");
-            Toast T = Toast.makeText(this, "Blue selected.", Toast.LENGTH_SHORT);
-            T.show();
+            currentColor = Color.parseColor("#072F5F");
+            selectedColor.setBackgroundColor(currentColor);
         }
 
         if (view.getId() == orangeMintColor.getId()) {
             drawingView.setColor("#ff7518");
             verifyingTools.verifyToolandSwapColor("#ff7518");
-            Toast T = Toast.makeText(this, "Orange selected.", Toast.LENGTH_SHORT);
-            T.show();
+            currentColor = Color.parseColor("#ff7518");
+            selectedColor.setBackgroundColor(currentColor);
+
         }
 
         if (view.getId() == violetColor.getId()) {
             drawingView.setColor("#800080");
             verifyingTools.verifyToolandSwapColor("#800080");
-            Toast T = Toast.makeText(this, "Violet selected.", Toast.LENGTH_SHORT);
-            T.show();
+            currentColor = Color.parseColor("#800080");
+            selectedColor.setBackgroundColor(currentColor);
         }
 
         if (view.getId() == cinnamonColor.getId()) {
             drawingView.setColor("#D2691E");
             verifyingTools.verifyToolandSwapColor("#D2691E");
-            Toast T = Toast.makeText(this, "Brown selected.", Toast.LENGTH_SHORT);
-            T.show();
+            currentColor = Color.parseColor("#D2691E");
+            selectedColor.setBackgroundColor(currentColor);
         }
 
         if (view.getId() == azureColor.getId()) {
             drawingView.setColor("#2471A3");
             verifyingTools.verifyToolandSwapColor("#2471A3");
-            Toast T = Toast.makeText(this, "Azure selected.", Toast.LENGTH_SHORT);
-            T.show();
+            currentColor = Color.parseColor("#2471A3");
+            selectedColor.setBackgroundColor(currentColor);
         }
 
         if (view.getId() == whiteColor.getId()) {
             drawingView.setColor("#ffffff");
             verifyingTools.verifyToolandSwapColor("#ffffff");
-            Toast T = Toast.makeText(this, "White selected.", Toast.LENGTH_SHORT);
-            T.show();
+            currentColor = Color.parseColor("#ffffff");
+            selectedColor.setBackgroundColor(currentColor);
         }
 
         if (view.getId() == redColor.getId()) {
             drawingView.setColor("#FFFF0000");
             verifyingTools.verifyToolandSwapColor("#FFFF0000");
-
-            //Used for Espresso test
-            Toast T = Toast.makeText(this, "Red selected.", Toast.LENGTH_SHORT);
-            T.show();
+            currentColor = Color.parseColor("#FFFF0000");
+            selectedColor.setBackgroundColor(currentColor);
         }
 
         if (view.getId() == yellowColor.getId()) {
             drawingView.setColor("#FFFF00");
             verifyingTools.verifyToolandSwapColor("#FFFF00");
-            //Used for Espresso test
-            Toast T = Toast.makeText(this, "Yellow selected.", Toast.LENGTH_SHORT);
-            T.show();
+            currentColor = Color.parseColor("#FFFF00");
+            selectedColor.setBackgroundColor(currentColor);
         }
 
         if (view.getId() == greenColor.getId()) {
             drawingView.setColor("#00FF3E");
             verifyingTools.verifyToolandSwapColor("#00FF3E");
-            //Used for Espresso test
-            Toast T = Toast.makeText(this, "Green selected.", Toast.LENGTH_SHORT);
-            T.show();
+            currentColor = Color.parseColor("#00FF3E");
+            selectedColor.setBackgroundColor(currentColor);
         }
 
         if (view.getId() == blackColor.getId()) {
             drawingView.setColor("#FF000000");
             verifyingTools.verifyToolandSwapColor("#FF000000");
-            //Used for Espresso test
-            Toast T = Toast.makeText(this, "Black selected.", Toast.LENGTH_SHORT);
-            T.show();
+            currentColor = Color.parseColor("#FF000000");
+            selectedColor.setBackgroundColor(currentColor);
         }
 
 
@@ -526,6 +527,8 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
             drawingView.setColor(colorOne);
             verifyingTools.verifyToolandSwapColor(colorOne);
+            currentColor = Color.parseColor(colorOne);
+            selectedColor.setBackgroundColor(currentColor);
         }
 
         if (view.getId() == recentTwo.getId())
@@ -537,6 +540,8 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
             drawingView.setColor(colorTwo);
             verifyingTools.verifyToolandSwapColor(colorTwo);
+            currentColor = Color.parseColor(colorTwo);
+            selectedColor.setBackgroundColor(currentColor);
         }
 
         if (view.getId() == recentThree.getId())
@@ -548,6 +553,8 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
             drawingView.setColor(colorThree);
             verifyingTools.verifyToolandSwapColor(colorThree);
+            currentColor = Color.parseColor(colorThree);
+            selectedColor.setBackgroundColor(currentColor);
         }
 
         if (view.getId() == recentFour.getId())
@@ -559,6 +566,8 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
             drawingView.setColor(colorFour);
             verifyingTools.verifyToolandSwapColor(colorFour);
+            currentColor = Color.parseColor(colorFour);
+            selectedColor.setBackgroundColor(currentColor);
         }
 
         if (view.getId() == recentFive.getId())
@@ -570,6 +579,8 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
             drawingView.setColor(colorFive);
             verifyingTools.verifyToolandSwapColor(colorFive);
+            currentColor = Color.parseColor(colorFive);
+            selectedColor.setBackgroundColor(currentColor);
         }
 
         if (view.getId() == recentSix.getId())
@@ -581,6 +592,8 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
             drawingView.setColor(colorSix);
             verifyingTools.verifyToolandSwapColor(colorSix);
+            currentColor = Color.parseColor(colorSix);
+            selectedColor.setBackgroundColor(currentColor);
         }
 
         if (view.getId() == recentSeven.getId())
@@ -592,6 +605,8 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
             drawingView.setColor(colorSeven);
             verifyingTools.verifyToolandSwapColor(colorSeven);
+            currentColor = Color.parseColor(colorSeven);
+            selectedColor.setBackgroundColor(currentColor);
         }
 
         if (view.getId() == recentEight.getId())
@@ -603,6 +618,8 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
             drawingView.setColor(colorEight);
             verifyingTools.verifyToolandSwapColor(colorEight);
+            currentColor = Color.parseColor(colorEight);
+            selectedColor.setBackgroundColor(currentColor);
         }
 
         if (view.getId() == recentNine.getId())
@@ -614,6 +631,8 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
             drawingView.setColor(colorNine);
             verifyingTools.verifyToolandSwapColor(colorNine);
+            currentColor = Color.parseColor(colorNine);
+            selectedColor.setBackgroundColor(currentColor);
         }
 
         if (view.getId() == recentTen.getId())
@@ -625,6 +644,8 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
             drawingView.setColor(colorTen);
             verifyingTools.verifyToolandSwapColor(colorTen);
+            currentColor = Color.parseColor(colorTen);
+            selectedColor.setBackgroundColor(currentColor);
         }
 
 
@@ -652,7 +673,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     public void ColorWheel(boolean AlphaSupport)
     {
 
-        AmbilWarnaDialog ambilWarnaDialog = new AmbilWarnaDialog(this, DefaultColor, new AmbilWarnaDialog.OnAmbilWarnaListener() {
+        AmbilWarnaDialog ambilWarnaDialog = new AmbilWarnaDialog(this, currentColor, new AmbilWarnaDialog.OnAmbilWarnaListener() {
             @Override
             public void onCancel(AmbilWarnaDialog dialog) {
                 System.out.println("Color wheel canceled.");
@@ -661,10 +682,12 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             @Override
             public void onOk(AmbilWarnaDialog dialog, int color)
             {
-                DefaultColor = color;
+
+                currentColor = color;
                 String colorStr= "#"+Integer.toHexString(color);
                 System.out.println("\n"+colorStr);
                 drawingView.setColor(colorStr);
+                selectedColor.setBackgroundColor(color);
                 recentCounter++;
                 if (recentCounter == 1)
                 {
