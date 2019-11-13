@@ -845,4 +845,8 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         //Intent intent = new Intent(this,  galleryActivity.class);
         //startActivity(intent);
     }
+
+    public static drawView getDrawingView() {
+        return drawingView;
+    }
 }

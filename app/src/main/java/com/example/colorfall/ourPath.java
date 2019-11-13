@@ -15,6 +15,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import android.graphics.Paint;
+import android.view.MotionEvent;
 
 //WORK IN PROGRESS//
 public class ourPath extends Path implements Serializable {
@@ -27,6 +28,7 @@ public class ourPath extends Path implements Serializable {
     private List<ourPaint> brushes = new LinkedList<>();//list of brushes which contains color, size etc.
     private ListIterator<ourPaint> iterBrush;
     private boolean isAuto = false;
+    private drawView drawingView;
 
 
     /***********************************Testing methods***************************/
@@ -144,29 +146,38 @@ public class ourPath extends Path implements Serializable {
     /****************Overrides****************************/
     @Override
     public void moveTo(float x, float y) {
-        if(!(isAuto)) {
+        if(!(isAuto)) {//if we are not autodrawing
             brushes.add(drawView.getBrush());
             actions.add(new Move(x, y));
-        } else {
+        } else {//if we are autodrawing
             drawView.setBrush(iterBrush.next());
         }
+
         super.moveTo(x, y);
-        Log.d("TAG","in move method. x=" + x + " y=" +y + " SIZE = " +  + actions.size());
+        Log.d("TAG","in move drawing method. x=" + x + " y=" +y + " SIZE = " +  + actions.size());
     }
 
     @Override
     public void lineTo(float x, float y) {
-        if(!(isAuto)) {
+        if(!(isAuto)) {//if we are not auto drawing
             actions.add(new Line(x, y));
+        } else {
+
         }
+
         super.lineTo(x, y);
-        Log.d("TAG","in line method. x=" + x + " y=" +y + " SIZE = " +  + actions.size());
+        Log.d("TAG","in line drawing method. x=" + x + " y=" +y + " SIZE = " +  + actions.size());
     }
     /*****************end overrides**********************/
 
     //Getter for linked list
     public List<Action> getLL()  {
         return actions;
+    }
+
+    public void getDrawingView() {
+        drawingView = drawActivity.getDrawingView();
+        //drawingView.onTouchEvent(MotionEvent.obtain());//once fill out obtain this would pass a valid event
     }
 
     /**************inner MOVE class*******************/
@@ -177,7 +188,7 @@ public class ourPath extends Path implements Serializable {
         public Move(float x, float y) {
             this.x = x;
             this.y = y;
-            Log.d("TAG","in move class. x=" + x + " y=" +y);
+            Log.d("TAG","in move constructor. x=" + x + " y=" +y);
         }
 
         @Override
@@ -199,7 +210,7 @@ public class ourPath extends Path implements Serializable {
         public Line(float x, float y) {
             this.x = x;
             this.y = y;
-            Log.d("TAG","in line class. x=" + x + " y=" +y);
+            Log.d("TAG","in line constructor. x=" + x + " y=" +y);
         }
 
         @Override

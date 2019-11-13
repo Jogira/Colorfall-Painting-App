@@ -69,7 +69,9 @@ import java.io.Serializable;
             switch(event.getAction())
             {
                 case MotionEvent.ACTION_DOWN:
+
                     path.moveTo(pointX, pointY);
+
 
                     pixel = canvasPixelBitmap.getPixel((int) pointX, (int) pointY);
                     if(pointX > 0 && pointY > 0 && drawActivity.pickerClicked == true)
@@ -85,8 +87,10 @@ import java.io.Serializable;
                         drawActivity.pickerClicked = false;
                     }
 
+
                     return true;
                 case MotionEvent.ACTION_MOVE:
+
                     path.lineTo(pointX, pointY);
 
                     break;
