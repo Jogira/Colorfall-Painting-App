@@ -65,7 +65,7 @@ public class ourPath extends Path implements Serializable {
         try {
             ObjectInputStream loading = new ObjectInputStream(new FileInputStream(fileName));
             Log.d("TAG", "file opened ");//testing
-            Object loadedList = loading.readObject();
+            Object loadedList = loading.readObject();//THIS IS CURRENTLY CAUSING ERROR
             Log.d("TAG", "read complete");//testing
             List<List> tmpLL = (LinkedList<List>)loadedList;
             loading.close();
@@ -87,7 +87,7 @@ public class ourPath extends Path implements Serializable {
         Log.d("TAG","defaultReadObject passed");//testing
 
         /*
-        List<Paint> tmpBrushes = tmpLL.get(0);   //Hardcoded 0 & 1 as .getFirst() and getLast() aren't recognized for some reason
+        List<Paint> tmpBrushes = tmpLL.get(0);   //head
         Log.d("TAG","tempbrushes set");//testing
         List<Action> tmpLines = tmpLL.get(1);
         Log.d("TAG","dtempLines set");//testing
@@ -98,7 +98,7 @@ public class ourPath extends Path implements Serializable {
         */
         //testing if the ll we load is empty:
         if(tmpLL.isEmpty()){
-            Log.d("TAG", "tmpLL is fucking empty");//testing
+            Log.d("TAG", "tmpLL is empty for some reason");//testing
         }
         //end testing
         brushes = tmpLL.get(0);

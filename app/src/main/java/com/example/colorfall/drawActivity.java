@@ -13,6 +13,8 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.EditText;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -25,6 +27,13 @@ import yuku.ambilwarna.AmbilWarnaDialog;
 //this is a View in Model-View-Controller architecture
 public class drawActivity extends AppCompatActivity implements java.io.Serializable {
 
+
+
+    private String nameOfFile = "";
+
+
+
+   // private drawView drawingView;
     public static drawView drawingView;
     private ImageButton selectedColor;
     private ImageButton blueColor;
@@ -500,6 +509,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     public void save() {
         Context context = getApplicationContext();
         String fileName = context.getFilesDir().getPath() + "/drawing.ser";
+        fileName += nameOfFile;
         drawingView.getPath().save(fileName);
 
         File file = new File(fileName);
@@ -553,7 +563,27 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 
     //onCLick method for save button
     public void onClickSave (View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Name of your masterpiece");
+        final EditText input = new EditText(this);
+        builder.setView(input);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                nameOfFile = input.getText().toString();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
+
         save();
+
         Toast.makeText(getApplicationContext(), "Drawing saved...", Toast.LENGTH_SHORT).show();
 
 
