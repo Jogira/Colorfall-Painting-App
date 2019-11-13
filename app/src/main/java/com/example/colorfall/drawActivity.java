@@ -742,6 +742,8 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         if (file.exists()) {
             double bytes = file.length();
             Log.d("TAG", "bytes: " + bytes);
+
+            Log.d("TAG", "file path: " + fileName);
         } else {
             Log.d("TAG", "file does not exist");
         }
@@ -811,8 +813,6 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 
         builder.show();
 
-        //was being saved like: our/app/path/drawing.serUserInputName
-        //was running "save()" even if someone clicked "cancel", obvious issue
         //currently still throwing exception in ourPath.save() on saving.writeObject(container);
 
     }
