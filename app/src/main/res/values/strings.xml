@@ -104,5 +104,6 @@
     <string name="save_file">save_file</string>
     <string name="pixel">pixel</string>
     <string name="colorPicker">colorPicker</string>
+    <string name="sml">sml</string>
 
 </resources>

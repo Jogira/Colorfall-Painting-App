@@ -130,6 +130,13 @@ import java.io.Serializable;
           drawPixel.setColor(currentColor);
     }
 
+    //Size Setter Method
+    public void setStrokeWidth(float size)
+    {
+        invalidate();
+        drawPixel.setStrokeWidth(size);
+    }
+
     public void wipeCanvas()
     {
         drawPixelCanvas.drawColor(Color.TRANSPARENT,PorterDuff.Mode.CLEAR);

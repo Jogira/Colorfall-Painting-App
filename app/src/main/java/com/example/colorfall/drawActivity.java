@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,7 +43,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     private ImageButton recentThree;
     private ImageButton recentFour;
     private ImageButton recentFive;
-
+    private TextView currentSizeText;
     private Button loadButton;
     int DefaultColor;
     int recentCounter = 0;
@@ -51,6 +53,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     String colorFour = "#FF000000";
     String colorFive = "#FF000000";
     String colorPicked = "#ffffff";
+    public static int eraserSize = 70;
     static boolean pickerClicked = false;
     static String currentColor;
     public static float currentSize = 70F;
@@ -58,6 +61,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     private String files;
     private String file_name = "";
     public static String currentTool = "pencil";
+    static SeekBar seekSize;
 
     //WORK IN PROGRESS//
     //private static final String TAG = "drawActivity";
@@ -71,12 +75,43 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         LinearLayout paintLayout = (LinearLayout) findViewById(R.id.paint_colors);
         selectedColor = (ImageButton) paintLayout.getChildAt(0);
         drawingView = (drawView) findViewById(R.id.drawing);
+        currentSizeText = (TextView) findViewById(R.id.current_size);
+        seekSize = (SeekBar) findViewById(R.id.seekBar);
+        seekSize.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean userInput) {
+                drawingView.setStrokeWidth(progress);
+                progress = progress + 10;
+                eraserSize = progress;
+                if(currentTool.equals("pencil"))
+                {
+                    currentSizeText.setText("Brush Size: "+ progress);
+                }
+
+                if(currentTool.equals("eraser"))
+                {
+                    currentSizeText.setText("Eraser Size: "+ progress);
+                }
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
 
 
         blueColor = (ImageButton) findViewById(R.id.blueColor);
         blueColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                currentTool = "pencil";
                 onSelectColor(view);
             }
         });
@@ -85,6 +120,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         colorPicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                currentTool = "pencil";
                 onSelectTool(view);
             }
         });
@@ -109,6 +145,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         redColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                currentTool = "pencil";
                 onSelectColor(view);
             }
         });
@@ -117,6 +154,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         greenColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                currentTool = "pencil";
                 onSelectColor(view);
             }
         });
@@ -125,6 +163,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         yellowColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                currentTool = "pencil";
                 onSelectColor(view);
             }
         });
@@ -133,6 +172,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         blackColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                currentTool = "pencil";
                 onSelectColor(view);
             }
         });
@@ -181,6 +221,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         recentOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                currentTool = "pencil";
                 onSelectColor(view);
             }
         });
@@ -189,6 +230,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         recentTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                currentTool = "pencil";
                 onSelectColor(view);
             }
         });
@@ -197,6 +239,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         recentThree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                currentTool = "pencil";
                 onSelectColor(view);
             }
         });
@@ -205,6 +248,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         recentFour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                currentTool = "pencil";
                 onSelectColor(view);
             }
         });
@@ -213,6 +257,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         recentFive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                currentTool = "pencil";
                 onSelectColor(view);
             }
         });
@@ -241,10 +286,9 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     {
         if (view.getId() == drawButton.getId())
         {
-            drawingView.setColor("#FF000000");
             currentTool = "pencil";
             //Used for Espresso test
-            Toast T = Toast.makeText(this, "Draw selected.", Toast.LENGTH_SHORT);
+            Toast T = Toast.makeText(this, "Pencil selected.", Toast.LENGTH_SHORT);
             T.show();
         }
 
@@ -253,6 +297,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             drawingView.setColor("#ffffff");
             currentTool = "eraser";
             //Used for Espresso test
+            currentSizeText.setText("Eraser Size: "+ eraserSize);
             Toast T = Toast.makeText(this, "Eraser selected.", Toast.LENGTH_SHORT);
             T.show();
         }
@@ -383,14 +428,14 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         if (view.getId() == wipeCanvas.getId()) {
             //Delete canvas
             AlertDialog.Builder newDialog = new AlertDialog.Builder(this);
-            newDialog.setTitle("           Would you like to restart?");
-            newDialog.setPositiveButton("[Delete Canvas]", new DialogInterface.OnClickListener() {
+            newDialog.setTitle("      Would you like to wipe the canvas?");
+            newDialog.setPositiveButton("[Yes]", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     drawingView.wipeCanvas();
                     dialog.dismiss();
                 }
             });
-            newDialog.setNegativeButton("[Continue]", new DialogInterface.OnClickListener() {
+            newDialog.setNegativeButton("[No]", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.cancel();
                 }
