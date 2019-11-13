@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+import android.widget.EditText;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,6 +24,12 @@ import yuku.ambilwarna.AmbilWarnaDialog;
 
 //this is a View in Model-View-Controller architecture
 public class drawActivity extends AppCompatActivity implements java.io.Serializable {
+
+
+
+    private String nameOfFile = "";
+
+
 
     private drawView drawingView;
     private ImageButton selectedColor;
@@ -507,7 +515,27 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 
     //onCLick method for save button
     public void onClickSave (View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Name of your masterpiece");
+        final EditText input = new EditText(this);
+        builder.setView(input);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                nameOfFile = input.getText().toString();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
+
         save();
+
         Toast.makeText(getApplicationContext(), "Drawing saved...", Toast.LENGTH_SHORT).show();
 
 
