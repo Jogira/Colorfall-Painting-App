@@ -34,10 +34,12 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.is;
-
+/*Changing Brush and Eraser Size
+    Test that checks for a DECREASE in the size of the brush.
+ */
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class brushSizeTest {
+public class brushSizeDecreaseTest {
     private int brushSize = 25;
 
     @Rule

@@ -1,5 +1,16 @@
 package com.example.colorfall;
 
+/*****************************************
+ * Facade that hides the process of validating a tool first to ensure
+ * that it's a tool that can have its color/size changed.
+ * This has no current real use, outside of changing the color of the brush.
+ * However, it serves as a future proofing design pattern to make it so when adding future tools
+ * we can check if the tool is capable of changing colors or changing size via this facade.
+ * For instance, a brush can change color and size, and eraser cannot change color but can change size,
+ * but a bucket fill tool could change color but not size. This facade makes it so adding something like a rotate/panning
+ * tool is not capable of changing the color or size of the brush/other tools.
+ */
+
 
 public class toolSelectionFacade
 {

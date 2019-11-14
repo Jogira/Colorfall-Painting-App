@@ -30,7 +30,9 @@ import java.io.Serializable;
 
     public class drawView extends View implements Serializable
     {
-        //private Path path;//commented for new path
+        //private Path path;
+        // commented for new path
+
         private ourPath path;
         public static ourPaint drawPixel;                //Our brush object
         private Paint gridLines;
@@ -56,6 +58,11 @@ import java.io.Serializable;
             super(context, attributes);
             initializePixelArt();
         }
+
+
+        //************************
+        //Specifies what the app will do to the canvas when clicking, clicking and dragging, or releasing.
+        //************************
 
         @Override
         public boolean onTouchEvent(MotionEvent event)
@@ -105,6 +112,8 @@ import java.io.Serializable;
             return true;
         }
 
+    //Initializes the canvas and the brush tool properties.
+
     private void initializePixelArt()
     {
         path = new ourPath();
@@ -126,7 +135,7 @@ import java.io.Serializable;
      *  Method : setColor()
      *  Description: sets brush color parameter
      *
-     *  Notes:
+     *
      *
      **********************************************************************************************/
     //Color Setter method
@@ -144,6 +153,7 @@ import java.io.Serializable;
         drawPixel.setStrokeWidth(size);
     }
 
+    //Returns the canvas to a clean slate.
     public void wipeCanvas()
     {
         drawPixelCanvas.drawColor(Color.TRANSPARENT,PorterDuff.Mode.CLEAR);
@@ -158,6 +168,9 @@ import java.io.Serializable;
             canvasPixelBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
             drawPixelCanvas = new Canvas(canvasPixelBitmap);
         }
+
+        //Creates the grid effect across the canvas to help the user maybe line up their strokes better.
+        //Will most likely have a disable option in the future.
 
         @Override
         protected void onDraw(Canvas canvas)
@@ -189,7 +202,7 @@ import java.io.Serializable;
     public static void setBrush(ourPaint brush) {
         Log.d("TAG","drawPixel color Before change: " + drawPixel.getColor());
         drawPixel = brush;
-        Log.d("TAG","drawPixel color After chamge: " + drawPixel.getColor());
+        Log.d("TAG","drawPixel color After change: " + drawPixel.getColor());
     }
 
 }

@@ -1,5 +1,4 @@
 package com.example.colorfall;
-
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -14,11 +13,8 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 import java.util.Arrays;
-
-
 import androidx.fragment.app.Fragment;
 import android.widget.TextView;
-
 import com.mindorks.placeholderview.PlaceHolderView;
 import android.content.Intent;
 
@@ -43,13 +39,10 @@ public class galleryActivity extends Activity {
         m.setBackgroundColor(Color.BLACK);
         m.setTextColor(Color.WHITE);
 
-
+//WORK IN PROGRESS//
 //
 //        drawActivity class1 = new drawActivity();
 //        String list1 = class1.getFiles();
-
-
-
 //
 //            m.setText("Gallery");
 //
@@ -82,15 +75,6 @@ public class galleryActivity extends Activity {
             galleryList += "\n";
         }
         m1.setText(galleryList);
-    
-
 
     }
-
-
-
-
-
-    // }
-
 }

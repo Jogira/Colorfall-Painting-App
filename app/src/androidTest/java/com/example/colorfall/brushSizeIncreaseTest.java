@@ -28,6 +28,9 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
+/*Changing Brush and Eraser Size
+    Test that checks for a INCREASE in the size of the brush.
+ */
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
