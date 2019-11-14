@@ -27,17 +27,16 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
-//Test Name: choosingBlue
-//This is the test for choosing the color blue so that the brush color is set to blue.
+
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class choosingBlue {
+public class colorIndicatorViaButton {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void choosingBlue() {
+    public void colorIndicatorViaButton() {
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.drawBtn), withText("Draw"),
                         childAtPosition(
@@ -54,20 +53,20 @@ public class choosingBlue {
                                 allOf(withId(R.id.paint_colors),
                                         childAtPosition(
                                                 withClassName(is("android.widget.LinearLayout")),
-                                                0)),
+                                                4)),
                                 0),
                         isDisplayed()));
         appCompatImageButton.perform(click());
 
         ViewInteraction imageButton = onView(
-                allOf(withId(R.id.blueColor),
+                allOf(withId(R.id.current_Color),
                         childAtPosition(
-                                allOf(withId(R.id.paint_colors),
+                                allOf(withId(R.id.paint_colors2),
                                         childAtPosition(
                                                 IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
-                                                0)),
-                                0),isDisplayed()));
-
+                                                5)),
+                                5),
+                        isDisplayed()));
         imageButton.check(matches(isDisplayed()));
     }
 

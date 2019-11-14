@@ -31,9 +31,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 
 
     private String nameOfFile = "";
-
-
-
+   //All variable declarations for the many, many buttons and color storing strings.
    // private drawView drawingView;
     public static drawView drawingView;
     public static ImageButton selectedColor;
@@ -88,10 +86,6 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     public static String currentTool = "pencil";
     static SeekBar seekSize;
 
-    //WORK IN PROGRESS//
-    //private static final String TAG = "drawActivity";
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -129,6 +123,8 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         });
 
 
+
+        //All of the linkings for buttons and their respective method calls.
         selectedColor = (ImageButton) findViewById(R.id.current_Color);
         selectedColor.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -385,7 +381,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 
     }
 
-    //Sets vales based on btn press
+    //Sets tools based on button presses.
 
     public void onSelectTool(View view)
     {
@@ -424,6 +420,13 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             T.show();
         }
     }
+
+    //*******************************
+    //The primary function that handles all color swapping, be it for
+    //the basic pre-set colors, or for grabbing colors from the "recent colors" rows.
+    //Also sets the background color of the diamond in the dead center to server as an indicator for
+    //what color the user has current selected.
+    //*******************************
 
     public void onSelectColor(View view) {
 
@@ -499,8 +502,6 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             currentColor = Color.parseColor("#FF000000");
             selectedColor.setBackgroundColor(currentColor);
         }
-
-
 
         if (view.getId() == recentOne.getId())
         {
@@ -632,10 +633,11 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             selectedColor.setBackgroundColor(currentColor);
         }
 
-
+        //*****************************
+        //Wipes the canvas clean so the user doesn't have to tediously erase the entire screen.
+        //*****************************
 
         if (view.getId() == wipeCanvas.getId()) {
-            //Delete canvas
             AlertDialog.Builder newDialog = new AlertDialog.Builder(this);
             newDialog.setTitle("      Would you like to wipe the canvas?");
             newDialog.setPositiveButton("[Yes]", new DialogInterface.OnClickListener() {
@@ -653,6 +655,15 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 
         }
     }
+
+    //**********************
+    //Method that opens a color wheel when clicking the + sign, and then
+    //Swaps the color of the brush to the selected color if the user clicks ok
+    //after selecting a color.
+    //Does nothing if the user selects cancel.
+    //ONLY COLORS ADDED BY USING THE COLOR WHEEL ARE ADDED TO THE RECENT COLORS ROWS.
+    //It's redundant to add the base colors to the recent colors rows anyways.
+    //***********************
 
     public void ColorWheel(boolean AlphaSupport)
     {
@@ -739,6 +750,10 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         ambilWarnaDialog.show();
     }
 
+    //*********************************
+    //Saves the bitmap and stores it as a file.
+    //*********************************
+
     public void save() {
         Context context = getApplicationContext();
         String fileName = context.getFilesDir().getPath() + "/";
@@ -756,6 +771,9 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         }
     }
 
+    //*********************************
+    //Displays all currently saved files as a way to check files are properly being stored.
+    //*********************************
 
     void printSavedFiles() {
         Context context = getApplicationContext();
@@ -775,7 +793,12 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         return files;
     }
 
-//WORK IN PROGRESS//
+    //ALL BELOW IS WORK IN PROGRESS//
+
+    //*********************************
+    //Loads a chosen bitmap back to the canvas.
+    //*********************************
+
     public void load() {
         //setup
         Context context = getApplicationContext();//if errors occur down the road, its likely from this

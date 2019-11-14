@@ -1,5 +1,7 @@
 package com.example.colorfall;
-
+//*************************
+//Class that performs a size check for tools behind the scenes.
+//**************************
 public class currentSizeCheck
 {
     private float size = 70F;
