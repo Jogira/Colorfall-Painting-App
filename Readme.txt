@@ -49,6 +49,26 @@ THE DESIGN PATTERN:FACADE
  but a bucket fill tool could change color but not size. This facade makes it so adding something like a rotate/panning
  tool, which should not be capable of size/color changes, is not capable of changing the color or size of the brush/other tools/itself.
  
+ This iteration was a lot easier to do because all of the work in iteration #1 made it easier to build upon and implement the color 
+ tools. However, saving and loading the actual drawings is turning out to be much harder than anticipated. Despite spending over half the
+ iteration working on saving/loading, it's proving to be so difficult that working on it has been pushed to iteration #3, and we instead
+ decided to focus on adding more functionality to the canvas. However, the following was still added and works:
  
+ +A color picker tool that can select colors already placed on the canvas.
+ +The ability to select any specific color you want via a color wheel.
+ +Changing the brush/eraser size.
+ +An indicator for which color you currently have selected.
+ +A bank for your top 10 recent colors added from using the color wheel.
+ +5 more colors added to the pre-set rows.
+ 
+TESTING: 
+We have successfully implemented testing for the color wheel, brush/eraser size changing, and recent colors user stories.
+
+However, just like iteration #1, espresso does not keep track of anything drawn onto the canvas. Because of this, the
+COLOR PICKER/SELECTED COLOR INDICATOR user story cannot be tested. The other 3 user stories can be tested, as we can use the 
+currently selected color diamond as verification that the current color is changed when using the color wheel or picking from the
+recent colors bank. There is also a textview that indicates the current size of the brush/eraser, which can be used to verify those
+user stories without having to draw on the canvas. The color picker requires that we draw onto the canvas with a color, then use 
+the color picker to grab that color, but as stated before, drawing/coloring on the canvas is not recorded by espresso.
 
 
