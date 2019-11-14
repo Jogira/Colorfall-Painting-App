@@ -36,19 +36,6 @@ Espresso cannot directly check the contents of the drawing object, so it is not 
 
 ITERATION #2 ___________________________________________________________________________________________________________
 
-THE DESIGN PATTERN:FACADE
- Facade design pattern was implemented to hide the process of validating a tool first to ensure that it's a tool that can have its
- color/size changed, then changing the size/color if verified. The currentToolCheck and currentSizeCheck classes do as their names imply;
- Each verify if the current tool is a tool that can change in size or color. Then the toolSelectionFacade class combines both of those
- classes and verifies/checks color/checks size/changes color/changes size all behind the scenes with a single call of             
- "verifyingTools.verifyToolandSwapColor(colorFour);" within the drawActivity.
- This has no current real use, outside of changing the color of the brush, because all current tools can change color and/or size.
- However, it serves as a future proofing design pattern to make it so when adding future tools
- we can check if the tool is capable of changing colors or changing size via this facade.
- For instance, a brush can change color and size, and eraser cannot change color but can change size,
- but a bucket fill tool could change color but not size. This facade makes it so adding something like a rotate/panning
- tool, which should not be capable of size/color changes, is not capable of changing the color or size of the brush/other tools/itself.
- 
  This iteration was a lot easier to do because all of the work in iteration #1 made it easier to build upon and implement the color 
  tools. However, saving and loading the actual drawings is turning out to be much harder than anticipated. Despite spending over half the
  iteration working on saving/loading, it's proving to be so difficult that working on it has been pushed to iteration #3, and we instead
@@ -71,4 +58,16 @@ recent colors bank. There is also a textview that indicates the current size of 
 user stories without having to draw on the canvas. The color picker requires that we draw onto the canvas with a color, then use 
 the color picker to grab that color, but as stated before, drawing/coloring on the canvas is not recorded by espresso.
 
-
+THE DESIGN PATTERN:FACADE
+ Facade design pattern was implemented to hide the process of validating a tool first to ensure that it's a tool that can have its
+ color/size changed, then changing the size/color if verified. The currentToolCheck and currentSizeCheck classes do as their names imply;
+ Each verify if the current tool is a tool that can change in size or color. Then the toolSelectionFacade class combines both of those
+ classes and verifies/checks color/checks size/changes color/changes size all behind the scenes with a single call of             
+ "verifyingTools.verifyToolandSwapColor(colorFour);" within the drawActivity.
+ This has no current real use, outside of changing the color of the brush, because all current tools can change color and/or size.
+ However, it serves as a future proofing design pattern to make it so when adding future tools
+ we can check if the tool is capable of changing colors or changing size via this facade.
+ For instance, a brush can change color and size, and eraser cannot change color but can change size,
+ but a bucket fill tool could change color but not size. This facade makes it so adding something like a rotate/panning
+ tool, which should not be capable of size/color changes, is not capable of changing the color or size of the brush/other tools/itself.
+ 
