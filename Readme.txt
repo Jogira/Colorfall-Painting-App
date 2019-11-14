@@ -34,4 +34,21 @@ therefore, we cannot use Espresso to test it.
 For the Erasing The Entire Canvas User Story: 
 Espresso cannot directly check the contents of the drawing object, so it is not able to determine if the canvas is wiped.
 
+ITERATION #2 ___________________________________________________________________________________________________________
+
+THE DESIGN PATTERN:FACADE
+ Facade design pattern was implemented to hide the process of validating a tool first to ensure that it's a tool that can have its
+ color/size changed, then changing the size/color if verified. The currentToolCheck and currentSizeCheck classes do as their names imply;
+ Each verify if the current tool is a tool that can change in size or color. Then the toolSelectionFacade class combines both of those
+ classes and verifies/checks color/checks size/changes color/changes size all behind the scenes with a single call of             
+ "verifyingTools.verifyToolandSwapColor(colorFour);" within the drawActivity.
+ This has no current real use, outside of changing the color of the brush, because all current tools can change color and/or size.
+ However, it serves as a future proofing design pattern to make it so when adding future tools
+ we can check if the tool is capable of changing colors or changing size via this facade.
+ For instance, a brush can change color and size, and eraser cannot change color but can change size,
+ but a bucket fill tool could change color but not size. This facade makes it so adding something like a rotate/panning
+ tool, which should not be capable of size/color changes, is not capable of changing the color or size of the brush/other tools/itself.
+ 
+ 
+
 
