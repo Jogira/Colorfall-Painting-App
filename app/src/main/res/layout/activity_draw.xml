@@ -27,7 +27,7 @@
         android:layout_marginLeft="30dp"
         android:baselineAligned="false"
         android:fontFamily="casual"
-        android:text=" Brush Size: 70"
+        android:text="Brush Size: 70"
         android:textColor="#630000"
         android:textStyle="bold" />
 

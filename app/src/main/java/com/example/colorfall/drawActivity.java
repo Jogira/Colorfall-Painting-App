@@ -385,22 +385,6 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 
     }
 
-//WORK IN PROGRESS//
-//    public void colorChanged(View view)
-//    {
-//        if(view != selectedColor)
-//        {
-//            ImageButton imgView = (ImageButton) view;
-//            String color = view.getTag().toString();
-//            drawingView.setColor(color);
-//        }
-//    }
-//
-//    public Context getOurContext() {
-//        Context context = getApplicationContext();
-//        return context;
-//    }
-
     //Sets vales based on btn press
 
     public void onSelectTool(View view)
@@ -785,8 +769,6 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         //Intent intent = new Intent(this, galleryActivity.class);
         //intent.putExtra("filenames", files);
         //startActivity(intent);
-
-
     }
 
     public String getFiles(){
@@ -799,7 +781,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         Context context = getApplicationContext();//if errors occur down the road, its likely from this
         String fileName = context.getFilesDir().getPath() + "/gg.ser";
 
-        //check if file existss and is non empty
+        //check if file exists and is non empty
         File file = new File(fileName);
 
         if(file.exists()) {

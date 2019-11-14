@@ -4,8 +4,12 @@ package com.example.colorfall;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+import android.widget.SeekBar;
 
+import androidx.test.espresso.UiController;
+import androidx.test.espresso.ViewAction;
 import androidx.test.espresso.ViewInteraction;
+import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
@@ -13,7 +17,6 @@ import androidx.test.runner.AndroidJUnit4;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
-import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,21 +26,22 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
+import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
-//Test Name: choosingBlue
-//This is the test for choosing the color blue so that the brush color is set to blue.
+
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class choosingBlue {
+public class eraseSizeTest {
+    private int brushSize = 90;
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void choosingBlue() {
+    public void eraseSizeTest() {
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.drawBtn), withText("Draw"),
                         childAtPosition(
@@ -49,26 +53,18 @@ public class choosingBlue {
         appCompatButton.perform(click());
 
         ViewInteraction appCompatImageButton = onView(
-                allOf(withId(R.id.blueColor),
+                allOf(withId(R.id.eraser), withContentDescription("erase"),
                         childAtPosition(
-                                allOf(withId(R.id.paint_colors),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                0)),
+                                childAtPosition(
+                                        withClassName(is("android.widget.LinearLayout")),
+                                        7),
                                 0),
                         isDisplayed()));
         appCompatImageButton.perform(click());
 
-        ViewInteraction imageButton = onView(
-                allOf(withId(R.id.blueColor),
-                        childAtPosition(
-                                allOf(withId(R.id.paint_colors),
-                                        childAtPosition(
-                                                IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
-                                                0)),
-                                0),isDisplayed()));
+        onView(allOf(withId(R.id.seekBar))).perform(setProgress(brushSize));
 
-        imageButton.check(matches(isDisplayed()));
+        onView(withId(R.id.current_size)).check(matches(withText("Eraser Size: 90")));
     }
 
     private static Matcher<View> childAtPosition(
@@ -86,6 +82,26 @@ public class choosingBlue {
                 ViewParent parent = view.getParent();
                 return parent instanceof ViewGroup && parentMatcher.matches(parent)
                         && view.equals(((ViewGroup) parent).getChildAt(position));
+            }
+        };
+    }
+
+    public static ViewAction setProgress(final int progress) {
+        return new ViewAction() {
+            @Override
+            public void perform(UiController uiController, View view) {
+                SeekBar seekBar = (SeekBar) view;
+                seekBar.setProgress(progress - 10);
+            }
+
+            @Override
+            public String getDescription() {
+                return "Set a progress on a SeekBar";
+            }
+
+            @Override
+            public Matcher<View> getConstraints() {
+                return ViewMatchers.isAssignableFrom(SeekBar.class);
             }
         };
     }

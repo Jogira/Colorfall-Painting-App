@@ -4,8 +4,12 @@ package com.example.colorfall;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+import android.widget.SeekBar;
 
+import androidx.test.espresso.UiController;
+import androidx.test.espresso.ViewAction;
 import androidx.test.espresso.ViewInteraction;
+import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
@@ -13,7 +17,6 @@ import androidx.test.runner.AndroidJUnit4;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
-import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,22 +25,20 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.is;
-//Test Name: choosingBlue
-//This is the test for choosing the color blue so that the brush color is set to blue.
+
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class choosingBlue {
+public class brushSizeIncreaseTest {
+    private int brushSize = 120;
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void choosingBlue() {
+    public void brushSizeIncreaseTest() {
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.drawBtn), withText("Draw"),
                         childAtPosition(
@@ -48,27 +49,9 @@ public class choosingBlue {
                         isDisplayed()));
         appCompatButton.perform(click());
 
-        ViewInteraction appCompatImageButton = onView(
-                allOf(withId(R.id.blueColor),
-                        childAtPosition(
-                                allOf(withId(R.id.paint_colors),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.LinearLayout")),
-                                                0)),
-                                0),
-                        isDisplayed()));
-        appCompatImageButton.perform(click());
+        onView(allOf(withId(R.id.seekBar))).perform(setProgress(brushSize));
 
-        ViewInteraction imageButton = onView(
-                allOf(withId(R.id.blueColor),
-                        childAtPosition(
-                                allOf(withId(R.id.paint_colors),
-                                        childAtPosition(
-                                                IsInstanceOf.<View>instanceOf(android.widget.LinearLayout.class),
-                                                0)),
-                                0),isDisplayed()));
-
-        imageButton.check(matches(isDisplayed()));
+        onView(withId(R.id.current_size)).check(matches(withText("Brush Size: 120")));
     }
 
     private static Matcher<View> childAtPosition(
@@ -86,6 +69,26 @@ public class choosingBlue {
                 ViewParent parent = view.getParent();
                 return parent instanceof ViewGroup && parentMatcher.matches(parent)
                         && view.equals(((ViewGroup) parent).getChildAt(position));
+            }
+        };
+    }
+
+    public static ViewAction setProgress(final int progress) {
+        return new ViewAction() {
+            @Override
+            public void perform(UiController uiController, View view) {
+                SeekBar seekBar = (SeekBar) view;
+                seekBar.setProgress(progress - 10);
+            }
+
+            @Override
+            public String getDescription() {
+                return "Set brush size on the seekBar";
+            }
+
+            @Override
+            public Matcher<View> getConstraints() {
+                return ViewMatchers.isAssignableFrom(SeekBar.class);
             }
         };
     }
