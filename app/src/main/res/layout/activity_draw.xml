@@ -241,14 +241,13 @@
             android:contentDescription="@string/pixel"
             android:tag="#00FF3E" />
 
-
         <ImageButton
-            android:id="@+id/current_Color"
-            android:layout_width="wrap_content"
-            android:layout_height="16dp"
-            android:layout_marginLeft="15dp"
-            android:background="#FF000000"
-            android:src="@drawable/border" />
+        android:id="@+id/current_Color"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="15dp"
+        android:background="#FF000000"
+        android:src="@drawable/border" />
 
         <ImageButton
             android:id="@+id/recentSix"
