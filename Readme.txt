@@ -49,18 +49,28 @@ ITERATION #2 ___________________________________________________________________
  +5 more colors added to the pre-set rows.
  
 TESTING: 
-We have successfully implemented testing for the color wheel, brush/eraser size changing, and recent colors user stories.
+We have successfully implemented testing for the brush/eraser size changing.
 
 However, just like iteration #1, espresso does not keep track of anything drawn onto the canvas. Because of this, the
-COLOR PICKER/SELECTED COLOR INDICATOR user story cannot be tested. The other 3 user stories can be tested, as we can use the 
-currently selected color diamond as verification that the current color is changed when using the color wheel or picking from the
-recent colors bank. There is also a textview that indicates the current size of the brush/eraser, which can be used to verify those
-user stories without having to draw on the canvas. The color picker requires that we draw onto the canvas with a color, then use 
-the color picker to grab that color, but as stated before, drawing/coloring on the canvas is not recorded by espresso.
+color changing user stories for the color wheel, color picker, and recent colors were not possible to do. The new tools 
+obviously work as intended and have been tested extensively manually, but grabbing the color values of the brush is not possible.
+
+For the brush/eraser size changing user story:
+The size is artificially tested by checking the textview to see that the number in the textview changes when resizing the brush,
+but it doesn't grab the the size directly from the brush. Instead, the textview just reflects the changes in the brush size.
+
+For the color picker/color indicator user story:
+The color picker requires that we draw onto the canvas with a color, then use the color picker to grab that color, but as stated before, 
+drawing/coloring on the canvas is not recorded by espresso.
+
+For the color wheel user story and the recent colors user story:
+The same goes for the color wheel and the recent colors bank, because we 
+can change colors using either of those tools, but espresso won't record drawing on the canvas or let us verify that the color is what
+we changed to.
 
 THE DESIGN PATTERN:FACADE
  Facade design pattern was implemented to hide the process of validating a tool first to ensure that it's a tool that can have its
- color/size changed, then changing the size/color if verified. The currentToolCheck and currentSizeCheck classes do as their names imply;
+ color/size changed, then changing the size/color if valid. The currentToolCheck and currentSizeCheck classes do as their names imply;
  Each verify if the current tool is a tool that can change in size or color. Then the toolSelectionFacade class combines both of those
  classes and verifies/checks color/checks size/changes color/changes size all behind the scenes with a single call of             
  "verifyingTools.verifyToolandSwapColor(colorFour);" within the drawActivity.
