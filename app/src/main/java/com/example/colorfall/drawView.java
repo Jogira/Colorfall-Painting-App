@@ -197,6 +197,10 @@ import java.io.Serializable;
         return path;
     }
 
+    public Bitmap getBitmap(){ return canvasPixelBitmap;}
+
+    public void setBitmap(Bitmap overwrite){  canvasPixelBitmap = overwrite;}
+
     public static ourPaint getBrush() {return drawPixel; }
 
     public static void setBrush(ourPaint brush) {

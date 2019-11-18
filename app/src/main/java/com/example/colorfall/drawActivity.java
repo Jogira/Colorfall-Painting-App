@@ -4,8 +4,10 @@ package com.example.colorfall;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -758,7 +760,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         Context context = getApplicationContext();
         String fileName = context.getFilesDir().getPath() + "/";
         fileName = fileName + nameOfFile + ".ser";
-        drawingView.getPath().save(fileName);
+        //drawingView.getPath().save(fileName);
 
         File file = new File(fileName);
         if (file.exists()) {
@@ -769,6 +771,13 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         } else {
             Log.d("TAG", "file does not exist");
         }
+
+        //New SAVE/LOAD framework test
+        //MediaStore.Images.Media.insertImage(getContentResolver(),file.getAbsolutePath(),file.getName(),file.getName());
+
+        //Calls save process
+        bitmapSaveLoad.saveBitmap(fileName, drawingView.getBitmap());
+        Log.d("TAG", "New save called");
     }
 
     //*********************************
@@ -814,7 +823,10 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             Log.d("TAG", "file does not exist");
         }
 
-        drawingView.getPath().load(fileName);
+        //drawingView.getPath().load(fileName);
+
+        Bitmap decodedBitmap = bitmapSaveLoad.loadBitmap(fileName);
+        drawingView.setBitmap(decodedBitmap);
     }
 
     //onCLick method for save button
