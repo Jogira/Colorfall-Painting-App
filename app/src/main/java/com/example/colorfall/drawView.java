@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -50,15 +49,12 @@ import java.io.Serializable;
         static float pointY;
 
 
-
-
         //constructor
         public drawView(Context context, AttributeSet attributes)
         {
             super(context, attributes);
             initializePixelArt();
         }
-
 
         //************************
         //Specifies what the app will do to the canvas when clicking, clicking and dragging, or releasing.
@@ -67,18 +63,16 @@ import java.io.Serializable;
         @Override
         public boolean onTouchEvent(MotionEvent event)
         {
-
-            toolSelectionFacade verifyingTools = new toolSelectionFacade(drawActivity.currentTool, drawActivity.currentSize);
+            toolSelectionFacade verifyingTools = new toolSelectionFacade(drawActivity.currentTool,
+                    drawActivity.currentSize);
              pointX = event.getX();
              pointY = event.getY();
-
 
             switch(event.getAction())
             {
                 case MotionEvent.ACTION_DOWN:
 
                     path.moveTo(pointX, pointY);
-
 
                     pixel = canvasPixelBitmap.getPixel((int) pointX, (int) pointY);
                     if(pointX > 0 && pointY > 0 && drawActivity.pickerClicked == true)
@@ -93,7 +87,6 @@ import java.io.Serializable;
 
                         drawActivity.pickerClicked = false;
                     }
-
 
                     return true;
                 case MotionEvent.ACTION_MOVE:
@@ -160,7 +153,6 @@ import java.io.Serializable;
         invalidate();
     }
 
-
         @Override
         protected void onSizeChanged(int w, int h, int oldw, int oldh)
         {
@@ -171,42 +163,35 @@ import java.io.Serializable;
 
         //Creates the grid effect across the canvas to help the user maybe line up their strokes better.
         //Will most likely have a disable option in the future.
-
         @Override
         protected void onDraw(Canvas canvas)
         {
             canvas.drawBitmap(canvasPixelBitmap, 0, 0, pixelCanvasPaint);
             canvas.drawPath(path, drawPixel);
 
-
                 int width = getMeasuredWidth();
                 int height = getMeasuredHeight();
                 // Vertical lines
                 for (int i = 1; i < 16; i++) {
-                    canvas.drawLine(width * i / 16, 0, width * i / 16, height, gridLines);
+                    canvas.drawLine(width * i / 16, 0, width * i / 16, height,
+                            gridLines);
                 }
 
                 // Horizontal lines
                 for (int i = 1; i < 16; i++) {
-                    canvas.drawLine(0, height * i / 16, width, height * i / 16, gridLines);
+                    canvas.drawLine(0, height * i / 16, width, height * i / 16,
+                            gridLines);
                 }
-            }
-
-    public ourPath getPath()
-    {
-        return path;
-    }
+        }
 
     public Bitmap getBitmap(){ return canvasPixelBitmap;}
 
-    public void setBitmap(Bitmap overwrite){  canvasPixelBitmap = overwrite;}
+    public void setBitmap(Bitmap overwrite){
+        canvasPixelBitmap = overwrite;
+        initializePixelArt();
+        invalidate();
+    }
 
     public static ourPaint getBrush() {return drawPixel; }
-
-    public static void setBrush(ourPaint brush) {
-        Log.d("TAG","drawPixel color Before change: " + drawPixel.getColor());
-        drawPixel = brush;
-        Log.d("TAG","drawPixel color After change: " + drawPixel.getColor());
-    }
 
 }

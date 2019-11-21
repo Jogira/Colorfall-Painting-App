@@ -92,9 +92,11 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_draw);
-        drawingView = (drawView) findViewById(R.id.drawing);
-        currentSizeText = (TextView) findViewById(R.id.current_size);
-        seekSize = (SeekBar) findViewById(R.id.seekBar);
+        drawingView = findViewById(R.id.drawing);
+        currentSizeText = findViewById(R.id.current_size);
+
+
+        seekSize = findViewById(R.id.seekBar);
         seekSize.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean userInput) {
@@ -127,7 +129,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 
 
         //All of the linkings for buttons and their respective method calls.
-        selectedColor = (ImageButton) findViewById(R.id.current_Color);
+        selectedColor = findViewById(R.id.current_Color);
         selectedColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -136,7 +138,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
         });
 
-        colorPicker = (ImageButton) findViewById(R.id.colorPicker);
+        colorPicker = findViewById(R.id.colorPicker);
         colorPicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -145,7 +147,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
         });
 
-        saveButton = (ImageButton) findViewById(R.id.save_file);
+        saveButton = findViewById(R.id.save_file);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -161,7 +163,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
         });
 
-        blueColor = (ImageButton) findViewById(R.id.blueColor);
+        blueColor = findViewById(R.id.blueColor);
         blueColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -170,7 +172,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
         });
 
-        redColor = (ImageButton) findViewById(R.id.redColor);
+        redColor = findViewById(R.id.redColor);
         redColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -179,7 +181,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
         });
 
-        greenColor = (ImageButton) findViewById(R.id.greenColor);
+        greenColor = findViewById(R.id.greenColor);
         greenColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -188,7 +190,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
         });
 
-        yellowColor = (ImageButton) findViewById(R.id.yellowColor);
+        yellowColor = findViewById(R.id.yellowColor);
         yellowColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -197,7 +199,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
         });
 
-        blackColor = (ImageButton) findViewById(R.id.blackColor);
+        blackColor = findViewById(R.id.blackColor);
         blackColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -206,7 +208,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
         });
 
-        cinnamonColor = (ImageButton) findViewById(R.id.cinnamonColor);
+        cinnamonColor = findViewById(R.id.cinnamonColor);
         cinnamonColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -215,7 +217,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
         });
 
-        orangeMintColor = (ImageButton) findViewById(R.id.orangeMintColor);
+        orangeMintColor = findViewById(R.id.orangeMintColor);
         orangeMintColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -224,7 +226,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
         });
 
-        azureColor = (ImageButton) findViewById(R.id.azureColor);
+        azureColor = findViewById(R.id.azureColor);
         azureColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -233,7 +235,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
         });
 
-        whiteColor = (ImageButton) findViewById(R.id.whiteColor);
+        whiteColor = findViewById(R.id.whiteColor);
         whiteColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -242,7 +244,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
         });
 
-        violetColor = (ImageButton) findViewById(R.id.violetColor);
+        violetColor = findViewById(R.id.violetColor);
         violetColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -251,7 +253,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
         });
 
-        wipeCanvas = (ImageButton) findViewById(R.id.delete_canvas);
+        wipeCanvas = findViewById(R.id.delete_canvas);
         wipeCanvas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -259,7 +261,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
         });
 
-        eraseButton = (ImageButton) findViewById(R.id.eraser);
+        eraseButton = findViewById(R.id.eraser);
         eraseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -267,7 +269,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
         });
 
-        drawButton = (ImageButton) findViewById(R.id.pixel_pen);
+        drawButton = findViewById(R.id.pixel_pen);
         drawButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -275,7 +277,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
         });
 
-        newColors = (ImageButton) findViewById(R.id.new_colors);
+        newColors = findViewById(R.id.new_colors);
         newColors.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -283,7 +285,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
         });
 
-        saveButton = (ImageButton) findViewById(R.id.save_file);
+        saveButton = findViewById(R.id.save_file);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -291,7 +293,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
         });
 
-        recentOne = (ImageButton) findViewById(R.id.recentOne);
+        recentOne = findViewById(R.id.recentOne);
         recentOne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -300,7 +302,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
         });
 
-        recentTwo = (ImageButton) findViewById(R.id.recentTwo);
+        recentTwo = findViewById(R.id.recentTwo);
         recentTwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -309,7 +311,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
         });
 
-        recentThree = (ImageButton) findViewById(R.id.recentThree);
+        recentThree = findViewById(R.id.recentThree);
         recentThree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -318,7 +320,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
         });
 
-        recentFour = (ImageButton) findViewById(R.id.recentFour);
+        recentFour = findViewById(R.id.recentFour);
         recentFour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -327,7 +329,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
         });
 
-        recentFive = (ImageButton) findViewById(R.id.recentFive);
+        recentFive = findViewById(R.id.recentFive);
         recentFive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -336,7 +338,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
         });
 
-        recentSix = (ImageButton) findViewById(R.id.recentSix);
+        recentSix = findViewById(R.id.recentSix);
         recentSix.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -345,7 +347,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
         });
 
-        recentSeven = (ImageButton) findViewById(R.id.recentSeven);
+        recentSeven = findViewById(R.id.recentSeven);
         recentSeven.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -354,7 +356,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
         });
 
-        recentEight = (ImageButton) findViewById(R.id.recentEight);
+        recentEight = findViewById(R.id.recentEight);
         recentEight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -363,7 +365,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
         });
 
-        recentNine = (ImageButton) findViewById(R.id.recentNine);
+        recentNine = findViewById(R.id.recentNine);
         recentNine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -372,7 +374,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
         });
 
-        recentTen = (ImageButton) findViewById(R.id.recentTen);
+        recentTen = findViewById(R.id.recentTen);
         recentTen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -825,7 +827,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 
         //drawingView.getPath().load(fileName);
 
-        Bitmap decodedBitmap = bitmapSaveLoad.loadBitmap(fileName);
+        Bitmap decodedBitmap = bitmapSaveLoad.loadBitmap(fileName);//decodeMutableBitmapFromResourceId(context, );
         drawingView.setBitmap(decodedBitmap);
     }
 
