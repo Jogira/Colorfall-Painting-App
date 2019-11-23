@@ -7,17 +7,14 @@ import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.EditText;
-
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -64,7 +61,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     private ImageButton recentNine;
     private ImageButton recentTen;
     private TextView currentSizeText;
-    private Button loadButton;
+    private ImageButton loadButton;
     int currentColor;
     int recentCounter = 0;
     String colorOne = "#FF000000";
@@ -814,6 +811,8 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         //setup
         Context context = getApplicationContext();//if errors occur down the road, its likely from this
         String fileName = context.getFilesDir().getPath() + "/gg.ser";
+        //String fileName = context.getFilesDir().getPath() + "/" + nameOfFile + ".ser";
+        System.out.println(fileName);
 
         //check if file exists and is non empty
         File file = new File(fileName);

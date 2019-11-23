@@ -322,6 +322,13 @@
         android:orientation="horizontal">
 
         <ImageButton
+            android:id="@+id/paint_bucket"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="#00FFFFFF"
+            android:src="@drawable/paintbucket" />
+
+        <ImageButton
             android:id="@+id/eraser"
             android:layout_width="50dp"
             android:layout_height="50dp"
@@ -331,42 +338,64 @@
 
         <ImageButton
             android:id="@+id/colorPicker"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:background="#00FFFFFF"
             android:contentDescription="@string/colorPicker"
+            android:paddingTop="10dp"
             android:src="@drawable/color_pick" />
 
         <ImageButton
             android:id="@+id/pixel_pen"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:background="#00FFFFFF"
             android:contentDescription="@string/pixel_pen"
+            android:paddingTop="10dp"
+            android:paddingRight="5dp"
             android:src="@drawable/pixel_pen" />
 
         <ImageButton
             android:id="@+id/save_file"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:background="#00FFFFFF"
+            android:paddingTop="5dp"
             android:src="@drawable/save_file" />
 
 
         <ImageButton
             android:id="@+id/delete_canvas"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:background="#00FFFFFF"
+            android:paddingTop="10dp"
             android:src="@drawable/delete_canvas" />
 
 
-        <Button
+        <ImageButton
             android:id="@+id/load_file"
-            android:layout_width="100dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="#00FFFFFF"
+            android:paddingTop="5dp"
+            android:src="@drawable/load" />
+
+        <ImageButton
+            android:id="@+id/toggle_grid"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="#00FFFFFF"
+            android:paddingTop="10dp"
+            android:src="@drawable/gridtoggle" />
+
+        <ImageButton
+            android:id="@+id/change_background"
+            android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_weight="1"
-            android:text="Load" />
+            android:background="#00FFFFFF"
+            android:paddingRight="15dp"
+            android:src="@drawable/canvas_background" />
 
 
         <LinearLayout
@@ -379,6 +408,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
+
 
             </LinearLayout>
 
