@@ -7,9 +7,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -29,90 +31,96 @@ import java.util.Queue;
  * Date         : 10/13/2019
  *********************************************************************************************/
 
-    public class drawView extends View implements Serializable
+public class drawView extends View implements Serializable
+{
+    //private Path path;
+    // commented for new path
+
+    private ourPath path;
+    public static ourPaint drawPixel;                //Our brush object
+    private Paint gridLines;
+    private Paint pixelCanvasPaint;
+    private int currentColor = 0xFF000000;
+    private int pickedColor = 0xFF000000;
+    public static Canvas drawPixelCanvas;
+    public static Bitmap canvasPixelBitmap;
+    static String hexValuePicked = "#0";
+    static int pixel;
+    static boolean toggleGrid = false;
+    static int redValue;
+    static int blueValue;
+    static int greenValue;
+    static float pointX;
+    static float pointY;
+    public static boolean isFilling = false;
+    public static boolean eraserMode = false;
+
+    public void setErase(boolean isErase)
     {
-        //private Path path;
-        // commented for new path
+        eraserMode = isErase;
+        if(eraserMode) drawPixel.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+        else drawPixel.setXfermode(null);
+    }
+    //constructor
+    public drawView(Context context, AttributeSet attributes)
+    {
+        super(context, attributes);
+        initializePixelArt();
+    }
 
-        private ourPath path;
-        public static ourPaint drawPixel;                //Our brush object
-        private Paint gridLines;
-        private Paint pixelCanvasPaint;
-        private int currentColor = 0xFF000000;
-        private int pickedColor = 0xFF000000;
-        public static Canvas drawPixelCanvas;
-        public static Bitmap canvasPixelBitmap;
-        static String hexValuePicked = "#0";
-        static int pixel;
-        static boolean toggleGrid = false;
-        static int redValue;
-        static int blueValue;
-        static int greenValue;
-        static float pointX;
-        static float pointY;
-        public static boolean isFilling = false;
+    //************************
+    //Specifies what the app will do to the canvas when clicking, clicking and dragging, or releasing.
+    //************************
 
-        //constructor
-        public drawView(Context context, AttributeSet attributes)
+    @Override
+    public boolean onTouchEvent(MotionEvent event)
+    {
+        toolSelectionFacade verifyingTools = new toolSelectionFacade(drawActivity.currentTool,
+                drawActivity.currentSize);
+        pointX = event.getX();
+        pointY = event.getY();
+
+
+        switch(event.getAction())
         {
-            super(context, attributes);
-            initializePixelArt();
-        }
+            case MotionEvent.ACTION_DOWN:
 
-        //************************
-        //Specifies what the app will do to the canvas when clicking, clicking and dragging, or releasing.
-        //************************
+                path.moveTo(pointX, pointY);
 
-        @Override
-        public boolean onTouchEvent(MotionEvent event)
-        {
-            toolSelectionFacade verifyingTools = new toolSelectionFacade(drawActivity.currentTool,
-                    drawActivity.currentSize);
-             pointX = event.getX();
-             pointY = event.getY();
+                pixel = canvasPixelBitmap.getPixel((int) pointX, (int) pointY);
+                if(pointX > 0 && pointY > 0 && drawActivity.pickerClicked == true)
+                {
+                    redValue = Color.red(pixel);
+                    blueValue = Color.blue(pixel);
+                    greenValue = Color.green(pixel);
+                    drawPixel.setColor(pixel);
+                    drawActivity.selectedColor.setBackgroundColor(pixel);
+                    String pixelStr = Integer.toString(pixel);
+                    verifyingTools.verifyToolandSwapColor(pixelStr);
+                    drawActivity.pickerClicked = false;
+                }
 
+                return true;
+            case MotionEvent.ACTION_MOVE:
 
-            switch(event.getAction())
-            {
-                case MotionEvent.ACTION_DOWN:
+                path.lineTo(pointX, pointY);
 
-                    path.moveTo(pointX, pointY);
-
-                    pixel = canvasPixelBitmap.getPixel((int) pointX, (int) pointY);
-                    if(pointX > 0 && pointY > 0 && drawActivity.pickerClicked == true)
-                    {
-                        redValue = Color.red(pixel);
-                        blueValue = Color.blue(pixel);
-                        greenValue = Color.green(pixel);
-                        drawPixel.setColor(pixel);
-                        drawActivity.selectedColor.setBackgroundColor(pixel);
-                        String pixelStr = Integer.toString(pixel);
-                        verifyingTools.verifyToolandSwapColor(pixelStr);
-
-                        drawActivity.pickerClicked = false;
-                    }
-
-                    return true;
-                case MotionEvent.ACTION_MOVE:
-
-                    path.lineTo(pointX, pointY);
-
-                    break;
-                case MotionEvent.ACTION_UP:
+                break;
+            case MotionEvent.ACTION_UP:
                 if (isFilling)
                 {
                     FloodFill(new Point((int) pointX, (int) pointY));
                     break;
                 }
-                    drawPixelCanvas.drawPath(path, drawPixel);
-                    path.reset();
-                    break;
-                default:
-                    return false;
-            }
-            postInvalidate();
-            return true;
+                drawPixelCanvas.drawPath(path, drawPixel);
+                path.reset();
+                break;
+            default:
+                return false;
         }
+        postInvalidate();
+        return true;
+    }
 
     //Initializes the canvas and the brush tool properties.
 
@@ -142,9 +150,9 @@ import java.util.Queue;
     //Color Setter method
     public void setColor(String color)
     {
-          invalidate();
-          currentColor = Color.parseColor(color);
-          drawPixel.setColor(currentColor);
+        invalidate();
+        currentColor = Color.parseColor(color);
+        drawPixel.setColor(currentColor);
     }
 
     //Size Setter Method
@@ -161,39 +169,39 @@ import java.util.Queue;
         invalidate();
     }
 
-        @Override
-        protected void onSizeChanged(int w, int h, int oldw, int oldh)
-        {
-            super.onSizeChanged(0, 0, oldw, oldh);
-            canvasPixelBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
-            drawPixelCanvas = new Canvas(canvasPixelBitmap);
-        }
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh)
+    {
+        super.onSizeChanged(0, 0, oldw, oldh);
+        canvasPixelBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+        drawPixelCanvas = new Canvas(canvasPixelBitmap);
+    }
 
-        //Creates the grid effect across the canvas to help the user maybe line up their strokes better.
-        //Will most likely have a disable option in the future.
+    //Creates the grid effect across the canvas to help the user maybe line up their strokes better.
+    //Will most likely have a disable option in the future.
 
-        @Override
-        protected void onDraw(Canvas canvas) {
-            canvas.drawBitmap(canvasPixelBitmap, 0, 0, pixelCanvasPaint);
-            canvas.drawPath(path, drawPixel);
-            if (toggleGrid) {
-                int width = getMeasuredWidth();
-                int height = getMeasuredHeight();
-                // Vertical lines
-                for (int i = 1; i < 16; i++) {
-                    canvas.drawLine(width * i / 16, 0, width * i / 16, height,
-                            gridLines);
-                }
+    @Override
+    protected void onDraw(Canvas canvas) {
+        canvas.drawBitmap(canvasPixelBitmap, 0, 0, pixelCanvasPaint);
+        canvas.drawPath(path, drawPixel);
+        if (toggleGrid) {
+            int width = getMeasuredWidth();
+            int height = getMeasuredHeight();
+            // Vertical lines
+            for (int i = 1; i < 16; i++) {
+                canvas.drawLine(width * i / 16, 0, width * i / 16, height,
+                        gridLines);
+            }
 
-                // Horizontal lines
-                for (int i = 1; i < 16; i++) {
-                    canvas.drawLine(0, height * i / 16, width, height * i / 16,
-                            gridLines);
-                }
+            // Horizontal lines
+            for (int i = 1; i < 16; i++) {
+                canvas.drawLine(0, height * i / 16, width, height * i / 16,
+                        gridLines);
             }
         }
+    }
 
-        public Bitmap getBitmap(){ return canvasPixelBitmap;}
+    public Bitmap getBitmap(){ return canvasPixelBitmap;}
 
     public void setBitmap(Bitmap overwrite){
         canvasPixelBitmap = overwrite;
@@ -203,43 +211,44 @@ import java.util.Queue;
 
     public static ourPaint getBrush() {return drawPixel; }
 
-        public void fillColor() {
-            isFilling = true;
-        }
+    public void fillColor() {
+        isFilling = true;
+    }
 
-        private synchronized void FloodFill(Point startPoint) {
+    private synchronized void FloodFill(Point startPoint) {
 
-            Queue<Point> queue = new LinkedList<>();
-            queue.add(startPoint);
+        Queue<Point> queue = new LinkedList<>();
+        queue.add(startPoint);
 
-            int targetColor = canvasPixelBitmap.getPixel(startPoint.x, startPoint.y);
+        int targetColor = canvasPixelBitmap.getPixel(startPoint.x, startPoint.y);
 
-            while (queue.size() > 0) {
-                Point nextPoint = queue.poll();
-                if (canvasPixelBitmap.getPixel(nextPoint.x, nextPoint.y) != targetColor)
-                    continue;
+        while (queue.size() > 0) {
+            Point nextPoint = queue.poll();
+            if (canvasPixelBitmap.getPixel(nextPoint.x, nextPoint.y) != targetColor)
+                continue;
 
-                Point point = new Point(nextPoint.x + 1, nextPoint.y);
+            Point point = new Point(nextPoint.x + 1, nextPoint.y);
 
-                while ((nextPoint.x > 0) && (canvasPixelBitmap.getPixel(nextPoint.x, nextPoint.y) == targetColor)) {
-                    canvasPixelBitmap.setPixel(nextPoint.x, nextPoint.y, currentColor);
-                    if ((nextPoint.y > 0) && (canvasPixelBitmap.getPixel(nextPoint.x, nextPoint.y - 1) == targetColor))
-                        queue.add(new Point(nextPoint.x, nextPoint.y - 1));
-                    if ((nextPoint.y < canvasPixelBitmap.getHeight() - 1) && (canvasPixelBitmap.getPixel(nextPoint.x, nextPoint.y + 1) == targetColor))
-                        queue.add(new Point(nextPoint.x, nextPoint.y + 1));
-                    nextPoint.x--;
-                }
-
-                while ((point.x < canvasPixelBitmap.getWidth() - 1) && (canvasPixelBitmap.getPixel(point.x, point.y) == targetColor)) {
-                    canvasPixelBitmap.setPixel(point.x, point.y, currentColor);
-                    if ((point.y > 0) && (canvasPixelBitmap.getPixel(point.x, point.y - 1) == targetColor))
-                        queue.add(new Point(point.x, point.y - 1));
-                    if ((point.y < canvasPixelBitmap.getHeight() - 1)
-                            && (canvasPixelBitmap.getPixel(point.x, point.y + 1) == targetColor))
-                        queue.add(new Point(point.x, point.y + 1));
-                    point.x++;
-                }
+            while ((nextPoint.x > 0) && (canvasPixelBitmap.getPixel(nextPoint.x, nextPoint.y) == targetColor)) {
+                canvasPixelBitmap.setPixel(nextPoint.x, nextPoint.y, currentColor);
+                if ((nextPoint.y > 0) && (canvasPixelBitmap.getPixel(nextPoint.x, nextPoint.y - 1) == targetColor))
+                    queue.add(new Point(nextPoint.x, nextPoint.y - 1));
+                if ((nextPoint.y < canvasPixelBitmap.getHeight() - 1) && (canvasPixelBitmap.getPixel(nextPoint.x, nextPoint.y + 1) == targetColor))
+                    queue.add(new Point(nextPoint.x, nextPoint.y + 1));
+                nextPoint.x--;
             }
 
+            while ((point.x < canvasPixelBitmap.getWidth() - 1) && (canvasPixelBitmap.getPixel(point.x, point.y) == targetColor)) {
+                canvasPixelBitmap.setPixel(point.x, point.y, currentColor);
+                if ((point.y > 0) && (canvasPixelBitmap.getPixel(point.x, point.y - 1) == targetColor))
+                    queue.add(new Point(point.x, point.y - 1));
+                if ((point.y < canvasPixelBitmap.getHeight() - 1)
+                        && (canvasPixelBitmap.getPixel(point.x, point.y + 1) == targetColor))
+                    queue.add(new Point(point.x, point.y + 1));
+                point.x++;
+            }
         }
+
     }
+
+}

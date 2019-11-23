@@ -29,8 +29,8 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 
 
     private String nameOfFile = "";
-   //All variable declarations for the many, many buttons and color storing strings.
-   // private drawView drawingView;
+    //All variable declarations for the many, many buttons and color storing strings.
+    // private drawView drawingView;
     public static drawView drawingView;
     public static ImageButton selectedColor;
     private ImageButton blueColor;
@@ -64,6 +64,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     private ImageButton toggleGrid;
     private TextView currentSizeText;
     private ImageButton loadButton;
+    public static boolean changingCanvasColor = false;
     int currentColor;
     int recentCounter = 0;
     String colorOne = "#FF000000";
@@ -417,6 +418,8 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         if (view.getId() == drawButton.getId())
         {
             currentTool = "pencil";
+            drawView.eraserMode = false;
+            drawingView.setErase(drawView.eraserMode);
             drawingView.isFilling = false;
             //Used for Espresso test
             Toast T = Toast.makeText(this, "Pencil selected.", Toast.LENGTH_SHORT);
@@ -426,8 +429,9 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         if (view.getId() == eraseButton.getId())
         {
             drawingView.isFilling = false;
-            drawingView.setColor("#ffffff");
             currentTool = "eraser";
+            drawView.eraserMode = true;
+            drawingView.setErase(drawView.eraserMode);
             //Used for Espresso test
             currentSizeText.setText("Eraser Size: "+ eraserSize);
             Toast T = Toast.makeText(this, "Eraser selected.", Toast.LENGTH_SHORT);
@@ -451,6 +455,14 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             Toast T = Toast.makeText(this, "Color picker selected.", Toast.LENGTH_SHORT);
             T.show();
         }
+
+        if (view.getId() == canvasColor.getId())
+        {
+            changingCanvasColor = true;
+            ColorWheel(false);
+            //drawingView.setBackgroundColor(currentColor);
+        }
+
     }
 
     //*******************************
@@ -688,6 +700,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         }
     }
 
+
     //**********************
     //Method that opens a color wheel when clicking the + sign, and then
     //Swaps the color of the brush to the selected color if the user clicks ok
@@ -710,72 +723,69 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             public void onOk(AmbilWarnaDialog dialog, int color)
             {
 
-                currentColor = color;
-                String colorStr= "#"+Integer.toHexString(color);
-                System.out.println("\n"+colorStr);
-                drawingView.setColor(colorStr);
-                selectedColor.setBackgroundColor(color);
-                recentCounter++;
-                if (recentCounter == 1)
+                if (changingCanvasColor == true)
                 {
-                    recentOne.setBackgroundColor(color);
-                    colorOne = colorStr;
+                    drawingView.setBackgroundColor(color);
+                    changingCanvasColor = false;
                 }
+                else {
+                    currentColor = color;
+                    String colorStr= "#"+Integer.toHexString(color);
+                    System.out.println("\n"+colorStr);
+                    drawingView.setColor(colorStr);
+                    selectedColor.setBackgroundColor(color);
+                    recentCounter++;
+                    if (recentCounter == 1) {
+                        recentOne.setBackgroundColor(color);
+                        colorOne = colorStr;
+                    }
 
-                if (recentCounter == 2)
-                {
-                    recentTwo.setBackgroundColor(color);
-                    colorTwo = colorStr;
-                }
+                    if (recentCounter == 2) {
+                        recentTwo.setBackgroundColor(color);
+                        colorTwo = colorStr;
+                    }
 
-                if (recentCounter == 3)
-                {
-                    recentThree.setBackgroundColor(color);
-                    colorThree = colorStr;
-                }
+                    if (recentCounter == 3) {
+                        recentThree.setBackgroundColor(color);
+                        colorThree = colorStr;
+                    }
 
-                if (recentCounter == 4)
-                {
-                    recentFour.setBackgroundColor(color);
-                    colorFour = colorStr;
-                }
+                    if (recentCounter == 4) {
+                        recentFour.setBackgroundColor(color);
+                        colorFour = colorStr;
+                    }
 
-                if (recentCounter == 5)
-                {
-                    recentFive.setBackgroundColor(color);
-                    colorFive = colorStr;
+                    if (recentCounter == 5) {
+                        recentFive.setBackgroundColor(color);
+                        colorFive = colorStr;
 
-                }
+                    }
 
-                if (recentCounter == 6)
-                {
-                    recentSix.setBackgroundColor(color);
-                    colorSix = colorStr;
-                }
+                    if (recentCounter == 6) {
+                        recentSix.setBackgroundColor(color);
+                        colorSix = colorStr;
+                    }
 
-                if (recentCounter == 7)
-                {
-                    recentSeven.setBackgroundColor(color);
-                    colorSeven = colorStr;
-                }
+                    if (recentCounter == 7) {
+                        recentSeven.setBackgroundColor(color);
+                        colorSeven = colorStr;
+                    }
 
-                if (recentCounter == 8)
-                {
-                    recentEight.setBackgroundColor(color);
-                    colorEight = colorStr;
-                }
+                    if (recentCounter == 8) {
+                        recentEight.setBackgroundColor(color);
+                        colorEight = colorStr;
+                    }
 
-                if (recentCounter == 9)
-                {
-                    recentNine.setBackgroundColor(color);
-                    colorNine = colorStr;
-                }
+                    if (recentCounter == 9) {
+                        recentNine.setBackgroundColor(color);
+                        colorNine = colorStr;
+                    }
 
-                if (recentCounter == 10)
-                {
-                    recentTen.setBackgroundColor(color);
-                    colorTen = colorStr;
-                    recentCounter = 0;
+                    if (recentCounter == 10) {
+                        recentTen.setBackgroundColor(color);
+                        colorTen = colorStr;
+                        recentCounter = 0;
+                    }
                 }
             }
         });
