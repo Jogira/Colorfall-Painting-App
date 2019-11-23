@@ -150,7 +150,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         paintBucket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onSelectTool(view);
+                drawingView.fillColor();
             }
         });
 
@@ -158,7 +158,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         toggleGrid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                drawView.showGrid = !drawView.showGrid;
+                drawView.toggleGrid = !drawView.toggleGrid;
                 drawingView.invalidate();
             }
         });
@@ -417,6 +417,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         if (view.getId() == drawButton.getId())
         {
             currentTool = "pencil";
+            drawingView.isFilling = false;
             //Used for Espresso test
             Toast T = Toast.makeText(this, "Pencil selected.", Toast.LENGTH_SHORT);
             T.show();
@@ -424,6 +425,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 
         if (view.getId() == eraseButton.getId())
         {
+            drawingView.isFilling = false;
             drawingView.setColor("#ffffff");
             currentTool = "eraser";
             //Used for Espresso test
@@ -434,6 +436,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 
         if (view.getId() == colorPicker.getId())
         {
+            drawingView.isFilling = false;
             currentTool = "picker";
             pickerClicked = true;
             if(drawingView.hexValuePicked.equals("#0") || drawingView.hexValuePicked.equals(null))
