@@ -9,7 +9,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
@@ -60,6 +59,9 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     private ImageButton recentEight;
     private ImageButton recentNine;
     private ImageButton recentTen;
+    private ImageButton paintBucket;
+    private ImageButton canvasColor;
+    private ImageButton toggleGrid;
     private TextView currentSizeText;
     private ImageButton loadButton;
     int currentColor;
@@ -143,6 +145,32 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
                 onSelectTool(view);
             }
         });
+
+        paintBucket = findViewById(R.id.paint_bucket);
+        paintBucket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onSelectTool(view);
+            }
+        });
+
+        toggleGrid = findViewById(R.id.toggle_grid);
+        toggleGrid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawView.showGrid = !drawView.showGrid;
+                drawingView.invalidate();
+            }
+        });
+
+        canvasColor = findViewById(R.id.change_background);
+        canvasColor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onSelectTool(view);
+            }
+        });
+
 
         saveButton = findViewById(R.id.save_file);
         saveButton.setOnClickListener(new View.OnClickListener() {

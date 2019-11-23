@@ -38,10 +38,11 @@ import java.io.Serializable;
         private Paint pixelCanvasPaint;
         private int currentColor = 0xFF000000;
         private int pickedColor = 0xFF000000;
-        private Canvas drawPixelCanvas;
+        public static Canvas drawPixelCanvas;
         public static Bitmap canvasPixelBitmap;
         static String hexValuePicked = "#0";
         static int pixel;
+        static boolean showGrid = false;
         static int redValue;
         static int blueValue;
         static int greenValue;
@@ -163,12 +164,13 @@ import java.io.Serializable;
 
         //Creates the grid effect across the canvas to help the user maybe line up their strokes better.
         //Will most likely have a disable option in the future.
+
         @Override
-        protected void onDraw(Canvas canvas)
-        {
+        protected void onDraw(Canvas canvas) {
             canvas.drawBitmap(canvasPixelBitmap, 0, 0, pixelCanvasPaint);
             canvas.drawPath(path, drawPixel);
-
+            //canvas.drawLine(1,1, 20, 21, gridLines);
+            if (showGrid) {
                 int width = getMeasuredWidth();
                 int height = getMeasuredHeight();
                 // Vertical lines
@@ -182,9 +184,10 @@ import java.io.Serializable;
                     canvas.drawLine(0, height * i / 16, width, height * i / 16,
                             gridLines);
                 }
+            }
         }
 
-    public Bitmap getBitmap(){ return canvasPixelBitmap;}
+        public Bitmap getBitmap(){ return canvasPixelBitmap;}
 
     public void setBitmap(Bitmap overwrite){
         canvasPixelBitmap = overwrite;
