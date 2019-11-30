@@ -48,6 +48,7 @@ public class drawView extends View implements Serializable
     private static Bitmap canvasPixelBitmap;
     static final String hexValuePicked = "#0";
     static boolean toggleGrid = false;
+    public static String pixelStr;
     public static boolean isFilling = false;
     public static boolean eraserMode = false;
 
@@ -92,7 +93,8 @@ public class drawView extends View implements Serializable
                     int greenValue = Color.green(pixel);
                     drawPixel.setColor(pixel);
                     drawActivity.selectedColor.setBackgroundColor(pixel);
-                    String pixelStr = Integer.toString(pixel);
+                    pixelStr = Integer.toString(pixel);
+                    currentColor = pixel;
                     verifyingTools.verifyToolandSwapColor(pixelStr);
                     drawActivity.pickerClicked = false;
                 }

@@ -36,7 +36,7 @@ class toolSelectionFacade
     {
         if (toolChecker.verifyTool(getSelectedTool()) && sizeChecker.verifySize(getSize()))
         {
-            System.out.println("\nCOLOR HAS BEEN SWAPPED TO"+ colorToSwapTo);
+            System.out.println("\nCOLOR HAS BEEN SWAPPED  "+ colorToSwapTo);
             drawActivity.drawingView.setColor(colorToSwapTo);
         }
         else

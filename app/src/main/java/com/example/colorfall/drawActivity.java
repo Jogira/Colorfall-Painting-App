@@ -441,7 +441,6 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             drawView.isFilling = false;
             currentTool = "picker";
             pickerClicked = true;
-            System.out.println("\nNo colors at that spot.");
             //Used for Espresso test
             Toast T = Toast.makeText(this, "Color picker selected.", Toast.LENGTH_SHORT);
             T.show();
