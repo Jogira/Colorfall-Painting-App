@@ -1,25 +1,19 @@
 package com.example.colorfall;
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.Toast;
-import java.util.Arrays;
-import androidx.fragment.app.Fragment;
 import android.widget.TextView;
+
 import com.mindorks.placeholderview.PlaceHolderView;
-import android.content.Intent;
+
+import java.util.Arrays;
 
 
 
+@SuppressWarnings("unused")
 public class galleryActivity extends Activity {
     private PlaceHolderView mGalleryView;
     private String list;
@@ -27,15 +21,16 @@ public class galleryActivity extends Activity {
     //private class galleryActivity1 extends Fragment {
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gallery);
 
-        TextView textView = (TextView)findViewById(R.id.textView);
-        TextView m = (TextView) findViewById(R.id.textView);
-        TextView textView1 = (TextView)findViewById(R.id.textView);
-        TextView m1 = (TextView) findViewById(R.id.textView1);
+        @SuppressLint("CutPasteId") TextView textView = findViewById(R.id.textView);
+        @SuppressLint("CutPasteId") TextView m = findViewById(R.id.textView);
+        @SuppressLint("CutPasteId") TextView textView1 = findViewById(R.id.textView);
+        TextView m1 = findViewById(R.id.textView1);
         m.setBackgroundColor(Color.BLACK);
         m.setTextColor(Color.WHITE);
 
@@ -61,7 +56,7 @@ public class galleryActivity extends Activity {
        // m1.setText(Arrays.toString(fList));
 
         String gallery = Arrays.toString(fList);
-        String galleryList = "";
+        StringBuilder galleryList = new StringBuilder();
 //        for(int i = 0; i<gallery.length(); i++){
 //            if(gallery.charAt(i) !='[' || gallery.charAt(i)!=']'){
 //                if(gallery.charAt(i)==','){
@@ -70,11 +65,11 @@ public class galleryActivity extends Activity {
 //                galleryList += gallery.charAt(i);
 //            }
 //        }
-        for(int i = 0; i<fList.length; i++){
-            galleryList += fList[i];
-            galleryList += "\n";
+        for (String s : fList) {
+            galleryList.append(s);
+            galleryList.append("\n");
         }
-        m1.setText(galleryList);
+        m1.setText(galleryList.toString());
 
     }
 }

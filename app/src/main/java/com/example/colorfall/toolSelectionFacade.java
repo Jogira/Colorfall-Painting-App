@@ -12,13 +12,13 @@ package com.example.colorfall;
  */
 
 
-public class toolSelectionFacade
+class toolSelectionFacade
 {
-    private String selectedTool;
-    private float toolSize;
+    private final String selectedTool;
+    private final float toolSize;
 
-    selectedToolCheck toolChecker;
-    currentSizeCheck sizeChecker;
+    private final selectedToolCheck toolChecker;
+    private final currentSizeCheck sizeChecker;
 
     public toolSelectionFacade(String newTool, float newToolSize)
     {
@@ -29,8 +29,8 @@ public class toolSelectionFacade
         sizeChecker = new currentSizeCheck();
     }
 
-    public String getSelectedTool() { return selectedTool;}
-    public float getSize() { return toolSize;}
+    private String getSelectedTool() { return selectedTool;}
+    private float getSize() { return toolSize;}
 
     public void verifyToolandSwapColor(String colorToSwapTo)
     {

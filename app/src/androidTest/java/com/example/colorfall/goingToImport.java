@@ -26,6 +26,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 //Test Name: goingToImport
 //This is the test for having the user actually taken to the import screen when clicking the import button on the home menu.
+@SuppressWarnings("deprecation")
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class goingToImport {
@@ -34,7 +35,7 @@ public class goingToImport {
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void goingToImport() {
+    public goingToImport() {
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.importBtn), withText("Import"),
                         childAtPosition(

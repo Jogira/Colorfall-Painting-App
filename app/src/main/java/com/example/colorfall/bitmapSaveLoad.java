@@ -1,20 +1,13 @@
 package com.example.colorfall;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Build;
 import android.util.Log;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.nio.MappedByteBuffer;
-import java.nio.channels.FileChannel;
 
-public class bitmapSaveLoad {
+class bitmapSaveLoad {
 
     static public Bitmap loadBitmap(String fileName) {
         Log.d("TAG", "line before decoded bitmap returned");
@@ -44,7 +37,6 @@ public class bitmapSaveLoad {
                 Log.d("TAG", "bitmap compressed");
 
                 out.flush();
-                out.close();
         } catch (
                 IOException e) {
             e.printStackTrace();

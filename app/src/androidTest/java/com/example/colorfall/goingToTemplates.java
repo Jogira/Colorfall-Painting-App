@@ -26,6 +26,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 //Test Name: goingToTemplate
 //This is the test for having the user actually taken to the template screen when clicking the template button on the home menu.
+@SuppressWarnings("deprecation")
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class goingToTemplates {
@@ -34,7 +35,7 @@ public class goingToTemplates {
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void goingToTemplates() {
+    public goingToTemplates() {
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.templatesBtn), withText("Templates"),
                         childAtPosition(

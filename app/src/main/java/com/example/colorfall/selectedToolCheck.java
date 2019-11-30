@@ -2,22 +2,16 @@ package com.example.colorfall;
 //*************************
 //Class that performs a check to ensure the tool selected is in fact a tool that can be modified.
 //**************************
-public class selectedToolCheck
+@SuppressWarnings("SameReturnValue")
+class selectedToolCheck
 {
-    private String tool = "pencil";
 
-    public String getTool() { return tool;}
+    private String getTool() {
+        return "pencil";}
 
     public boolean verifyTool(String toolToCheck)
     {
-        if(toolToCheck.equals(getTool()))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return toolToCheck.equals(getTool());
 
     }
 

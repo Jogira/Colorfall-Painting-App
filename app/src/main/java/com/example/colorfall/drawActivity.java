@@ -1,6 +1,7 @@
 package com.example.colorfall;
 
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -24,6 +25,7 @@ import yuku.ambilwarna.AmbilWarnaDialog;
 
 
 //this is a View in Model-View-Controller architecture
+@SuppressWarnings({"ALL", "unused"})
 public class drawActivity extends AppCompatActivity implements java.io.Serializable {
 
 
@@ -32,6 +34,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     //All variable declarations for the many, many buttons and color storing strings.
     // private drawView drawingView;
     public static drawView drawingView;
+    @SuppressLint("StaticFieldLeak")
     public static ImageButton selectedColor;
     private ImageButton blueColor;
     private ImageButton yellowColor;
@@ -47,8 +50,6 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     private ImageButton drawButton;
     private ImageButton colorPicker;
     private ImageButton wipeCanvas;
-    private ImageButton newColors;
-    private ImageButton saveButton;
     private ImageButton recentOne;
     private ImageButton recentTwo;
     private ImageButton recentThree;
@@ -59,34 +60,29 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     private ImageButton recentEight;
     private ImageButton recentNine;
     private ImageButton recentTen;
-    private ImageButton paintBucket;
     private ImageButton canvasColor;
-    private ImageButton toggleGrid;
     private TextView currentSizeText;
-    private ImageButton loadButton;
-    public static boolean changingCanvasColor = false;
-    int currentColor;
-    int recentCounter = 0;
-    String colorOne = "#FF000000";
-    String colorTwo = "#FF000000";
-    String colorThree = "#FF000000";
-    String colorFour = "#FF000000";
-    String colorFive = "#FF000000";
-    String colorSix = "#FF000000";
-    String colorSeven = "#FF000000";
-    String colorEight = "#FF000000";
-    String colorNine = "#FF000000";
-    String colorTen = "#FF000000";
+    private static boolean changingCanvasColor = false;
+    private int currentColor;
+    private int recentCounter = 0;
+    private String colorOne = "#FF000000";
+    private String colorTwo = "#FF000000";
+    private String colorThree = "#FF000000";
+    private String colorFour = "#FF000000";
+    private String colorFive = "#FF000000";
+    private String colorSix = "#FF000000";
+    private String colorSeven = "#FF000000";
+    private String colorEight = "#FF000000";
+    private String colorNine = "#FF000000";
+    private String colorTen = "#FF000000";
     String colorPicked = "#ffffff";
-    public static int eraserSize = 70;
+    private static int eraserSize = 70;
     static boolean pickerClicked = false;
-    static String pickedColor;
-    public static float currentSize = 70F;
+    public static final float currentSize = 70F;
     //testing save file -> gallery
     private String files;
     private String file_name = "";
     public static String currentTool = "pencil";
-    static SeekBar seekSize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,8 +92,9 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         currentSizeText = findViewById(R.id.current_size);
 
 
-        seekSize = findViewById(R.id.seekBar);
+        SeekBar seekSize = findViewById(R.id.seekBar);
         seekSize.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean userInput) {
                 drawingView.setStrokeWidth(progress);
@@ -147,7 +144,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
         });
 
-        paintBucket = findViewById(R.id.paint_bucket);
+        ImageButton paintBucket = findViewById(R.id.paint_bucket);
         paintBucket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -155,7 +152,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
         });
 
-        toggleGrid = findViewById(R.id.toggle_grid);
+        ImageButton toggleGrid = findViewById(R.id.toggle_grid);
         toggleGrid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -173,7 +170,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         });
 
 
-        saveButton = findViewById(R.id.save_file);
+        ImageButton saveButton = findViewById(R.id.save_file);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -181,7 +178,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
         });
 
-        loadButton = findViewById(R.id.load_file);
+        ImageButton loadButton = findViewById(R.id.load_file);
         loadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -303,11 +300,11 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
         });
 
-        newColors = findViewById(R.id.new_colors);
+        ImageButton newColors = findViewById(R.id.new_colors);
         newColors.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ColorWheel(false);
+                ColorWheel();
             }
         });
 
@@ -413,14 +410,15 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 
     //Sets tools based on button presses.
 
-    public void onSelectTool(View view)
+    @SuppressLint("SetTextI18n")
+    private void onSelectTool(View view)
     {
         if (view.getId() == drawButton.getId())
         {
             currentTool = "pencil";
             drawView.eraserMode = false;
-            drawingView.setErase(drawView.eraserMode);
-            drawingView.isFilling = false;
+            drawingView.setErase(false);
+            drawView.isFilling = false;
             //Used for Espresso test
             Toast T = Toast.makeText(this, "Pencil selected.", Toast.LENGTH_SHORT);
             T.show();
@@ -428,10 +426,10 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 
         if (view.getId() == eraseButton.getId())
         {
-            drawingView.isFilling = false;
+            drawView.isFilling = false;
             currentTool = "eraser";
             drawView.eraserMode = true;
-            drawingView.setErase(drawView.eraserMode);
+            drawingView.setErase(true);
             //Used for Espresso test
             currentSizeText.setText("Eraser Size: "+ eraserSize);
             Toast T = Toast.makeText(this, "Eraser selected.", Toast.LENGTH_SHORT);
@@ -440,17 +438,10 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 
         if (view.getId() == colorPicker.getId())
         {
-            drawingView.isFilling = false;
+            drawView.isFilling = false;
             currentTool = "picker";
             pickerClicked = true;
-            if(drawingView.hexValuePicked.equals("#0") || drawingView.hexValuePicked.equals(null))
-            {
-                System.out.println("\nNo colors at that spot.");
-            }
-            else
-            {
-                pickedColor = drawingView.hexValuePicked;
-            }
+            System.out.println("\nNo colors at that spot.");
             //Used for Espresso test
             Toast T = Toast.makeText(this, "Color picker selected.", Toast.LENGTH_SHORT);
             T.show();
@@ -459,7 +450,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         if (view.getId() == canvasColor.getId())
         {
             changingCanvasColor = true;
-            ColorWheel(false);
+            ColorWheel();
             //drawingView.setBackgroundColor(currentColor);
         }
 
@@ -472,7 +463,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     //what color the user has current selected.
     //*******************************
 
-    public void onSelectColor(View view) {
+    private void onSelectColor(View view) {
 
         toolSelectionFacade verifyingTools = new toolSelectionFacade(currentTool, currentSize);
 
@@ -710,7 +701,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     //It's redundant to add the base colors to the recent colors rows anyways.
     //***********************
 
-    public void ColorWheel(boolean AlphaSupport)
+    private void ColorWheel()
     {
 
         AmbilWarnaDialog ambilWarnaDialog = new AmbilWarnaDialog(this, currentColor, new AmbilWarnaDialog.OnAmbilWarnaListener() {
@@ -723,7 +714,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             public void onOk(AmbilWarnaDialog dialog, int color)
             {
 
-                if (changingCanvasColor == true)
+                if (changingCanvasColor)
                 {
                     drawingView.setBackgroundColor(color);
                     changingCanvasColor = false;
@@ -796,7 +787,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     //Saves the bitmap and stores it as a file.
     //*********************************
 
-    public void save() {
+    private void save() {
         Context context = getApplicationContext();
         String fileName = context.getFilesDir().getPath() + "/";
         fileName = fileName + nameOfFile + ".ser";
@@ -824,7 +815,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     //Displays all currently saved files as a way to check files are properly being stored.
     //*********************************
 
-    void printSavedFiles() {
+    private void printSavedFiles() {
         Context context = getApplicationContext();
         System.out.println(context.getFilesDir().getAbsolutePath());
         String[] fList = context.fileList();
@@ -848,7 +839,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     //Loads a chosen bitmap back to the canvas.
     //*********************************
 
-    public void load() {
+    private void load() {
         //setup
         Context context = getApplicationContext();//if errors occur down the road, its likely from this
         String fileName = context.getFilesDir().getPath() + "/gg.ser";
@@ -872,7 +863,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     }
 
     //onCLick method for save button
-    public void onClickSave (View view) {
+    private void onClickSave(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Name of your masterpiece");
         final EditText input = new EditText(this);
@@ -899,12 +890,14 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 
     }
 
-    public void onClickLoad(View view) {
+    @SuppressWarnings("unused")
+    private void onClickLoad(View view) {
         load();
         //Intent intent = new Intent(this,  galleryActivity.class);
         //startActivity(intent);
     }
 
+    @SuppressWarnings("unused")
     public static drawView getDrawingView() {
         return drawingView;
     }

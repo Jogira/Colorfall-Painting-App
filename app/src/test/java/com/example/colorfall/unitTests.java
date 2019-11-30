@@ -1,7 +1,5 @@
 package com.example.colorfall;
 
-import android.graphics.Canvas;
-
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

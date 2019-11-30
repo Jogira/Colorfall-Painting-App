@@ -45,8 +45,7 @@
         android:min="1"
         android:progress="70"
         tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="396dp"
-        tools:targetApi="o" />
+        tools:layout_editor_absoluteY="396dp"/>
 
     <TextView
         android:id="@+id/recent_colors"
@@ -258,7 +257,7 @@
         android:layout_marginStart="15dp"
         android:background="#FF000000"
         android:src="@drawable/border"
-            android:contentDescription="current"
+            android:contentDescription="cur"
             tools:ignore="HardcodedText" />
 
         <ImageButton
@@ -380,8 +379,8 @@
             android:background="#00FFFFFF"
             android:paddingTop="10dp"
             android:src="@drawable/delete_canvas"
-            android:contentDescription="wipe"
-            tools:ignore="HardcodedText" />
+            android:contentDescription="TODO"
+            tools:ignore="ContentDescription,HardcodedText" />
 
 
         <ImageButton
@@ -412,7 +411,7 @@
             android:paddingEnd="15dp"
             android:paddingStart="0dp"
             android:src="@drawable/canvas_background"
-            android:contentDescription="background"
+            android:contentDescription="change"
             tools:ignore="HardcodedText" />
 
 

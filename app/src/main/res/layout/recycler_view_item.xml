@@ -4,4 +4,7 @@
    android:layout_width="50dp"
    android:layout_height="50dp"
    android:layout_margin="5dp"
-   tools:src="@tools:sample/avatars" />
+   tools:src="@tools:sample/avatars"
+    android:contentDescription="avatar"
+    tools:keep="@layout/recycler_view_item"
+    tools:ignore="HardcodedText" />

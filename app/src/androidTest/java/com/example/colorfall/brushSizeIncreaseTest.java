@@ -32,16 +32,17 @@ import static org.hamcrest.Matchers.allOf;
     Test that checks for a INCREASE in the size of the brush.
  */
 
+@SuppressWarnings("deprecation")
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class brushSizeIncreaseTest {
-    private int brushSize = 120;
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
+    @SuppressWarnings("unchecked")
     @Test
-    public void brushSizeIncreaseTest() {
+    public brushSizeIncreaseTest() {
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.drawBtn), withText("Draw"),
                         childAtPosition(
@@ -52,6 +53,7 @@ public class brushSizeIncreaseTest {
                         isDisplayed()));
         appCompatButton.perform(click());
 
+        int brushSize = 120;
         onView(allOf(withId(R.id.seekBar))).perform(setProgress(brushSize));
 
         onView(withId(R.id.current_size)).check(matches(withText("Brush Size: 120")));

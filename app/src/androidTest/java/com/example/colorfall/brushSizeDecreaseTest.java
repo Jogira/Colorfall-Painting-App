@@ -16,9 +16,7 @@ import androidx.test.runner.AndroidJUnit4;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
 import org.hamcrest.TypeSafeMatcher;
-import org.hamcrest.core.IsInstanceOf;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,25 +24,22 @@ import org.junit.runner.RunWith;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.assertThat;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.is;
 /*Changing Brush and Eraser Size
     Test that checks for a DECREASE in the size of the brush.
  */
+@SuppressWarnings("deprecation")
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class brushSizeDecreaseTest {
-    private int brushSize = 25;
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
+    @SuppressWarnings("unchecked")
     @Test
     public void brushSizeTest() {
         ViewInteraction appCompatButton = onView(allOf(withId(R.id.drawBtn), withText("Draw"),
@@ -52,6 +47,7 @@ public class brushSizeDecreaseTest {
                                 1),isDisplayed()));
         appCompatButton.perform(click());
 
+        int brushSize = 25;
         onView(allOf(withId(R.id.seekBar))).perform(setProgress(brushSize));
 
         onView(withId(R.id.current_size)).check(matches(withText("Brush Size: 25")));

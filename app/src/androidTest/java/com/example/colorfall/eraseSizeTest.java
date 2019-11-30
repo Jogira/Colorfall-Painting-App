@@ -35,16 +35,17 @@ import static org.hamcrest.Matchers.is;
     Test that checks for a INCREASE in the size of the eraser.
  */
 
+@SuppressWarnings("deprecation")
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class eraseSizeTest {
-    private int brushSize = 90;
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
+    @SuppressWarnings("unchecked")
     @Test
-    public void eraseSizeTest() {
+    public eraseSizeTest() {
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.drawBtn), withText("Draw"),
                         childAtPosition(
@@ -65,6 +66,7 @@ public class eraseSizeTest {
                         isDisplayed()));
         appCompatImageButton.perform(click());
 
+        int brushSize = 90;
         onView(allOf(withId(R.id.seekBar))).perform(setProgress(brushSize));
 
         onView(withId(R.id.current_size)).check(matches(withText("Eraser Size: 90")));

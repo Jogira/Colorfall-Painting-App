@@ -1,30 +1,21 @@
 package com.example.colorfall;
 
-import android.content.Context;
 import android.graphics.Path;
 import android.util.Log;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.ListIterator;
-import android.graphics.Paint;
-import android.view.MotionEvent;
 
 //WORK IN PROGRESS//
+@SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
 public class ourPath extends Path implements Serializable {
 
     private static final long serialVersionUID = -5974912367682897467L;//used for serializing
 
     //private drawView drawingView;
-    private List<Action> actions = new LinkedList<>();//list where all user actions are stored
-    private List<ourPaint> brushes = new LinkedList<>();//list of brushes which contains color, size etc.
+    private final List<Action> actions = new LinkedList<>();//list where all user actions are stored
+    private final List<ourPaint> brushes = new LinkedList<>();//list of brushes which contains color, size etc.
 
 
 
@@ -39,10 +30,10 @@ public class ourPath extends Path implements Serializable {
     }
     /*******************************end Testing methods***************************/
 
+    @SuppressWarnings("unused")
     private interface Action extends Serializable {
         void perform(Path path);
     }//end Action
-    /*************End redrawing stored paths on load**********************************************/
 
 
     /****************Overrides****************************/
@@ -63,7 +54,6 @@ public class ourPath extends Path implements Serializable {
         super.lineTo(x, y);
         Log.d("TAG","in line drawing method. x=" + x + " y=" +y + " SIZE = " +  + actions.size());
     }
-    /*****************end overrides**********************/
 
 
     /**************inner MOVE class*******************/
@@ -71,7 +61,7 @@ public class ourPath extends Path implements Serializable {
 
         private final float x, y;
 
-        public Move(float x, float y) {
+        Move(float x, float y) {
             this.x = x;
             this.y = y;
             Log.d("TAG","in move constructor. x=" + x + " y=" +y);
@@ -82,7 +72,6 @@ public class ourPath extends Path implements Serializable {
             path.moveTo(x, y);
         }
     }
-    /***********End inner MOVE class*******************/
 
 
     /**************inner LINE class*******************/
@@ -90,7 +79,7 @@ public class ourPath extends Path implements Serializable {
 
         private final float x, y;
 
-        public Line(float x, float y) {
+        Line(float x, float y) {
             this.x = x;
             this.y = y;
             Log.d("TAG","in line constructor. x=" + x + " y=" +y);
@@ -101,6 +90,5 @@ public class ourPath extends Path implements Serializable {
             path.lineTo(x, y);
         }
     }
-    /***********End inner LINE class*******************/
 
 }

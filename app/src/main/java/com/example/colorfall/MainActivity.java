@@ -9,11 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 public class MainActivity extends AppCompatActivity {
-    private Button drawBtn;
-    private Button galleryBtn;
-    private Button templatesBtn;
-    private Button importBtn;
-
 
 
     /**********************************************************************************************
@@ -35,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //draw button
-        drawBtn = findViewById(R.id.drawBtn);
+        Button drawBtn = findViewById(R.id.drawBtn);
         drawBtn.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -46,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //gallery button
-        galleryBtn = findViewById(R.id.galleryBtn);
+        Button galleryBtn = findViewById(R.id.galleryBtn);
         galleryBtn.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -57,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //templates button
-        templatesBtn = findViewById(R.id.templatesBtn);
+        Button templatesBtn = findViewById(R.id.templatesBtn);
         templatesBtn.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -68,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //import button
-        importBtn = findViewById(R.id.importBtn);
+        Button importBtn = findViewById(R.id.importBtn);
         importBtn.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -82,25 +77,25 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public void openDrawScreen()
+    private void openDrawScreen()
      {
         Intent intent = new Intent(this,  drawActivity.class);
         startActivityForResult(intent, CONFIG_REQUEST);
      }
 
-    public void openTemplateScreen()
+    private void openTemplateScreen()
     {
         Intent intent = new Intent(this,  TemplatesActivity.class);
         startActivityForResult(intent, CONFIG_REQUEST);
     }
 
-    public void openImportScreen()
+    private void openImportScreen()
     {
         Intent intent = new Intent(this,  importActivity.class);
         startActivityForResult(intent, CONFIG_REQUEST);
     }
 
-    public void openGalleryScreen()
+    private void openGalleryScreen()
     {
         Intent intent = new Intent(this,  galleryActivity.class);
         startActivityForResult(intent, CONFIG_REQUEST);

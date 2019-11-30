@@ -2,22 +2,16 @@ package com.example.colorfall;
 //*************************
 //Class that performs a size check for tools behind the scenes.
 //**************************
-public class currentSizeCheck
+@SuppressWarnings("SameReturnValue")
+class currentSizeCheck
 {
-    private float size = 70F;
 
-    public float getSize() { return size;}
+    private float getSize() {
+        return 70F;}
 
     public boolean verifySize(float sizeToCheck)
     {
-        if(sizeToCheck == getSize())
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return sizeToCheck == getSize();
 
     }
 }

@@ -10,11 +10,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="ExtraText,GoogleAppIndexingWarning">
+        tools:ignore="ExtraText,GoogleAppIndexingWarning"
+        android:fullBackupContent="@xml/backup_descriptor">
         <activity
             android:name=".TemplatesActivity"
             android:label="@string/title_activity_templates"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".importActivity"
             android:label="@string/title_activity_import"

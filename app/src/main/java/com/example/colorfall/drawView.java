@@ -1,5 +1,6 @@
 package com.example.colorfall;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -31,27 +32,22 @@ import java.util.Queue;
  * Date         : 10/13/2019
  *********************************************************************************************/
 
+@SuppressWarnings("unused")
 public class drawView extends View implements Serializable
 {
     //private Path path;
     // commented for new path
 
     private ourPath path;
-    public static ourPaint drawPixel;                //Our brush object
+    private static ourPaint drawPixel;                //Our brush object
     private Paint gridLines;
     private Paint pixelCanvasPaint;
     private int currentColor = 0xFF000000;
     private int pickedColor = 0xFF000000;
-    public static Canvas drawPixelCanvas;
-    public static Bitmap canvasPixelBitmap;
-    static String hexValuePicked = "#0";
-    static int pixel;
+    private static Canvas drawPixelCanvas;
+    private static Bitmap canvasPixelBitmap;
+    static final String hexValuePicked = "#0";
     static boolean toggleGrid = false;
-    static int redValue;
-    static int blueValue;
-    static int greenValue;
-    static float pointX;
-    static float pointY;
     public static boolean isFilling = false;
     public static boolean eraserMode = false;
 
@@ -72,13 +68,14 @@ public class drawView extends View implements Serializable
     //Specifies what the app will do to the canvas when clicking, clicking and dragging, or releasing.
     //************************
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
         toolSelectionFacade verifyingTools = new toolSelectionFacade(drawActivity.currentTool,
                 drawActivity.currentSize);
-        pointX = event.getX();
-        pointY = event.getY();
+        float pointX = event.getX();
+        float pointY = event.getY();
 
 
         switch(event.getAction())
@@ -87,12 +84,12 @@ public class drawView extends View implements Serializable
 
                 path.moveTo(pointX, pointY);
 
-                pixel = canvasPixelBitmap.getPixel((int) pointX, (int) pointY);
-                if(pointX > 0 && pointY > 0 && drawActivity.pickerClicked == true)
+                int pixel = canvasPixelBitmap.getPixel((int) pointX, (int) pointY);
+                if(pointX > 0 && pointY > 0 && drawActivity.pickerClicked)
                 {
-                    redValue = Color.red(pixel);
-                    blueValue = Color.blue(pixel);
-                    greenValue = Color.green(pixel);
+                    int redValue = Color.red(pixel);
+                    int blueValue = Color.blue(pixel);
+                    int greenValue = Color.green(pixel);
                     drawPixel.setColor(pixel);
                     drawActivity.selectedColor.setBackgroundColor(pixel);
                     String pixelStr = Integer.toString(pixel);
@@ -224,6 +221,7 @@ public class drawView extends View implements Serializable
 
         while (queue.size() > 0) {
             Point nextPoint = queue.poll();
+            assert nextPoint != null;
             if (canvasPixelBitmap.getPixel(nextPoint.x, nextPoint.y) != targetColor)
                 continue;
 
