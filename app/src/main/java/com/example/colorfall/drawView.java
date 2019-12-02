@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.PorterDuff;
@@ -46,6 +47,7 @@ public class drawView extends View implements Serializable
     private int pickedColor = 0xFF000000;
     private static Canvas drawPixelCanvas;
     private static Bitmap canvasPixelBitmap;
+    private static Matrix drawMatrix;
     static final String hexValuePicked = "#0";
     static boolean toggleGrid = false;
     public static String pixelStr;
@@ -77,7 +79,6 @@ public class drawView extends View implements Serializable
                 drawActivity.currentSize);
         float pointX = event.getX();
         float pointY = event.getY();
-
 
         switch(event.getAction())
         {
@@ -111,6 +112,7 @@ public class drawView extends View implements Serializable
                     FloodFill(new Point((int) pointX, (int) pointY));
                     break;
                 }
+                drawPixelCanvas.setBitmap(canvasPixelBitmap);
                 drawPixelCanvas.drawPath(path, drawPixel);
                 path.reset();
                 break;
@@ -229,18 +231,23 @@ public class drawView extends View implements Serializable
 
             Point point = new Point(nextPoint.x + 1, nextPoint.y);
 
-            while ((nextPoint.x > 0) && (canvasPixelBitmap.getPixel(nextPoint.x, nextPoint.y) == targetColor)) {
+            while ((nextPoint.x > 0) && (canvasPixelBitmap.getPixel(nextPoint.x, nextPoint.y) ==
+                    targetColor)) {
                 canvasPixelBitmap.setPixel(nextPoint.x, nextPoint.y, currentColor);
-                if ((nextPoint.y > 0) && (canvasPixelBitmap.getPixel(nextPoint.x, nextPoint.y - 1) == targetColor))
+                if ((nextPoint.y > 0) && (canvasPixelBitmap.getPixel(nextPoint.x, nextPoint.y -
+                        1) == targetColor))
                     queue.add(new Point(nextPoint.x, nextPoint.y - 1));
-                if ((nextPoint.y < canvasPixelBitmap.getHeight() - 1) && (canvasPixelBitmap.getPixel(nextPoint.x, nextPoint.y + 1) == targetColor))
+                if ((nextPoint.y < canvasPixelBitmap.getHeight() - 1) && (canvasPixelBitmap.
+                        getPixel(nextPoint.x, nextPoint.y + 1) == targetColor))
                     queue.add(new Point(nextPoint.x, nextPoint.y + 1));
                 nextPoint.x--;
             }
 
-            while ((point.x < canvasPixelBitmap.getWidth() - 1) && (canvasPixelBitmap.getPixel(point.x, point.y) == targetColor)) {
+            while ((point.x < canvasPixelBitmap.getWidth() - 1) && (canvasPixelBitmap.
+                    getPixel(point.x, point.y) == targetColor)) {
                 canvasPixelBitmap.setPixel(point.x, point.y, currentColor);
-                if ((point.y > 0) && (canvasPixelBitmap.getPixel(point.x, point.y - 1) == targetColor))
+                if ((point.y > 0) && (canvasPixelBitmap.getPixel(point.x, point.y - 1) ==
+                        targetColor))
                     queue.add(new Point(point.x, point.y - 1));
                 if ((point.y < canvasPixelBitmap.getHeight() - 1)
                         && (canvasPixelBitmap.getPixel(point.x, point.y + 1) == targetColor))
