@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -61,6 +62,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     private ImageButton recentNine;
     private ImageButton recentTen;
     private ImageButton canvasColor;
+    private ImageButton paintBucket;
     private TextView currentSizeText;
     private static boolean changingCanvasColor = false;
     private int currentColor;
@@ -144,11 +146,12 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
         });
 
-        ImageButton paintBucket = findViewById(R.id.paint_bucket);
+        paintBucket = findViewById(R.id.paint_bucket);
         paintBucket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 drawingView.fillColor();
+                onSelectTool(view);
             }
         });
 
@@ -421,6 +424,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             drawView.isFilling = false;
             //Used for Espresso test
             Toast T = Toast.makeText(this, "Pencil selected.", Toast.LENGTH_SHORT);
+            T.setGravity(Gravity.TOP|Gravity.LEFT, 350, 1150);
             T.show();
         }
 
@@ -433,6 +437,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             //Used for Espresso test
             currentSizeText.setText("Eraser Size: "+ eraserSize);
             Toast T = Toast.makeText(this, "Eraser selected.", Toast.LENGTH_SHORT);
+            T.setGravity(Gravity.TOP|Gravity.LEFT, 350, 1150);
             T.show();
         }
 
@@ -443,6 +448,15 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             pickerClicked = true;
             //Used for Espresso test
             Toast T = Toast.makeText(this, "Color picker selected.", Toast.LENGTH_SHORT);
+            T.setGravity(Gravity.TOP|Gravity.LEFT, 350, 1150);
+            T.show();
+        }
+
+        if (view.getId() == paintBucket.getId())
+        {
+            //Used for Espresso test
+            Toast T = Toast.makeText(this, "Paint Bucket selected.", Toast.LENGTH_SHORT);
+            T.setGravity(Gravity.TOP|Gravity.LEFT, 350, 1150);
             T.show();
         }
 
@@ -540,6 +554,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             if(colorOne.equals("#FF000000"))
             {
                 Toast T = Toast.makeText(this, "No recent colors!\nColor set to black instead.", Toast.LENGTH_SHORT);
+                T.setGravity(Gravity.TOP|Gravity.LEFT, 350, 1150);
                 T.show();
             }
             drawingView.setColor(colorOne);
@@ -553,6 +568,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             if(colorTwo.equals("#FF000000"))
             {
                 Toast T = Toast.makeText(this, "No recent colors!\nColor set to black instead.", Toast.LENGTH_SHORT);
+                T.setGravity(Gravity.TOP|Gravity.LEFT, 350, 1150);
                 T.show();
             }
             drawingView.setColor(colorTwo);
@@ -566,6 +582,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             if(colorThree.equals("#FF000000"))
             {
                 Toast T = Toast.makeText(this, "No recent colors!\nColor set to black instead.", Toast.LENGTH_SHORT);
+                T.setGravity(Gravity.TOP|Gravity.LEFT, 350, 1150);
                 T.show();
             }
             drawingView.setColor(colorThree);
@@ -579,6 +596,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             if(colorFour.equals("#FF000000"))
             {
                 Toast T = Toast.makeText(this, "No recent colors!\nColor set to black instead.", Toast.LENGTH_SHORT);
+                T.setGravity(Gravity.TOP|Gravity.LEFT, 350, 1150);
                 T.show();
             }
             drawingView.setColor(colorFour);
@@ -592,6 +610,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             if(colorFive.equals("#FF000000"))
             {
                 Toast T = Toast.makeText(this, "No recent colors!\nColor set to black instead.", Toast.LENGTH_SHORT);
+                T.setGravity(Gravity.TOP|Gravity.LEFT, 350, 1150);
                 T.show();
             }
             drawingView.setColor(colorFive);
@@ -605,6 +624,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             if(colorSix.equals("#FF000000"))
             {
                 Toast T = Toast.makeText(this, "No recent colors!\nColor set to black instead.", Toast.LENGTH_SHORT);
+                T.setGravity(Gravity.TOP|Gravity.LEFT, 350, 1150);
                 T.show();
             }
             drawingView.setColor(colorSix);
@@ -618,6 +638,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             if(colorThree.equals("#FF000000"))
             {
                 Toast T = Toast.makeText(this, "No recent colors!\nColor set to black instead.", Toast.LENGTH_SHORT);
+                T.setGravity(Gravity.TOP|Gravity.LEFT, 350, 1150);
                 T.show();
             }
             drawingView.setColor(colorSeven);
@@ -631,6 +652,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             if(colorThree.equals("#FF000000"))
             {
                 Toast T = Toast.makeText(this, "No recent colors!\nColor set to black instead.", Toast.LENGTH_SHORT);
+                T.setGravity(Gravity.TOP|Gravity.LEFT, 350, 1150);
                 T.show();
             }
             drawingView.setColor(colorEight);
@@ -644,6 +666,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             if(colorThree.equals("#FF000000"))
             {
                 Toast T = Toast.makeText(this, "No recent colors!\nColor set to black instead.", Toast.LENGTH_SHORT);
+                T.setGravity(Gravity.TOP|Gravity.LEFT, 350, 1150);
                 T.show();
             }
             drawingView.setColor(colorNine);
@@ -657,6 +680,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             if(colorThree.equals("#FF000000"))
             {
                 Toast T = Toast.makeText(this, "No recent colors!\nColor set to black instead.", Toast.LENGTH_SHORT);
+                T.setGravity(Gravity.TOP|Gravity.LEFT, 350, 1150);
                 T.show();
             }
             drawingView.setColor(colorTen);

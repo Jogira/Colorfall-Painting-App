@@ -13,6 +13,7 @@ import android.graphics.PorterDuffXfermode;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import java.io.Serializable;
 import java.util.LinkedList;
@@ -81,7 +82,6 @@ public class drawView extends View implements Serializable
         {
 
             case MotionEvent.ACTION_DOWN:
-
                 path.moveTo(pointX, pointY);
 
                 int pixel = canvasPixelBitmap.getPixel((int) pointX, (int) pointY);
@@ -136,7 +136,7 @@ public class drawView extends View implements Serializable
         drawPixel.setAntiAlias(false);
         drawPixel.setStrokeWidth(70F);
         drawPixel.setStyle(Paint.Style.STROKE);
-        drawPixel.setStrokeJoin(Paint.Join.MITER);
+        drawPixel.setStrokeJoin(Paint.Join.ROUND);
         drawPixel.setStrokeCap(Paint.Cap.ROUND);
         pixelCanvasPaint = new Paint(Paint.DITHER_FLAG);
     }
