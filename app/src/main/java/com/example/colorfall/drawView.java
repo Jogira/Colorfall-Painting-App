@@ -36,9 +36,6 @@ import java.util.Queue;
 @SuppressWarnings("unused")
 public class drawView extends View implements Serializable
 {
-    //private Path path;
-    // commented for new path
-
     private ourPath path;
     private static ourPaint drawPixel;                //Our brush object
     private Paint gridLines;
@@ -67,10 +64,10 @@ public class drawView extends View implements Serializable
         initializePixelArt();
     }
 
+
     //************************
     //Specifies what the app will do to the canvas when clicking, clicking and dragging, or releasing.
     //************************
-
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event)
@@ -82,6 +79,7 @@ public class drawView extends View implements Serializable
 
         switch(event.getAction())
         {
+
             case MotionEvent.ACTION_DOWN:
 
                 path.moveTo(pointX, pointY);
@@ -89,6 +87,7 @@ public class drawView extends View implements Serializable
                 int pixel = canvasPixelBitmap.getPixel((int) pointX, (int) pointY);
                 if(pointX > 0 && pointY > 0 && drawActivity.pickerClicked)
                 {
+                    drawPixelCanvas.setBitmap(canvasPixelBitmap);
                     int redValue = Color.red(pixel);
                     int blueValue = Color.blue(pixel);
                     int greenValue = Color.green(pixel);
@@ -166,6 +165,7 @@ public class drawView extends View implements Serializable
     //Returns the canvas to a clean slate.
     public void wipeCanvas()
     {
+        drawPixelCanvas.setBitmap(canvasPixelBitmap);
         drawPixelCanvas.drawColor(Color.TRANSPARENT,PorterDuff.Mode.CLEAR);
         invalidate();
     }

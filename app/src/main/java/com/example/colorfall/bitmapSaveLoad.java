@@ -7,86 +7,27 @@ import android.util.Log;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-class bitmapSaveLoad {
-
-    static public Bitmap loadBitmap(String fileName) {
-        Log.d("TAG", "line before decoded bitmap returned");
-        Bitmap loadedBitmap = BitmapFactory.decodeFile(fileName); // bitmap is the Bitmap instance
-
-        loadedBitmap = loadedBitmap.copy(Bitmap.Config.ARGB_8888, true);
-
+class bitmapSaveLoad
+{
+    static public Bitmap loadBitmap(String fileName)
+    {
+        Bitmap loadedBitmap = BitmapFactory.decodeFile(fileName); //Creates temp Bitmap instance
+        loadedBitmap = loadedBitmap.copy(Bitmap.Config.ARGB_8888, true); //Ensures Bitmap is Mutable
         return loadedBitmap;
-//        try (
-//                //FileInputStream in = new FileInputStream(fileName)) {
-//
-//
-//
-//            // PNG is a lossless format, the compression factor (100) is ignored
-//        } catch (
-//                IOException e) {
-//            e.printStackTrace();
-//        }
     }
 
-    static public void saveBitmap(String fileName, Bitmap bitmap) {
-        try (
-                FileOutputStream out = new FileOutputStream(fileName)) {
-                Log.d("TAG", "output file created");
-                bitmap.compress(Bitmap.CompressFormat.PNG, 100, out); // bitmap is the Bitmap instance
-            // PNG is a lossless format, the compression factor (100) is ignored
-                Log.d("TAG", "bitmap compressed");
+    static public void saveBitmap(String fileName, Bitmap bitmap)
+    {
+        try (FileOutputStream out = new FileOutputStream(fileName))
+        {
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out); //Save bitmap as PNG
+            //NOTE as PNG is a lossless format, the compression factor (100) is ignored
 
-                out.flush();
-        } catch (
-                IOException e) {
+            out.flush();
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
     }
-
-
-
-
-
-
-//    public static Bitmap decodeMutableBitmapFromResourceId(final Context context, final int bitmapResId) {
-//        final BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-//            bitmapOptions.inMutable = true;
-//        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), bitmapResId, bitmapOptions);
-//        if (!bitmap.isMutable())
-//            bitmap = convertToMutable(context, bitmap);
-//        return bitmap;
-//    }
-//
-//    public static Bitmap convertToMutable(final Context context, final Bitmap imgIn) {
-//
-//        final BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
-//        bitmapOptions.inMutable = true;
-//
-//        final int width = imgIn.getWidth(), height = imgIn.getHeight();
-//        final Bitmap.Config type = imgIn.getConfig();
-//        File outputFile = null;
-//        final File outputDir = context.getCacheDir();
-//        try {
-//            outputFile = File.createTempFile(Long.toString(System.currentTimeMillis()), null, outputDir);
-//            outputFile.deleteOnExit();
-//            final RandomAccessFile randomAccessFile = new RandomAccessFile(outputFile, "rw");
-//            final FileChannel channel = randomAccessFile.getChannel();
-//            final MappedByteBuffer map = channel.map(FileChannel.MapMode.READ_WRITE, 0, imgIn.getRowBytes() * height);
-//            imgIn.copyPixelsToBuffer(map);
-//            imgIn.recycle();
-//            final Bitmap result = Bitmap.createBitmap(width, height, type);
-//            map.position(0);
-//            result.copyPixelsFromBuffer(map);
-//            channel.close();
-//            randomAccessFile.close();
-//            outputFile.delete();
-//            return result;
-//        } catch (final Exception e) {
-//        } finally {
-//            if (outputFile != null)
-//                outputFile.delete();
-//        }
-//        return null;
-//    }
 }

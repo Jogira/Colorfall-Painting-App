@@ -450,9 +450,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         {
             changingCanvasColor = true;
             ColorWheel();
-            //drawingView.setBackgroundColor(currentColor);
         }
-
     }
 
     //*******************************
@@ -790,30 +788,22 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         Context context = getApplicationContext();
         String fileName = context.getFilesDir().getPath() + "/";
         fileName = fileName + nameOfFile + ".ser";
-        //drawingView.getPath().save(fileName);
 
         File file = new File(fileName);
         if (file.exists()) {
             double bytes = file.length();
             Log.d("TAG", "bytes: " + bytes);
-
             Log.d("TAG", "file path: " + fileName);
         } else {
             Log.d("TAG", "file does not exist");
         }
-
-        //New SAVE/LOAD framework test
-        //MediaStore.Images.Media.insertImage(getContentResolver(),file.getAbsolutePath(),file.getName(),file.getName());
-
         //Calls save process
         bitmapSaveLoad.saveBitmap(fileName, drawingView.getBitmap());
-        Log.d("TAG", "New save called");
     }
 
     //*********************************
     //Displays all currently saved files as a way to check files are properly being stored.
     //*********************************
-
     private void printSavedFiles() {
         Context context = getApplicationContext();
         System.out.println(context.getFilesDir().getAbsolutePath());
@@ -821,28 +811,19 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         System.out.println(Arrays.toString(fList) + "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
         Log.d("TAG", "files:" + Arrays.toString(fList));
         files+=Arrays.toString(fList) + "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$\n";
-        //code for gallery
-
-        //Intent intent = new Intent(this, galleryActivity.class);
-        //intent.putExtra("filenames", files);
-        //startActivity(intent);
     }
 
     public String getFiles(){
         return files;
     }
 
-    //ALL BELOW IS WORK IN PROGRESS//
-
     //*********************************
     //Loads a chosen bitmap back to the canvas.
     //*********************************
-
     private void load() {
         //setup
         Context context = getApplicationContext();//if errors occur down the road, its likely from this
         String fileName = context.getFilesDir().getPath() + "/gg.ser";
-        //String fileName = context.getFilesDir().getPath() + "/" + nameOfFile + ".ser";
         System.out.println(fileName);
 
         //check if file exists and is non empty
@@ -851,13 +832,12 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         if(file.exists()) {
             double bytes = file.length();
             Log.d("TAG", "bytes: " + bytes);
+            Log.d("TAG", "file path: " + fileName);
         } else {
             Log.d("TAG", "file does not exist");
         }
 
-        //drawingView.getPath().load(fileName);
-
-        Bitmap decodedBitmap = bitmapSaveLoad.loadBitmap(fileName);//decodeMutableBitmapFromResourceId(context, );
+        Bitmap decodedBitmap = bitmapSaveLoad.loadBitmap(fileName);
         drawingView.setBitmap(decodedBitmap);
     }
 
@@ -884,19 +864,16 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         });
 
         builder.show();
-
-        //currently still throwing exception in ourPath.save() on saving.writeObject(container);
-
     }
 
     @SuppressWarnings("unused")
+    //Calls load on button click
     private void onClickLoad(View view) {
         load();
-        //Intent intent = new Intent(this,  galleryActivity.class);
-        //startActivity(intent);
     }
 
     @SuppressWarnings("unused")
+    //Returns the drawingView object when called
     public static drawView getDrawingView() {
         return drawingView;
     }
