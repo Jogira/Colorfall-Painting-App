@@ -846,23 +846,75 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     //*********************************
     private void load() {
         //setup
-        Context context = getApplicationContext();//if errors occur down the road, its likely from this
-        String fileName = context.getFilesDir().getPath() + "/gg.ser";
-        System.out.println(fileName);
 
-        //check if file exists and is non empty
-        File file = new File(fileName);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("What picture would you like to load?");
+        final EditText input = new EditText(this);
+        builder.setView(input);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                nameOfFile = input.getText().toString();
+                Context context = getApplicationContext();//if errors occur down the road, its likely from this
+                String fileName = context.getFilesDir().getPath() + "/" + nameOfFile + ".ser";
+                System.out.println(fileName);
 
-        if(file.exists()) {
-            double bytes = file.length();
-            Log.d("TAG", "bytes: " + bytes);
-            Log.d("TAG", "file path: " + fileName);
-        } else {
-            Log.d("TAG", "file does not exist");
-        }
+                //check if file exists and is non empty
+                File file = new File(fileName);
 
-        Bitmap decodedBitmap = bitmapSaveLoad.loadBitmap(fileName);
-        drawingView.setBitmap(decodedBitmap);
+                if(file.exists()) {
+                    double bytes = file.length();
+                    Log.d("TAG", "bytes: " + bytes);
+                    Log.d("TAG", "file path: " + fileName);
+                } else {
+                    Log.d("TAG", "file does not exist");
+                }
+
+                Bitmap decodedBitmap = bitmapSaveLoad.loadBitmap(fileName);
+                drawingView.setBitmap(decodedBitmap);
+
+
+
+
+
+
+                Toast.makeText(getApplicationContext(), "Loading...", Toast.LENGTH_SHORT).show();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        builder.show();
+
+
+
+
+
+
+
+        //
+//        Context context = getApplicationContext();//if errors occur down the road, its likely from this
+//        String fileName = context.getFilesDir().getPath() + nameOfFile + ".ser";
+//        System.out.println(fileName);
+//
+//        //check if file exists and is non empty
+//        File file = new File(fileName);
+//
+//        if(file.exists()) {
+//            double bytes = file.length();
+//            Log.d("TAG", "bytes: " + bytes);
+//            Log.d("TAG", "file path: " + fileName);
+//        } else {
+//            Log.d("TAG", "file does not exist");
+//        }
+//
+//        Bitmap decodedBitmap = bitmapSaveLoad.loadBitmap(fileName);
+//        drawingView.setBitmap(decodedBitmap);
+
     }
 
     //onCLick method for save button
