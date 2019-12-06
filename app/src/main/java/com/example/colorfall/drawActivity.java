@@ -728,6 +728,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         AmbilWarnaDialog ambilWarnaDialog = new AmbilWarnaDialog(this, currentColor, new AmbilWarnaDialog.OnAmbilWarnaListener() {
             @Override
             public void onCancel(AmbilWarnaDialog dialog) {
+                changingCanvasColor = false;
                 System.out.println("Color wheel canceled.");
             }
 
