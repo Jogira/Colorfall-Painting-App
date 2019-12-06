@@ -3,5 +3,7 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_margin" tools:keep="@dimen/text_margin">16dp</dimen>
     <dimen name="pixel_brush">30dp</dimen>
+    <dimen name="small">2dp</dimen>
+    <dimen name="ggg">4dp</dimen>
     <integer name="pixel_size" tools:keep="@integer/pixel_size">20</integer>
 </resources>

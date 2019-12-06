@@ -823,6 +823,13 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         }
         //Calls save process
         bitmapSaveLoad.saveBitmap(fileName, drawingView.getBitmap());
+
+        TextView canvas_title = (TextView) findViewById(R.id.canvas_title);
+        if(file.exists())
+            canvas_title.setText(fileName);
+        else
+            canvas_title.setText("FAILURE TO SAVE");
+
     }
 
     //*********************************
@@ -871,12 +878,13 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
                 }
 
                 Bitmap decodedBitmap = bitmapSaveLoad.loadBitmap(fileName);
-                drawingView.setBitmap(decodedBitmap);
+                boolean correctLoad = drawingView.setBitmap(decodedBitmap);
 
-
-
-
-
+                TextView canvas_title = (TextView) findViewById(R.id.canvas_title);
+                if(correctLoad)
+                    canvas_title.setText(fileName);
+                else
+                    canvas_title.setText("FAILURE TO LOAD");
 
                 Toast.makeText(getApplicationContext(), "Loading...", Toast.LENGTH_SHORT).show();
             }
@@ -889,11 +897,6 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         });
 
         builder.show();
-
-
-
-
-
 
 
         //

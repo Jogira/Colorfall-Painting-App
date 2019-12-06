@@ -204,10 +204,15 @@ public class drawView extends View implements Serializable
 
     public Bitmap getBitmap(){ return canvasPixelBitmap;}
 
-    public void setBitmap(Bitmap overwrite){
+    public boolean setBitmap(Bitmap overwrite){
         canvasPixelBitmap = overwrite;
         initializePixelArt();
         invalidate();
+
+        if (canvasPixelBitmap == overwrite)
+            return true;
+        else
+            return false;
     }
 
     public static ourPaint getBrush() {return drawPixel; }

@@ -14,7 +14,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginLeft="150dp"
         android:fontFamily="casual"
-        android:paddingLeft="175dp"
+        android:paddingLeft="0dp"
         android:text="Unsaved"
         android:textColor="#630000"
         android:textStyle="bold" />
