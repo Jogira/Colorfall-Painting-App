@@ -826,7 +826,10 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 
         TextView canvas_title = (TextView) findViewById(R.id.canvas_title);
         if(file.exists())
+        {
+            fileName = fileName.substring(41, (fileName.length() - 4));
             canvas_title.setText(fileName);
+        }
         else
             canvas_title.setText("FAILURE TO SAVE");
 
@@ -882,7 +885,10 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 
                 TextView canvas_title = (TextView) findViewById(R.id.canvas_title);
                 if(correctLoad)
+                {
+                    fileName = fileName.substring(41, (fileName.length() - 4));
                     canvas_title.setText(fileName);
+                }
                 else
                     canvas_title.setText("FAILURE TO LOAD");
 
