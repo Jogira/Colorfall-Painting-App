@@ -7,18 +7,28 @@
     tools:context=".drawView"
     tools:ignore="Overdraw">
 
+    <TextView
+        android:id="@+id/canvas_title"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="150dp"
+        android:fontFamily="casual"
+        android:paddingLeft="175dp"
+        android:text="Unsaved"
+        android:textColor="#630000"
+        android:textStyle="bold" />
 
     <com.example.colorfall.drawView
         android:id="@+id/drawing"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginLeft="0dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="0dp"
         android:layout_marginRight="0dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="0dp"
         android:layout_weight="1"
         android:background="#FFFFFFFF" />
-
 
 
     <TextView
@@ -45,7 +55,7 @@
         android:min="1"
         android:progress="70"
         tools:layout_editor_absoluteX="30dp"
-        tools:layout_editor_absoluteY="396dp"/>
+        tools:layout_editor_absoluteY="396dp" />
 
     <TextView
         android:id="@+id/recent_colors"
@@ -73,8 +83,8 @@
             android:layout_marginTop="2dp"
             android:layout_marginBottom="2dp"
             android:background="#072F5F"
-            android:tag="#072F5F"
             android:contentDescription="blue"
+            android:tag="#072F5F"
             tools:ignore="HardcodedText" />
 
         <ImageButton
@@ -126,8 +136,8 @@
             android:layout_width="@dimen/pixel_brush"
             android:layout_height="@dimen/pixel_brush"
             android:background="#00FFFFFF"
-            android:src="@drawable/add_colors"
             android:contentDescription="new"
+            android:src="@drawable/add_colors"
             tools:ignore="HardcodedText" />
 
         <ImageButton
@@ -202,8 +212,8 @@
             android:layout_marginTop="2dp"
             android:layout_marginBottom="2dp"
             android:background="#2471A3 "
-            android:tag="#072F5F"
             android:contentDescription="azure"
+            android:tag="#072F5F"
             tools:ignore="HardcodedText" />
 
         <ImageButton
@@ -251,13 +261,13 @@
             android:tag="#00FF3E" />
 
         <ImageButton
-        android:id="@+id/current_Color"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="15dp"
-        android:background="#FF000000"
-        android:src="@drawable/border"
+            android:id="@+id/current_Color"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="15dp"
+            android:background="#FF000000"
             android:contentDescription="cur"
+            android:src="@drawable/border"
             tools:ignore="HardcodedText" />
 
         <ImageButton
@@ -329,8 +339,8 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="#00FFFFFF"
-            android:src="@drawable/paintbucket"
             android:contentDescription="paint"
+            android:src="@drawable/paintbucket"
             tools:ignore="HardcodedText" />
 
         <ImageButton
@@ -356,9 +366,9 @@
             android:layout_height="40dp"
             android:background="#00FFFFFF"
             android:contentDescription="@string/pixel_pen"
+            android:paddingStart="0dp"
             android:paddingTop="10dp"
             android:paddingEnd="5dp"
-            android:paddingStart="0dp"
             android:src="@drawable/pixel_pen" />
 
         <ImageButton
@@ -366,9 +376,9 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="#00FFFFFF"
+            android:contentDescription="save"
             android:paddingTop="5dp"
             android:src="@drawable/save_file"
-            android:contentDescription="save"
             tools:ignore="HardcodedText" />
 
 
@@ -377,9 +387,9 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="#00FFFFFF"
+            android:contentDescription="TODO"
             android:paddingTop="10dp"
             android:src="@drawable/delete_canvas"
-            android:contentDescription="TODO"
             tools:ignore="ContentDescription,HardcodedText" />
 
 
@@ -388,9 +398,9 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="#00FFFFFF"
+            android:contentDescription="load"
             android:paddingTop="5dp"
             android:src="@drawable/load"
-            android:contentDescription="load"
             tools:ignore="HardcodedText" />
 
         <ImageButton
@@ -398,9 +408,9 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="#00FFFFFF"
+            android:contentDescription="toggle"
             android:paddingTop="10dp"
             android:src="@drawable/gridtoggle"
-            android:contentDescription="toggle"
             tools:ignore="HardcodedText" />
 
         <ImageButton
@@ -408,10 +418,10 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="#00FFFFFF"
-            android:paddingEnd="15dp"
-            android:paddingStart="0dp"
-            android:src="@drawable/canvas_background"
             android:contentDescription="change"
+            android:paddingStart="0dp"
+            android:paddingEnd="15dp"
+            android:src="@drawable/canvas_background"
             tools:ignore="HardcodedText" />
 
 
