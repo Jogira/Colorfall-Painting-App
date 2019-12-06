@@ -13,7 +13,6 @@ import android.graphics.PorterDuffXfermode;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
 
 import java.io.Serializable;
 import java.util.LinkedList;
@@ -209,10 +208,7 @@ public class drawView extends View implements Serializable
         initializePixelArt();
         invalidate();
 
-        if (canvasPixelBitmap == overwrite)
-            return true;
-        else
-            return false;
+        return canvasPixelBitmap == overwrite;
     }
 
     public static ourPaint getBrush() {return drawPixel; }

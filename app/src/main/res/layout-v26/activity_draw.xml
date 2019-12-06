@@ -11,13 +11,14 @@
         android:id="@+id/canvas_title"
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:layout_marginStart="0dp"
-        android:layout_marginLeft="150dp"
+        android:layout_marginStart="150dp"
         android:fontFamily="casual"
-        android:paddingLeft="175dp"
+        android:paddingStart="175dp"
+        android:paddingEnd="0dp"
         android:text="Unsaved"
         android:textColor="#630000"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:ignore="HardcodedText" />
 
     <com.example.colorfall.drawView
         android:id="@+id/drawing"
@@ -58,7 +59,6 @@
         tools:layout_editor_absoluteY="396dp" />
 
     <TextView
-        android:id="@+id/recent_colors"
         android:layout_width="106dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="230dp"
@@ -70,7 +70,6 @@
         tools:ignore="HardcodedText" />
 
     <LinearLayout
-        android:id="@+id/paint_colors"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -199,7 +198,6 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/paint_colors2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
