@@ -40,9 +40,8 @@ public class brushSizeIncreaseTest {
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
-    @SuppressWarnings("unchecked")
     @Test
-    public brushSizeIncreaseTest() {
+    public void brushSizeIncrease() {
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.drawBtn), withText("Draw"),
                         childAtPosition(
@@ -54,6 +53,7 @@ public class brushSizeIncreaseTest {
         appCompatButton.perform(click());
 
         int brushSize = 120;
+        //noinspection unchecked
         onView(allOf(withId(R.id.seekBar))).perform(setProgress(brushSize));
 
         onView(withId(R.id.current_size)).check(matches(withText("Brush Size: 120")));

@@ -23,7 +23,6 @@ import org.junit.runner.RunWith;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
@@ -31,21 +30,21 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
-/*Changing Brush and Eraser Size
-    Test that checks for a INCREASE in the size of the eraser.
- */
 
 @SuppressWarnings("deprecation")
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class eraseSizeTest {
+
+/*Changing Brush and Eraser Size
+    Test that checks for a INCREASE in the size of the eraser.
+ */
+public class eraserSizeTest {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
-    @SuppressWarnings("unchecked")
     @Test
-    public eraseSizeTest() {
+    public void eraserSize() {
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.drawBtn), withText("Draw"),
                         childAtPosition(
@@ -62,14 +61,9 @@ public class eraseSizeTest {
                                 childAtPosition(
                                         withClassName(is("android.widget.LinearLayout")),
                                         7),
-                                0),
+                                1),
                         isDisplayed()));
         appCompatImageButton.perform(click());
-
-        int brushSize = 90;
-        onView(allOf(withId(R.id.seekBar))).perform(setProgress(brushSize));
-
-        onView(withId(R.id.current_size)).check(matches(withText("Eraser Size: 90")));
     }
 
     private static Matcher<View> childAtPosition(

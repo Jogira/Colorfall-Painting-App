@@ -78,6 +78,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     private String colorNine = "#FF000000";
     private String colorTen = "#FF000000";
     String colorPicked = "#ffffff";
+    private ImageButton toggleGrid;
     private static int eraserSize = 70;
     static boolean pickerClicked = false;
     public static final float currentSize = 70F;
@@ -155,11 +156,12 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             }
         });
 
-        ImageButton toggleGrid = findViewById(R.id.toggle_grid);
+        toggleGrid = findViewById(R.id.toggle_grid);
         toggleGrid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 drawView.toggleGrid = !drawView.toggleGrid;
+                onSelectTool(view);
                 drawingView.invalidate();
             }
         });
@@ -465,6 +467,22 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
             changingCanvasColor = true;
             ColorWheel();
         }
+
+        if(view.getId() == toggleGrid.getId())
+        {
+            if (drawView.toggleGrid) {
+                Toast T = Toast.makeText(this, "Grid Enabled.", Toast.LENGTH_SHORT);
+                T.setGravity(Gravity.TOP | Gravity.LEFT, 350, 1150);
+                T.show();
+            }
+            if (drawView.toggleGrid == false)
+            {
+                Toast T = Toast.makeText(this, "Grid Disabled.", Toast.LENGTH_SHORT);
+                T.setGravity(Gravity.TOP | Gravity.LEFT, 350, 1150);
+                T.show();
+            }
+        }
+
     }
 
     //*******************************

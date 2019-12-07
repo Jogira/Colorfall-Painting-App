@@ -35,7 +35,7 @@ public class goingToTemplates {
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public goingToTemplates() {
+    public void goingToTemplatesTest() {
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.templatesBtn), withText("Templates"),
                         childAtPosition(
