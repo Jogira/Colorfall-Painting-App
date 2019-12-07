@@ -71,14 +71,14 @@ public class SaveCancel {
         appCompatButton2.perform(scrollTo(), click());
 
         ViewInteraction textView = onView(
-                allOf(withId(R.id.canvas_title), withText("Unsaved"),
+                allOf(withId(R.id.canvas_title), withText("Untitled"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
                                         0),
                                 0),
                         isDisplayed()));
-        textView.check(matches(withText("Unsaved")));
+        textView.check(matches(withText("Untitled")));
     }
 
     private static Matcher<View> childAtPosition(
