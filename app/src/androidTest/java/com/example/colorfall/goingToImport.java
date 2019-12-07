@@ -35,7 +35,7 @@ public class goingToImport {
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public goingToImport() {
+    public void goingToImportTest() {
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.importBtn), withText("Import"),
                         childAtPosition(

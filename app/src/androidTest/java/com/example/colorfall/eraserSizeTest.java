@@ -4,8 +4,12 @@ package com.example.colorfall;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+import android.widget.SeekBar;
 
+import androidx.test.espresso.UiController;
+import androidx.test.espresso.ViewAction;
 import androidx.test.espresso.ViewInteraction;
+import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.filters.LargeTest;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
@@ -19,10 +23,6 @@ import org.junit.runner.RunWith;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static androidx.test.espresso.action.ViewActions.replaceText;
-import static androidx.test.espresso.action.ViewActions.scrollTo;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
@@ -31,18 +31,20 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
 
-//Test Name: SaveSpace
-//This is the test for saving a file name with a space in it
 @SuppressWarnings("deprecation")
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class SaveSpace {
+
+/*Changing Brush and Eraser Size
+    Test that checks for a INCREASE in the size of the eraser.
+ */
+public class eraserSizeTest {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void saveSpace() {
+    public void eraserSize() {
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.drawBtn), withText("Draw"),
                         childAtPosition(
@@ -54,43 +56,14 @@ public class SaveSpace {
         appCompatButton.perform(click());
 
         ViewInteraction appCompatImageButton = onView(
-                allOf(withId(R.id.save_file), withContentDescription("save"),
+                allOf(withId(R.id.eraser), withContentDescription("erase"),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("android.widget.LinearLayout")),
                                         7),
-                                4),
+                                1),
                         isDisplayed()));
         appCompatImageButton.perform(click());
-
-        ViewInteraction editText = onView(
-                allOf(childAtPosition(
-                        allOf(withId(android.R.id.custom),
-                                childAtPosition(
-                                        withClassName(is("android.widget.FrameLayout")),
-                                        0)),
-                        0),
-                        isDisplayed()));
-        editText.perform(replaceText("test space"), closeSoftKeyboard());
-
-        ViewInteraction appCompatButton2 = onView(
-                allOf(withId(android.R.id.button1), withText("OK"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.ScrollView")),
-                                        0),
-                                3)));
-        appCompatButton2.perform(scrollTo(), click());
-
-        ViewInteraction textView = onView(
-                allOf(withId(R.id.canvas_title), withText("test space"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                0),
-                        isDisplayed()));
-        textView.check(matches(withText("test space")));
     }
 
     private static Matcher<View> childAtPosition(
@@ -108,6 +81,26 @@ public class SaveSpace {
                 ViewParent parent = view.getParent();
                 return parent instanceof ViewGroup && parentMatcher.matches(parent)
                         && view.equals(((ViewGroup) parent).getChildAt(position));
+            }
+        };
+    }
+
+    public static ViewAction setProgress(final int progress) {
+        return new ViewAction() {
+            @Override
+            public void perform(UiController uiController, View view) {
+                SeekBar seekBar = (SeekBar) view;
+                seekBar.setProgress(progress - 10);
+            }
+
+            @Override
+            public String getDescription() {
+                return "Set a progress on a SeekBar";
+            }
+
+            @Override
+            public Matcher<View> getConstraints() {
+                return ViewMatchers.isAssignableFrom(SeekBar.class);
             }
         };
     }

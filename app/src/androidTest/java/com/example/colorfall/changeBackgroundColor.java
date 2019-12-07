@@ -19,10 +19,7 @@ import org.junit.runner.RunWith;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
@@ -30,19 +27,19 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
-
-//Test Name: SaveSpace
-//This is the test for saving a file name with a space in it
+/*
+This test checks if the background changing button properly changes the color of the entire canvas.
+ */
 @SuppressWarnings("deprecation")
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class SaveSpace {
+public class changeBackgroundColor {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void saveSpace() {
+    public void changeBackgroundColorTest() {
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.drawBtn), withText("Draw"),
                         childAtPosition(
@@ -54,24 +51,14 @@ public class SaveSpace {
         appCompatButton.perform(click());
 
         ViewInteraction appCompatImageButton = onView(
-                allOf(withId(R.id.save_file), withContentDescription("save"),
+                allOf(withId(R.id.change_background), withContentDescription("change"),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("android.widget.LinearLayout")),
                                         7),
-                                4),
+                                8),
                         isDisplayed()));
         appCompatImageButton.perform(click());
-
-        ViewInteraction editText = onView(
-                allOf(childAtPosition(
-                        allOf(withId(android.R.id.custom),
-                                childAtPosition(
-                                        withClassName(is("android.widget.FrameLayout")),
-                                        0)),
-                        0),
-                        isDisplayed()));
-        editText.perform(replaceText("test space"), closeSoftKeyboard());
 
         ViewInteraction appCompatButton2 = onView(
                 allOf(withId(android.R.id.button1), withText("OK"),
@@ -82,15 +69,24 @@ public class SaveSpace {
                                 3)));
         appCompatButton2.perform(scrollTo(), click());
 
-        ViewInteraction textView = onView(
-                allOf(withId(R.id.canvas_title), withText("test space"),
+        ViewInteraction appCompatImageButton2 = onView(
+                allOf(withId(R.id.change_background), withContentDescription("change"),
                         childAtPosition(
                                 childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                0),
+                                        withClassName(is("android.widget.LinearLayout")),
+                                        7),
+                                8),
                         isDisplayed()));
-        textView.check(matches(withText("test space")));
+        appCompatImageButton2.perform(click());
+
+        ViewInteraction appCompatButton3 = onView(
+                allOf(withId(android.R.id.button1), withText("OK"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.ScrollView")),
+                                        0),
+                                3)));
+        appCompatButton3.perform(scrollTo(), click());
     }
 
     private static Matcher<View> childAtPosition(

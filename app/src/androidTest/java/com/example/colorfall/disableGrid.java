@@ -19,10 +19,6 @@ import org.junit.runner.RunWith;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static androidx.test.espresso.action.ViewActions.replaceText;
-import static androidx.test.espresso.action.ViewActions.scrollTo;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
@@ -30,19 +26,20 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertFalse;
 
-//Test Name: SaveSpace
-//This is the test for saving a file name with a space in it
 @SuppressWarnings("deprecation")
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class SaveSpace {
-
+public class disableGrid {
+    /*
+    This is the test that checks if the grid is disabled when the grid button is clicked when the grid is enabled.
+     */
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void saveSpace() {
+    public void disableGridTest() {
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.drawBtn), withText("Draw"),
                         childAtPosition(
@@ -54,43 +51,45 @@ public class SaveSpace {
         appCompatButton.perform(click());
 
         ViewInteraction appCompatImageButton = onView(
-                allOf(withId(R.id.save_file), withContentDescription("save"),
+                allOf(withId(R.id.toggle_grid), withContentDescription("toggle"),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("android.widget.LinearLayout")),
                                         7),
-                                4),
+                                7),
                         isDisplayed()));
         appCompatImageButton.perform(click());
 
-        ViewInteraction editText = onView(
-                allOf(childAtPosition(
-                        allOf(withId(android.R.id.custom),
-                                childAtPosition(
-                                        withClassName(is("android.widget.FrameLayout")),
-                                        0)),
-                        0),
-                        isDisplayed()));
-        editText.perform(replaceText("test space"), closeSoftKeyboard());
-
-        ViewInteraction appCompatButton2 = onView(
-                allOf(withId(android.R.id.button1), withText("OK"),
+        ViewInteraction appCompatImageButton2 = onView(
+                allOf(withId(R.id.toggle_grid), withContentDescription("toggle"),
                         childAtPosition(
                                 childAtPosition(
-                                        withClassName(is("android.widget.ScrollView")),
-                                        0),
-                                3)));
-        appCompatButton2.perform(scrollTo(), click());
+                                        withClassName(is("android.widget.LinearLayout")),
+                                        7),
+                                7),
+                        isDisplayed()));
+        appCompatImageButton2.perform(click());
 
-        ViewInteraction textView = onView(
-                allOf(withId(R.id.canvas_title), withText("test space"),
+        ViewInteraction appCompatImageButton3 = onView(
+                allOf(withId(R.id.toggle_grid), withContentDescription("toggle"),
                         childAtPosition(
                                 childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                0),
+                                        withClassName(is("android.widget.LinearLayout")),
+                                        7),
+                                7),
                         isDisplayed()));
-        textView.check(matches(withText("test space")));
+        appCompatImageButton3.perform(click());
+
+        ViewInteraction appCompatImageButton4 = onView(
+                allOf(withId(R.id.toggle_grid), withContentDescription("toggle"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.LinearLayout")),
+                                        7),
+                                7),
+                        isDisplayed()));
+        appCompatImageButton4.perform(click());
+        assertFalse(drawView.toggleGrid);
     }
 
     private static Matcher<View> childAtPosition(

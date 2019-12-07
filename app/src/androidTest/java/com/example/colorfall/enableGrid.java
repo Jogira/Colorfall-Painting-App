@@ -18,12 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static androidx.test.espresso.action.ViewActions.replaceText;
-import static androidx.test.espresso.action.ViewActions.scrollTo;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
@@ -31,17 +26,20 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertTrue;
 
+/*
+This is the test that checks if the grid is enabled when the grid button is clicked when the grid is disabled.
+ */
 @SuppressWarnings("deprecation")
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class SaveGallery {
-
+public class enableGrid {
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void saveGallery() {
+    public void enableGridTest() {
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.drawBtn), withText("Draw"),
                         childAtPosition(
@@ -53,55 +51,15 @@ public class SaveGallery {
         appCompatButton.perform(click());
 
         ViewInteraction appCompatImageButton = onView(
-                allOf(withId(R.id.save_file), withContentDescription("save"),
+                allOf(withId(R.id.toggle_grid), withContentDescription("toggle"),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("android.widget.LinearLayout")),
                                         7),
-                                4),
+                                7),
                         isDisplayed()));
         appCompatImageButton.perform(click());
-
-        ViewInteraction editText = onView(
-                allOf(childAtPosition(
-                        allOf(withId(android.R.id.custom),
-                                childAtPosition(
-                                        withClassName(is("android.widget.FrameLayout")),
-                                        0)),
-                        0),
-                        isDisplayed()));
-        editText.perform(replaceText("gallery"), closeSoftKeyboard());
-
-        ViewInteraction appCompatButton2 = onView(
-                allOf(withId(android.R.id.button1), withText("OK"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.ScrollView")),
-                                        0),
-                                3)));
-        appCompatButton2.perform(scrollTo(), click());
-
-        pressBack();
-
-        ViewInteraction appCompatButton3 = onView(
-                allOf(withId(R.id.galleryBtn), withText("Gallery "),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                2),
-                        isDisplayed()));
-        appCompatButton3.perform(click());
-
-        ViewInteraction textView = onView(
-                allOf(withId(R.id.textView1), withText("gallery.ser\n"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                1),
-                        isDisplayed()));
-        textView.check(matches(withText("gallery.ser ")));
+        assertTrue(drawView.toggleGrid);
     }
 
     private static Matcher<View> childAtPosition(

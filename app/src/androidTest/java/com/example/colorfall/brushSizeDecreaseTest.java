@@ -39,15 +39,15 @@ public class brushSizeDecreaseTest {
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
-    @SuppressWarnings("unchecked")
     @Test
     public void brushSizeTest() {
         ViewInteraction appCompatButton = onView(allOf(withId(R.id.drawBtn), withText("Draw"),
-                        childAtPosition(childAtPosition(withId(android.R.id.content), 0),
-                                1),isDisplayed()));
+                childAtPosition(childAtPosition(withId(android.R.id.content), 0),
+                        1),isDisplayed()));
         appCompatButton.perform(click());
 
         int brushSize = 25;
+        //noinspection unchecked
         onView(allOf(withId(R.id.seekBar))).perform(setProgress(brushSize));
 
         onView(withId(R.id.current_size)).check(matches(withText("Brush Size: 25")));

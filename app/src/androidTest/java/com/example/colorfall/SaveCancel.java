@@ -19,8 +19,6 @@ import org.junit.runner.RunWith;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -31,18 +29,18 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
 
-//Test Name: SaveSpace
-//This is the test for saving a file name with a space in it
+//Test Name: SaveCancel
+//This is the test for starting a save and then cancelling the save
 @SuppressWarnings("deprecation")
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class SaveSpace {
+public class SaveCancel {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void saveSpace() {
+    public void saveCancel() {
         ViewInteraction appCompatButton = onView(
                 allOf(withId(R.id.drawBtn), withText("Draw"),
                         childAtPosition(
@@ -63,34 +61,24 @@ public class SaveSpace {
                         isDisplayed()));
         appCompatImageButton.perform(click());
 
-        ViewInteraction editText = onView(
-                allOf(childAtPosition(
-                        allOf(withId(android.R.id.custom),
-                                childAtPosition(
-                                        withClassName(is("android.widget.FrameLayout")),
-                                        0)),
-                        0),
-                        isDisplayed()));
-        editText.perform(replaceText("test space"), closeSoftKeyboard());
-
         ViewInteraction appCompatButton2 = onView(
-                allOf(withId(android.R.id.button1), withText("OK"),
+                allOf(withId(android.R.id.button2), withText("Cancel"),
                         childAtPosition(
                                 childAtPosition(
                                         withClassName(is("android.widget.ScrollView")),
                                         0),
-                                3)));
+                                2)));
         appCompatButton2.perform(scrollTo(), click());
 
         ViewInteraction textView = onView(
-                allOf(withId(R.id.canvas_title), withText("test space"),
+                allOf(withId(R.id.canvas_title), withText("Unsaved"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
                                         0),
                                 0),
                         isDisplayed()));
-        textView.check(matches(withText("test space")));
+        textView.check(matches(withText("Unsaved")));
     }
 
     private static Matcher<View> childAtPosition(
