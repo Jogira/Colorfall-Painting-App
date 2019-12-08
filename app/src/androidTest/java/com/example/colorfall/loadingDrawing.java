@@ -39,7 +39,8 @@ public class loadingDrawing {
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
-
+    /*Test case for loading a drawing that DOES exist in the gallery.
+     */
     @Test
     public void loadingDrawingTest() {
         ViewInteraction appCompatButton = onView(

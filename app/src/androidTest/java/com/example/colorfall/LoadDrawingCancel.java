@@ -32,7 +32,8 @@ import static org.hamcrest.Matchers.is;
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class LoadDrawingCancel {
-
+    /*Test case for pressing the 'cancel' option when prompted to load a drawing.
+     */
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 

@@ -35,7 +35,8 @@ import static org.hamcrest.Matchers.is;
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class LoadingDrawingThatDoesNotExist {
-
+    /*Test case for trying to load a drawing name that doesn't exist in the gallery.
+     */
     @Rule
     public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
 
