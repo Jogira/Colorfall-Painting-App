@@ -64,7 +64,6 @@ public class drawView extends View implements Serializable
         initializePixelArt();
     }
 
-
     //************************
     //Specifies what the app will do to the canvas when clicking, clicking and dragging, or releasing.
     //************************
@@ -256,7 +255,5 @@ public class drawView extends View implements Serializable
                 point.x++;
             }
         }
-
     }
-
 }

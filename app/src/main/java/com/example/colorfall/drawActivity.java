@@ -29,8 +29,6 @@ import yuku.ambilwarna.AmbilWarnaDialog;
 @SuppressWarnings({"ALL", "unused"})
 public class drawActivity extends AppCompatActivity implements java.io.Serializable {
 
-
-
     private String nameOfFile = "";
     //All variable declarations for the many, many buttons and color storing strings.
     // private drawView drawingView;
@@ -96,7 +94,6 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
         drawingView = findViewById(R.id.drawing);
         currentSizeText = findViewById(R.id.current_size);
 
-
         SeekBar seekSize = findViewById(R.id.seekBar);
         seekSize.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @SuppressLint("SetTextI18n")
@@ -127,8 +124,6 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
 
             }
         });
-
-
 
         //All of the linkings for buttons and their respective method calls.
         selectedColor = findViewById(R.id.current_Color);
@@ -905,9 +900,6 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
                     Log.d("TAG", "file does not exist");
 
                 }
-
-
-
                 TextView canvas_title = (TextView) findViewById(R.id.canvas_title);
                 if(correctLoad)
                 {
@@ -927,29 +919,7 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
                 dialog.cancel();
             }
         });
-
         builder.show();
-
-
-        //
-//        Context context = getApplicationContext();//if errors occur down the road, its likely from this
-//        String fileName = context.getFilesDir().getPath() + nameOfFile + ".ser";
-//        System.out.println(fileName);
-//
-//        //check if file exists and is non empty
-//        File file = new File(fileName);
-//
-//        if(file.exists()) {
-//            double bytes = file.length();
-//            Log.d("TAG", "bytes: " + bytes);
-//            Log.d("TAG", "file path: " + fileName);
-//        } else {
-//            Log.d("TAG", "file does not exist");
-//        }
-//
-//        Bitmap decodedBitmap = bitmapSaveLoad.loadBitmap(fileName);
-//        drawingView.setBitmap(decodedBitmap);
-
     }
 
     //onCLick method for save button
