@@ -48,7 +48,9 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
     private ImageButton whiteColor;
     private ImageButton azureColor;
     private ImageButton eraseButton;
+    boolean correctLoad;
     private ImageButton drawButton;
+    Bitmap decodedBitmap;
     private ImageButton colorPicker;
     private ImageButton wipeCanvas;
     private ImageButton recentOne;
@@ -895,21 +897,26 @@ public class drawActivity extends AppCompatActivity implements java.io.Serializa
                     double bytes = file.length();
                     Log.d("TAG", "bytes: " + bytes);
                     Log.d("TAG", "file path: " + fileName);
-                } else {
+                    decodedBitmap = bitmapSaveLoad.loadBitmap(fileName);
+                    correctLoad = drawingView.setBitmap(decodedBitmap);
+                }
+                else
+                {
                     Log.d("TAG", "file does not exist");
+
                 }
 
-                Bitmap decodedBitmap = bitmapSaveLoad.loadBitmap(fileName);
-                boolean correctLoad = drawingView.setBitmap(decodedBitmap);
+
 
                 TextView canvas_title = (TextView) findViewById(R.id.canvas_title);
                 if(correctLoad)
                 {
                     fileName = fileName.substring(41, (fileName.length() - 4));
                     canvas_title.setText(fileName);
+                    correctLoad = false;
                 }
                 else
-                    canvas_title.setText("FAILURE TO LOAD");
+                    canvas_title.setText("File does not exist. Try to load another.");
 
                 Toast.makeText(getApplicationContext(), "Loading...", Toast.LENGTH_SHORT).show();
             }
