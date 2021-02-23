@@ -2,6 +2,11 @@ This app is going to be a simple drawing application that will allow the user to
 and import templates.
 
 ![alt text](https://i.imgur.com/VAbB91o.png)
+![alt text](https://i.imgur.com/U9iCoFt.png)
+![alt text](https://i.imgur.com/pPCZxZm.png)
+![alt text](https://i.imgur.com/ULsvEXS.png)
+![alt text](https://i.imgur.com/grekG7d.png)
+
 
 ITERATION #1 ___________________________________________________________________________________________________________
 
