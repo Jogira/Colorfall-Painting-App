@@ -1,6 +1,8 @@
 This app is going to be a simple drawing application that will allow the user to draw pictures, save them, export them, 
 and import templates.
 
+![alt text](https://i.imgur.com/VAbB91o.png)
+
 ITERATION #1 ___________________________________________________________________________________________________________
 
 CODE NOTES: 
